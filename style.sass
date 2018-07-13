@@ -1,0 +1,1102 @@
+// sass-lint:disable nesting-depth
+
+@import _variables.sass
+@import _reset.sass
+
+///////////////////////////////////////////////////////////////////////////////
+// TAGS                                                                      //
+///////////////////////////////////////////////////////////////////////////////
+
+body,
+p
+    @extend %font-barlow
+
+p
+    margin-bottom: $space-sm
+
+h1
+    @extend %font-barlow
+    @extend %font-bold
+    +font-size($font-size-xxl)
+
+h2
+    @extend %font-barlow
+    @extend %font-md
+    +font-size($font-size-sm)
+
+h3
+    @extend %font-barlow
+    @extend %font-md
+    +font-size($font-size-lg)
+
+ul
+    list-style-type: none
+
+header
+    display: flex
+    flex-direction: column
+
+nav
+    width: 100%
+
+    li
+        @extend %font-barlow-condensed
+        @extend %font-md
+        display: inline-block
+
+a
+    color: inherit
+
+div
+    background-position: center top
+    background-size: cover
+
+section
+    padding: $space-md 0
+
+hr
+    background-color: $color-primary
+    border: 0
+    height: 3px
+    margin: 0
+    width: 100%
+
+img
+    max-width: 100%
+
+///////////////////////////////////////////////////////////////////////////////
+// HEADER                                                                    //
+///////////////////////////////////////////////////////////////////////////////
+
+.header
+    &__main
+        align-items: center
+        color: $color-text-grey
+        display: flex
+        flex: 0 1 auto
+        flex-direction: column
+        padding: $space-sm
+        position: relative
+
+    &__rapparts
+        align-items: center
+        display: flex
+        flex-direction: column
+
+    &__accr
+        margin: $space-sm auto
+        position: relative
+        text-align: center
+
+        p
+            +font-size($font-size-xs)
+
+        img
+            width: 250px
+
+        .icon
+            +font-size($font-size-md)
+            color: $color-primary
+            margin: 0 $space-xs
+
+            &:hover
+                color: $color-primary-light
+
+    &__hero
+        position: relative
+
+        &-image
+            height: auto
+            width: 100%
+
+        &-title
+            color: $color-white
+            left: 50%
+            position: absolute
+            top: 50%
+            transform: translate(-50%, -50%)
+            z-index: 99
+
+    &--home
+        height: 100%
+
+.brand
+    align-items: center
+    display: flex
+    flex-direction: column
+    position: relative
+
+    &__text
+        @extend %font-barlow-condensed
+        @extend %font-md
+        +font-size($font-size-lg)
+        display: inline-block
+        line-height: 4rem
+        max-width: 375px
+
+    &__logo
+        display: inline-block
+        height: 8rem
+        margin-right: $space-sm
+
+.member-links
+    display: flex
+    flex-direction: column
+    justify-content: center
+    text-align: center
+
+    &__item
+        margin: $space-xs 0
+
+.nav
+    z-index: 99
+
+    &--header
+        display: flex
+        justify-content: space-around
+
+        ul
+            margin: 0 4px
+
+        &__sides
+            background-color: $color-navbar
+            flex: 1
+
+    &__item--header
+        +font-size($font-size-sm)
+        background-color: $color-navbar
+        margin: 0
+        overflow: visible
+        padding: $space-sm
+        position: relative
+
+        &:hover
+            background-color: $color-primary-light
+
+            a
+                color: $color-black
+                text-decoration: none
+
+    &__accent
+        @extend %font-bold
+        background-color: $color-secondary
+
+.submenu
+    background-color: $color-primary-light
+    display: flex
+    flex-direction: row
+    left: -4px
+    position: absolute
+    top: 100%
+    z-index: 99
+
+    &__item
+        display: block
+        padding: $space-xs $space-md
+        text-align: left
+
+        a
+            display: block
+
+        &:hover
+            background-color: $color-white
+
+    &__column
+        display: flex
+        flex-direction: column
+        white-space: nowrap
+
+.separator--header
+    align-self: stretch
+    background-color: $color-primary-light
+    display: inline-block
+    margin: 0 $space-sm
+    width: 4px
+
+.carousel
+    flex: 1
+    position: relative
+    width: 100%
+
+    &__caption
+        @extend %font-barlow
+        @extend %font-bold
+        bottom: $space-lg
+        color: $color-white
+        left: $space-lg
+        position: absolute
+        z-index: 1
+
+    &__caption__subheading
+        +font-size($font-size-xl)
+
+    &__image
+        height: 100%
+        width: 100%
+
+        &::after
+            background-color: $color-transparent-black
+            content: ' '
+            height: 100%
+            left: 0
+            position: absolute
+            top: 0
+            width: 100%
+
+    &__arrows
+        bottom: $space-md
+        color: $color-white
+        position: absolute
+        right: $space-md
+
+        p
+            padding-right: $space-xs
+            text-align: right
+
+    &-inner,
+    &-item
+        height: 100%
+
+    &-control-prev,
+    &-control-next
+        +font-size($font-size-xxl)
+        background-color: $color-primary-light
+        color: $color-black
+        display: inline-block
+        height: $space-lg
+        left: unset
+        margin: $space-xs
+        opacity: 1
+        position: relative
+        right: unset
+        width: $space-lg
+
+        &:focus
+            color: $color-black
+
+        &:hover
+            color: $color-white
+
+///////////////////////////////////////////////////////////////////////////////
+// CONTENT - AGNOSTIC                                                        //
+///////////////////////////////////////////////////////////////////////////////
+
+.btn
+    @extend %font-barlow
+    @extend %font-bold
+    +font-size($font-size-sm)
+    border: 1px solid $color-light-grey
+    border-radius: 0
+    color: $color-black
+
+.btn-primary
+    background-color: $color-primary
+
+    &:hover
+        background-color: $color-secondary
+        color: $color-black
+
+.btn-secondary
+    background-color: $color-secondary
+
+    &:hover
+        background-color: $color-primary
+        color: $color-black
+
+.btn-white
+    background-color: $color-white
+
+    &:hover
+        background-color: $color-secondary
+        color: $color-black
+
+    &:focus
+        background-color: $color-primary-light
+
+.btn-header-carousel
+    border: 0
+
+.dark-overlay
+    position: relative
+
+    &::after
+        background-color: $color-transparent-black
+        content: ' '
+        height: 100%
+        left: 0
+        position: absolute
+        top: 0
+        width: 100%
+
+.hr--light
+    background-color: $color-light-grey
+    height: 1px
+    margin: $space-sm 0
+
+.content-with-sidebar
+    border-bottom: 1px solid $color-light-grey
+    margin-bottom: $space-md
+    padding-bottom: $space-md
+
+.visible
+    opacity: 1
+
+.invisible
+    opacity: 0
+
+.map
+    height: 400px
+    width: 100%
+
+.page-and-share
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+.pagination
+    +font-size($font-size-md)
+    color: $color-text-grey
+    margin-bottom: $space-md
+
+    &__text
+        text-align: center
+        width: 100%
+
+.share
+    @extend %font-bold
+    +font-size($font-size-md)
+    color: $color-grey
+    padding-bottom: $space-md
+    text-align: center
+
+    &__text
+        display: block
+        margin-top: 0
+
+    a
+        &:hover
+            color: $color-primary
+
+    .icon
+        +font-size($font-size-lg)
+        margin: 0 $space-xs
+        margin-top: $space-xs
+
+        &:hover
+            color: $color-primary
+
+.grid-list
+    display: flex
+    justify-content: flex-end
+
+    .nav-link
+        background-color: $color-primary-light
+        border-radius: 0
+        margin-left: $space-sm
+
+    .icon
+        +font-size($font-size-md)
+        color: $color-white
+
+.section-tab
+    background-color: $color-primary-light
+    color: $color-white
+    cursor: pointer
+    display: inline-block
+    padding: $space-xs $space-sm
+
+    &__active
+        background-color: $color-primary
+
+.gallery
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-around
+
+    &__item
+        margin: $space-sm 0
+        width: 100%
+
+.subtitle
+    @extend %font-md
+    color: $color-text-grey
+    margin-bottom: $space-md
+
+///////////////////////////////////////////////////////////////////////////////
+// CONTENT - BODY                                                            //
+///////////////////////////////////////////////////////////////////////////////
+
+.search
+    background-color: $color-primary
+    padding: $space-sm 0
+
+    &__text
+        @extend %font-barlow-condensed
+        @extend %font-bold
+        +font-size($font-size-sm)
+        color: $color-white
+        display: inline-block
+        text-align: right
+
+        span
+            @extend %font-barlow
+            +font-size($font-size-md)
+            letter-spacing: .2rem
+
+.filter
+    +font-size($font-size-md)
+
+    p
+        @extend %font-bold
+        display: inline-block
+
+    &__list
+        display: inline-block
+
+        li
+            display: inline-block
+            margin-right: $space-xs
+
+        .active
+            @extend %font-bold
+
+.secondary-sliders
+    border-bottom: 1px solid $color-light-grey
+    margin-bottom: $space-md
+
+    section
+        &:first-of-type
+            padding-top: 0
+
+.event-slider-secondary__filter
+    margin-left: $space-md
+    margin-top: $space-sm
+
+    li
+        display: inline-block
+        margin-right: $space-xs
+
+    .active
+        @extend %font-bold
+
+.social-display
+    .nav-tabs
+        justify-content: center
+        margin: $space-md 0
+
+        .nav-link
+            background-color: transparent
+
+            &.active
+                background-color: transparent
+
+                .icon
+                    color: $color-primary
+
+    .icon
+        +font-size($font-size-xl)
+        color: $color-primary-light
+
+    &__heading
+        @extend %font-domine
+        @extend %font-bold
+        +font-size($font-size-md)
+        margin-bottom: $space-sm
+
+    &__subheading
+        @extend %font-montserrat
+
+.twitter-bar
+    @extend %font-md
+    background-color: $color-primary-light
+
+    .icon
+        +font-size(10)
+        color: $color-white
+        margin-top: $space-sm
+
+.partners
+    padding: $space-lg 0
+
+    &__heading
+        @extend %font-domine
+        +font-size($font-size-md)
+        margin-bottom: $space-sm
+
+    &__row
+        align-items: center
+        display: flex
+        justify-content: center
+
+        [class*='col']
+            margin: $space-sm 0
+
+.event
+    &__header
+        margin-bottom: $space-sm
+        text-align: center
+
+        &--featured
+            margin-bottom: 0
+
+    &__subtitle
+        color: $color-text-grey
+        font-style: italic
+
+    &__info
+        display: block
+
+    &__desc-wrapper
+        flex: 3
+        padding-top: $space-md
+
+        .btn
+            margin-bottom: $space-sm
+            margin-top: $space-sm
+
+        .view-more
+            color: $color-primary
+            font-style: italic
+
+    &__desc
+        color: $color-text-grey
+        margin-bottom: $space-sm
+
+    &__small-date
+        color: $color-text-grey
+        margin-top: $space-sm
+
+    &__small-btns
+        padding-top: $space-md
+
+        .btn
+            display: block
+            margin-bottom: $space-xs
+
+    &__meta-data
+        color: $color-text-grey
+        margin: $space-sm 0
+
+    .event-thumbnail
+        flex: 1.5
+
+        &--featured
+            flex: 2
+
+        &--small
+            flex: 1
+
+            .event-thumbnail__event
+                max-width: 200px
+
+        &__event
+            margin: 0 auto
+            max-width: 400px
+            padding-bottom: 0
+            padding-top: $space-md
+
+        &__date
+            top: 10px
+
+.single-event
+    .event
+        &__info
+            display: block
+
+        &__header
+            margin-left: 0
+
+.show-more
+    text-align: center
+
+.more-from-location
+    .event-thumbnail__event
+        padding-bottom: 0
+        padding-left: 0
+        padding-right: 0
+
+.breadcrumbs
+    color: $color-text-grey
+
+    p
+        margin-bottom: 0
+
+.layout-list
+    &__item
+        color: $color-text-grey
+        display: flex
+        flex-direction: column
+        margin-top: $space-sm
+
+        &:hover
+            color: $color-black
+            text-decoration: none
+
+            .layout-list__info
+                background-color: $color-primary-light
+
+    &__img
+        align-items: center
+        display: flex
+        flex: 1.5
+        justify-content: center
+        margin-bottom: $space-xs
+        margin-right: 0
+
+    &__info
+        flex: 4
+        padding: $space-sm
+        transition: .2s background-color ease, .2s color ease
+
+    &__name-tags
+        margin-bottom: $space-md
+
+    &__name
+        display: inline-block
+        margin-right: $space-md
+
+    &__tags
+        display: inline-block
+
+.layout-grid
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+    &__item
+        display: flex
+        justify-content: center
+        margin: $space-md 0
+        position: relative
+        text-align: center
+        width: 100%
+
+        &:hover
+            color: $color-black
+            text-decoration: none
+
+            .layout-grid__desc
+                opacity: 1
+
+    &__name
+        margin-bottom: $space-sm
+
+    &__desc
+        background-color: $color-primary-light
+        display: flex
+        flex-direction: column
+        height: 100%
+        justify-content: center
+        opacity: 0
+        padding: $space-sm
+        position: absolute
+        transition: .1s opacity ease
+        width: 100%
+
+    &__logo
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        padding-bottom: $space-sm
+
+        img
+            margin-bottom: $space-sm
+
+        p
+            text-align: center
+
+.single-org
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+
+    &__img
+        align-items: center
+        display: flex
+        flex: 1
+        justify-content: center
+        margin-bottom: 30px
+        margin-right: $space-md
+
+        img
+            height: auto
+
+    &__meta
+        flex: 2
+
+        p
+            margin-bottom: $space-sm
+
+    &__desc
+        display: block
+        margin: $space-md 0
+
+        p
+            margin-bottom: $space-sm
+
+.featured-artist
+    color: $color-text-grey
+    margin-bottom: $space-md
+    text-align: center
+
+    img
+        width: 100%
+
+.artist
+    display: none
+
+    &--member
+        display: flex
+
+.section--about
+    h2
+        display: inline-block
+        margin-bottom: $space-sm
+
+    p
+        color: $color-text-grey
+
+.about-documents
+    display: flex
+    justify-content: space-around
+
+    .icon
+        color: $color-primary
+
+.register
+    color: $color-text-grey
+
+    &__heading
+        color: $color-black
+        margin-bottom: $space-sm
+
+    &__point
+        +font-size($font-size-md)
+        display: block
+        margin-bottom: $space-sm
+
+        .icon
+            +font-size($font-size-lg)
+            color: $color-primary
+            text-align: center
+            width: 50px
+
+    &__section-title
+        +font-size($font-size-md)
+        margin: $space-md 0
+
+    &__form
+        max-width: 500px
+
+    &__form-input
+        @extend %font-barlow
+        +font-size($font-size-sm)
+        border: 1px solid $color-grey
+        border-radius: 0
+        margin-bottom: $space-xs
+        padding: $space-sm
+
+    &__submit
+        +font-size($font-size-md)
+        border: 1px solid $color-grey
+        color: $color-text-grey
+        width: 100%
+
+///////////////////////////////////////////////////////////////////////////////
+// SIDEBAR                                                                   //
+///////////////////////////////////////////////////////////////////////////////
+
+.sidebar
+    &__sponsored
+        margin: $space-sm 0
+
+    &__btn
+        border: 1px solid $color-light-grey
+        margin: $space-xs 0
+        width: 100%
+
+        &:hover
+            border: 1px solid $color-light-grey
+
+    &__heading
+        @extend %font-bold
+        +font-size($font-size-md)
+        margin-bottom: $space-xs
+
+        &--find-event
+            color: $color-white
+
+    &__find-event
+        background-color: $color-primary
+        padding: $space-sm
+
+    &__text
+        margin-bottom: 0
+
+///////////////////////////////////////////////////////////////////////////////
+// SLIDERS                                                                   //
+///////////////////////////////////////////////////////////////////////////////
+
+.events
+    &__heading
+        background-color: $color-primary
+        display: inline-block
+        letter-spacing: .3rem
+        padding: $space-xs $space-sm
+
+    &__tabs-wrapper
+        position: relative
+
+.view-all
+    +font-size($font-size-xs)
+    bottom: $space-xs
+    position: absolute
+    right: 0
+
+.event-thumbnail
+    &__event
+        padding: $space-md
+        padding-top: $space-lg
+        position: relative
+
+    &__image
+        height: auto
+        margin-bottom: $space-sm
+        width: 100%
+
+        img
+            width: 100%
+
+        &--featured
+            position: relative
+
+            &::after
+                @extend %font-bold
+                background-color: $color-secondary
+                bottom: 0
+                content: 'FEATURED'
+                height: auto
+                left: 0
+                padding: $space-xs
+                position: absolute
+                text-align: center
+                width: 100%
+
+    &__date
+        @extend %font-barlow-condensed
+        align-items: center
+        background-color: $color-primary-light
+        border-radius: 0 100px 100px 0
+        display: flex
+        height: 4rem
+        margin-left: -$space-md
+        padding: 0 $space-sm
+        position: absolute
+        top: 40px
+        z-index: 9
+
+        .month
+            +font-size($font-size-md)
+            transform: rotate(-90deg)
+
+            &::after
+                background-color: $color-primary
+                content: ' '
+                height: 2px
+                left: 0
+                position: absolute
+                width: 100%
+
+            &--wrapper
+                position: relative
+
+            &--start
+                margin-left: -$space-sm
+
+                &::after
+                    bottom: -3px
+
+            &--end
+                margin-left: 5px
+
+                &::after
+                    top: -3px
+
+        .day
+            @extend %font-bold
+            +font-size($font-size-xl)
+            margin-left: 5px
+            margin-top: -5px
+
+        .ongoing
+            @extend %font-bold
+            +font-size($font-size-md)
+            padding: $space-sm 0
+
+.slick-arrow
+    background-color: $color-primary-light
+
+.slick-prev,
+.slick-next
+    +font-size(0)
+    background-color: $color-primary-light
+    color: $color-black
+    height: $space-lg
+    opacity: 1
+    position: absolute
+    width: $space-lg
+    z-index: 1
+
+    &:focus
+        color: $color-black
+
+    &:hover
+        background-color: $color-primary
+        color: $color-white
+
+    &::before
+        @extend %font-bold
+        +font-size($font-size-xxl)
+        color: inherit
+
+.slick-prev
+    left: 0
+
+    &::before
+        content: '<'
+
+.slick-next
+    right: 0
+
+    &::before
+        content: '>'
+
+.slick-disabled
+    opacity: 0
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane
+    display: block
+    height: 0
+    overflow-y: hidden
+
+.tab-content > .active,
+.pill-content > .active
+    height: auto
+
+.nav-tabs
+    border: 0
+
+    .nav-link
+        @extend %font-bold
+        background-color: $color-primary-light
+        border: 0
+        border-radius: 0
+        color: $color-white
+        margin-bottom: 0
+        margin-right: $space-xs
+        transition: .15s background-color ease
+
+        &.events__heading--featured
+            background-color: $color-secondary
+            color: $color-black
+
+.nav-tabs .nav-item.show .nav-link, // sass-lint:disable-line force-element-nesting
+.nav-tabs .nav-link.active // sass-lint:disable-line force-element-nesting
+    background-color: $color-primary
+    color: $color-white
+
+    &.events__heading--featured
+        background-color: $color-secondary
+        color: $color-black
+
+///////////////////////////////////////////////////////////////////////////////
+// FOOTER                                                                    //
+///////////////////////////////////////////////////////////////////////////////
+
+footer
+    p,
+    a
+        @extend %font-montserrat
+
+.footer
+    &__upper
+        display: flex
+        flex-direction: column
+        position: relative
+
+        ul
+            margin-bottom: $space-md
+            text-align: center
+
+    &__links
+        background-color: $color-primary
+        flex: 3
+        padding: $space-md $space-sm
+
+        li
+            margin-bottom: $space-xs
+
+    &__contact
+        align-items: center
+        background-color: $color-dark-grey
+        color: $color-white
+        display: flex
+        flex: 1
+        flex-direction: column
+        padding: $space-sm
+        padding-bottom: 0
+        padding-top: $space-md
+
+        p
+            flex: 1
+            margin-bottom: $space-sm
+
+        a
+            &:hover
+                color: $color-primary
+
+    &__social
+        align-items: center
+        display: flex
+        flex: 1
+        flex-direction: row
+        justify-content: center
+
+        .icon
+            +font-size($font-size-lg)
+            margin: $space-md $space-xs
+
+    &__lower
+        align-items: center
+        display: flex
+        flex-direction: column
+        padding: $space-md
+
+    &__logo
+        margin-bottom: $space-md
+
+    &__mission
+        img
+            width: 100%
+
+        p
+            margin-bottom: $space-sm
+
+        hr
+            margin-top: $space-md
+
+    &__copyright
+        @extend %font-barlow
+        @extend %font-md
+        +font-size($font-size-xs)
+        margin-bottom: $space-sm
+        margin-top: $space-xs
+
+    &__hr
+        background-color: $color-light-grey
+        height: 2px
+
+
+@import _responsive.sass

@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,700|Barlow:300,400,500,700|Domine:700|Montserrat:300&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890%20%21%22%23%24%25%26%27%28%29%2A%2B%2C%2D%2E%2F%5F%5C%A9')
+
+// COLORS
+$color-primary: #739cd2
+$color-primary-light: #cfdaef
+$color-secondary: #ffe04f
+$color-dark-grey: #4d4d4d
+$color-grey: #999
+$color-light-grey: #ccc
+
+$color-navbar: $color-primary
+$color-text-grey: #666
+
+$color-white: #fff
+$color-black: #000
+$color-transparent-black: rgba(0, 0, 0, .5)
+
+// FONTS
+$font-size-xs: 1.2
+$font-size-sm: 1.6
+$font-size-md: 2.4
+$font-size-lg: 3
+$font-size-xl: 4
+$font-size-xxl: 6
+
+=font-size($size)
+    font-size: $size * 10 + px
+    font-size: $size + rem
+
+
+%font-barlow
+    font-family: 'Barlow', sans-serif
+
+%font-barlow-condensed
+    font-family: 'Barlow Condensed', sans-serif
+
+%font-domine
+    font-family: 'Domine', serif
+
+%font-montserrat
+    font-family: 'Montserrat', serif
+
+%font-light
+    font-weight: 300
+
+%font-md
+    font-weight: 500
+
+%font-bold
+    font-weight: 700
+
+// SPACING
+$space-xs: 7px
+$space-sm: 15px
+$space-md: 30px
+$space-lg: 60px
+
+// MISC
+%shadow
+    box-shadow: 5px 5px 10px $color-transparent-black

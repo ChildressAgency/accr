@@ -1,0 +1,130 @@
+@media screen and ( min-width: 576px )
+    h2
+        +font-size($font-size-md)
+
+    .header__rapparts
+        flex-direction: row
+
+    .member-links
+        text-align: left
+
+    .header__accr
+        img
+            width: 375px
+
+    .single-event
+        .event-thumbnail
+            float: left
+
+            &__event
+                padding: $space-md $space-md $space-sm 0
+
+    .layout-list
+        &__item
+            flex-direction: row
+
+        &__img
+            margin-right: $space-sm
+
+    .layout-grid__item
+        width: 50%
+
+    .gallery
+        justify-content: space-between
+
+        &__item
+            width: 47%
+
+    .single-org
+        flex-direction: row
+
+        &__img
+            width: 100%
+
+    .footer__upper
+        ul
+            text-align: left
+
+@media screen and ( min-width: 768px )
+    h2
+        +font-size($font-size-lg)
+
+    .header__rapparts
+        .brand
+            flex-direction: row
+
+    .secondary-sliders
+        margin-bottom: 0
+
+    .content-with-sidebar
+        border-bottom: 0
+        border-right: 1px solid $color-light-grey
+        margin-bottom: 0
+        padding-bottom: 0
+
+    .share
+        margin-left: auto
+        margin-right: 0
+        text-align: center
+
+        &__text
+            display: inline-block
+
+        .icon
+            +font-size($font-size-md)
+            margin-top: 0
+
+    .gallery__item
+        width: 30%
+
+@media screen and ( min-width: 992px )
+    .header
+        &__main
+            flex-direction: row
+
+        &__accr
+            margin-right: 0
+
+            img
+                width: 250px
+
+    .event
+        &__header
+            text-align: left
+
+            &--featured
+                margin-left: $space-md
+
+        &__info
+            display: flex
+
+        .event-thumbnail__event
+            max-width: none
+            padding: $space-md
+            padding-left: 0
+
+    .layout-list__img
+        flex: 1
+
+    .layout-grid__item
+        width: 30%
+
+    .page-and-share
+        flex-direction: row
+
+    .pagination__text
+        width: auto
+
+    .footer__upper
+        flex-direction: row
+
+        ul
+            margin-bottom: 0
+
+@media screen and ( min-width: 1200px )
+    .header__accr
+        img
+            width: 375px
+
+    .nav__item--header
+        +font-size($font-size-md)

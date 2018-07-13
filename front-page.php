@@ -14,6 +14,50 @@
     </div>
 </section>
 
+<?php if ( have_posts() ) : ?>
+    <section class="events">
+        <div class="container">
+
+            <?php 
+
+                if ( ! $wp_query = tribe_get_global_query_object() ) {
+                    return;
+                }
+
+                global $post;
+                $events = tribe_get_events( array(
+                    'posts_per_page'    => 10,
+                    'start_date'        => '2018-07-13',
+                    // 'featured'          => true
+                ) ); ?>
+
+            <div class="events__tabs-wrapper">
+                <a class="view-all" href="#_">View All</a>
+                <div class="nav nav-tabs" role="tablist">
+                    <a href="#featured" class="events__heading events__heading--featured nav-item nav-link active" id="nav-featured" data-toggle="tab" role="tab" aria-controls="featured" aria-selected="true"><h2>TEST EVENTS</h2></a>
+                </div>
+            </div>
+            <hr />
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
+                    <div class="event-slider">
+                        <?php foreach( $events as $event ): 
+                            $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                            $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                            ?>
+                            <div class="event-thumbnail__event">
+                                <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="event image" class="event-thumbnail__image">
+                                <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
+
 <section class="events">
     <div class="container">
         <div class="events__tabs-wrapper">

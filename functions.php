@@ -66,4 +66,6 @@
         register_nav_menu( 'header-navbar', _( 'Header Navigation' ) );
     }
     add_action( 'init', 'header_navbar' );
+
+    add_theme_support( 'post-thumbnails');
 ?>

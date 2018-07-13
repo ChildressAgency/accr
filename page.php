@@ -1,7 +1,5 @@
 <?php get_header(); ?>
 
-<?php get_template_part( 'tp-breadcrumbs' ); ?>
-
 <section>
     <div class="container">
         <div class="row">

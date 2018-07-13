@@ -895,6 +895,17 @@ img {
   width: 100%;
 }
 
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  display: flex;
+}
+
+.slick-initialized .slick-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .sidebar__sponsored {
   margin: 15px 0;
 }

@@ -28,7 +28,12 @@
                 $events = tribe_get_events( array(
                     'posts_per_page'    => 10,
                     'start_date'        => '2018-07-13',
-                    // 'featured'          => true
+                    'category'     => 'auditions'
+                ) );
+                $featuredEvents = tribe_get_events( array(
+                    'posts_per_page'    => 10,
+                    'start_date'        => '2018-07-13',
+                    'featured'          => true
                 ) ); ?>
 
             <div class="events__tabs-wrapper">
@@ -45,11 +50,13 @@
                             $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
                             $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
                             ?>
-                            <div class="event-thumbnail__event">
+                            <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
                                 <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
-                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="event image" class="event-thumbnail__image">
+                                <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                    <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="event image">
+                                </div>
                                 <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
-                            </div>
+                            </a>
                         <?php endforeach; ?>
                     </div>
                 </div>

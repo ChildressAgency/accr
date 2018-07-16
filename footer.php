@@ -71,7 +71,7 @@
                         <div class="footer__mission-text">
                             <p><strong>THE ARTS AND CULTURE COUNCIL OF THE RAPPAHANNOCK</strong></p>
                             <p>The mission of The Arts & Cultural Council of the Rappahannock is to advance the arts and cultural life of the central Rappahannock region by supporting and strengthening the region’s arts and cultural organizations, and its arts and cultural offerings, for the benefit of all its citizens.</p>
-                            <p><strong>CONTACT US - </strong><a href="mailto:arts@rapp-arts.org">arts@rapp-arts.org</a> &#8226; <a href="tel:555.555.5555">555.555.5555</a></p>
+                            <p><strong>CONTACT US - </strong><a href="mailto:<?php the_field( 'email_accr', 'option' ); ?>"><?php the_field( 'email_accr', 'option' ); ?></a> &#8226; <a href="tel:<?php the_field( 'phone_accr', 'option' ); ?>"><?php the_field( 'phone_accr', 'option' ); ?></a></p>
                         </div>
                     </div>
                 </div>

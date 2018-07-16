@@ -957,7 +957,7 @@ img {
   position: relative;
 }
 .event-thumbnail__image {
-  height: auto;
+  height: 100%;
   margin-bottom: 15px;
   width: 100%;
 }
@@ -1048,6 +1048,7 @@ img {
 }
 .slick-prev:focus,
 .slick-next:focus {
+  background-color: #cfdaef;
   color: #000;
 }
 .slick-prev:hover,

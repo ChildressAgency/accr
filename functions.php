@@ -67,5 +67,27 @@
     }
     add_action( 'init', 'header_navbar' );
 
+    // featured images
     add_theme_support( 'post-thumbnails');
+
+    function sponsored_post_type() {
+      register_post_type( 'sponsored',
+        array(
+            'labels' => array(
+            'name' => __( 'Sponsored Events' ),
+            'singular_name' => __( 'Sponsored Event' )
+            ),
+            'public' => true,
+            'has_archive' => false
+        )
+      );
+    }
+    add_action( 'init', 'sponsored_post_type' );
+
+    // remove content editor
+    add_action('admin_init', 'remove_textarea');
+    function remove_textarea() {
+        remove_post_type_support( 'page', 'editor' );
+        remove_post_type_support( 'sponsored', 'editor' );
+    }
 ?>

@@ -14,25 +14,19 @@
     </div>
 </section>
 
-<?php if ( have_posts() ) : ?>
+<?php if( false ): //if ( have_posts() ) : ?>
     <section class="events">
         <div class="container">
 
-            <?php 
-
-                if ( ! $wp_query = tribe_get_global_query_object() ) {
-                    return;
-                }
-
-                global $post;
+            <?php
                 $events = tribe_get_events( array(
                     'posts_per_page'    => 10,
-                    'start_date'        => '2018-07-13',
-                    'category'     => 'auditions'
+                    'start_date'        => date( 'Y-m-d' ),
+                    // 'tribe_events_cat'  => 'auditions'
                 ) );
                 $featuredEvents = tribe_get_events( array(
                     'posts_per_page'    => 10,
-                    'start_date'        => '2018-07-13',
+                    'start_date'        => date( 'Y-m-d' ),
                     'featured'          => true
                 ) ); ?>
 
@@ -53,7 +47,7 @@
                             <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
                                 <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
                                 <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
-                                    <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="event image">
+                                    <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
                                 </div>
                                 <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
                             </a>
@@ -65,8 +59,16 @@
     </section>
 <?php endif; ?>
 
+<?php if ( have_posts() ) : ?>
 <section class="events">
     <div class="container">
+        <?php 
+            $events = tribe_get_events( array(
+                'posts_per_page'    => 10,
+                'start_date'        => date( 'Y-m-d' ),
+                'featured'          => true
+            ) ); ?>
+
         <div class="events__tabs-wrapper">
             <a class="view-all" href="#_">View All</a>
             <div class="nav nav-tabs" role="tablist">
@@ -77,37 +79,26 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
                 <div class="event-slider">
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
+                    <?php foreach( $events as $event ): 
+                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                        ?>
+                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                            <div class="event-thumbnail__image">
+                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                            </div>
+                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
+<?php if ( have_posts() ) : ?>
 <section class="events">
     <div class="container">
         <div class="events__tabs-wrapper">
@@ -121,99 +112,94 @@
         <hr />
         <div class="tab-content">
             <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <?php
+                    $events = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'upcoming'
+                    ) ); 
+                    $featuredEvents = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'upcoming',
+                        'featured'          => true
+                    ) );
+                    ?>
                 <div class="event-slider">
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <div class="event-thumbnail__image event-thumbnail__image--featured">
-                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image">
-                        </div>
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <div class="event-thumbnail__image event-thumbnail__image--featured">
-                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image">
-                        </div>
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
+                    <?php foreach( $events as $event ): 
+                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                        ?>
+                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                            <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                            </div>
+                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="tab-pane fade" id="family" role="tabpanel" aria-labelledby="family-tab">
+                <?php
+                    $events = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'upcoming',
+                        'tag'               => 'family'
+                    ) ); 
+                    $featuredEvents = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'upcoming',
+                        'tag'               => 'family',
+                        'featured'          => true
+                    ) );
+                    ?>
                 <div class="event-slider">
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
+                    <?php foreach( $events as $event ): 
+                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                        ?>
+                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                            <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                            </div>
+                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="tab-pane fade" id="free" role="tabpanel" aria-labelledby="free-tab">
+                <?php
+                    $events = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'upcoming',
+                        'tag'               => 'free'
+                    ) ); 
+                    $featuredEvents = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'upcoming',
+                        'tag'               => 'free',
+                        'featured'          => true
+                    ) );
+                    ?>
                 <div class="event-slider">
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
-                    <div class="event-thumbnail__event">
-                        <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                        <p class="event-thumbnail__title">Title of Event Happening</p>
-                    </div>
+                    <?php foreach( $events as $event ): 
+                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                        ?>
+                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                            <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                            </div>
+                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <section>
     <div class="container">
@@ -232,171 +218,76 @@
     <div class="container">
         <div class="row">
             <section class="secondary-sliders col-md-9 content-with-sidebar">
-                    <section class="events">
-                       <div class="container">
-                           <div class="events__tabs-wrapper">
-                               <a class="view-all" href="#_">View All</a>
-                               <div class="nav nav-tabs" role="tablist">
-                                   <a href="#art" class="events__heading nav-item nav-link active" id="nav-art" data-toggle="tab" role="tab" aria-controls="art" aria-selected="true"><h2>ART</h2></a>
-                               </div>
-                           </div>
-                           <hr />
-                           <div class="tab-content">
-                               <div class="tab-pane fade show active" id="art" role="tabpanel" aria-labelledby="art-tab">
-                                    <ul class="event-slider-secondary__filter">
-                                        <li><a class="active" href="#_">ALL</a></li>|
-                                        <li><a href="#_">Exhibits</a></li>|
-                                        <li><a href="#_">Opening</a></li>|
-                                        <li><a href="#_">First Friday</a></li>
-                                    </ul>
-                                   <div class="event-slider-secondary">
-                                       <div class="event-thumbnail__event">
-                                           <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                           <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image" class="event-thumbnail__image">
-                                           <p class="event-thumbnail__title">Title of Event Happening</p>
-                                       </div>
-                                       <div class="event-thumbnail__event">
-                                           <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                                           <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                                           <p class="event-thumbnail__title">Title of Event Happening</p>
-                                       </div>
-                                       <div class="event-thumbnail__event">
-                                           <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                                           <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                                           <p class="event-thumbnail__title">Title of Event Happening</p>
-                                       </div>
-                                       <div class="event-thumbnail__event">
-                                           <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                           <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                           <p class="event-thumbnail__title">Title of Event Happening</p>
-                                       </div>
-                                       <div class="event-thumbnail__event">
-                                           <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                           <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                           <p class="event-thumbnail__title">Title of Event Happening</p>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                    </section>
-        
+
+                <?php if( have_rows( 'secondary_events' ) ): while( have_rows( 'secondary_events' ) ): the_row(); if ( have_posts() ): ?>
                     <section class="events">
                         <div class="container">
                             <div class="events__tabs-wrapper">
                                 <a class="view-all" href="#_">View All</a>
                                 <div class="nav nav-tabs" role="tablist">
-                                    <a href="#music" class="events__heading nav-item nav-link active" id="nav-music" data-toggle="tab" role="tab" aria-controls="music" aria-selected="true"><h2>MUSIC</h2></a>
+                                    <?php if( have_rows( 'tab' ) ): $i=0; while( have_rows( 'tab' ) ): the_row(); 
+                                        $category = get_sub_field( 'category' );
+                                        $category = strtolower( $category->name );
+
+                                        $title = get_sub_field( 'tab_title' );
+                                        if( !$title ){
+                                            $title = $category;
+                                        }
+                                        $title = strtoupper( $title );
+                                        ?>
+                                        <a href="#<?php echo $category; ?>" class="events__heading nav-item nav-link <?php if($i==0){ echo 'active'; } ?>" id="nav-<?php echo $category; ?>" data-toggle="tab" role="tab" aria-controls="<?php echo $category; ?>" aria-selected="true"><h2><?php echo $title; ?></h2></a>
+                                    <?php $i++; endwhile; endif; ?>
                                 </div>
                             </div>
                             <hr />
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="music" role="tabpanel" aria-labelledby="music-tab">
-                                    <div class="event-slider-secondary">
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
+                                <?php if( have_rows( 'tab' ) ): $i=0; while( have_rows( 'tab' ) ): the_row(); 
+                                    $category = get_sub_field( 'category' );
+                                    $category = strtolower( $category->name );
+                                    $events = tribe_get_events( array(
+                                        'posts_per_page'    => 10,
+                                        'eventDisplay'      => 'upcoming',
+                                        'tribe_events_cat'  => $category
+                                    ) ); 
+                                    $featuredEvents = tribe_get_events( array(
+                                        'posts_per_page'    => 10,
+                                        'eventDisplay'      => 'upcoming',
+                                        'tribe_events_cat'  => $category,
+                                        'featured'          => true
+                                    ) );
+                                    ?>
+                                    <div class="tab-pane fade <?php if( $i==0 ){ echo 'show active'; } ?>" id="<?php echo $category; ?>" role="tabpanel" aria-labelledby="<?php echo $category; ?>-tab">
+                                        <!-- <ul class="event-slider-secondary__filter">
+                                            <li><a class="active" href="#_">ALL</a></li>|
+                                            <li><a href="#_">Exhibits</a></li>|
+                                            <li><a href="#_">Opening</a></li>|
+                                            <li><a href="#_">First Friday</a></li>
+                                        </ul> -->
+                                        <?php if( $events ): ?>
+                                        <div class="event-slider-secondary">
+                                            <?php foreach( $events as $event ): 
+                                                $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                                                $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                                                ?>
+                                                <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                                                    <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                                                    <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                                        <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                                                    </div>
+                                                    <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                                                </a>
+                                            <?php endforeach; ?>
                                         </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
+                                        <?php else: ?>
+                                            <p>No upcoming events in this category</p>
+                                        <?php endif; ?>
                                     </div>
-                                </div>
+                                <?php $i++; endwhile; endif; ?>
                             </div>
                         </div>
                     </section>
-        
-                    <section class="events">
-                        <div class="container">
-                            <div class="events__tabs-wrapper">
-                                <a class="view-all" href="#_">View All</a>
-                                <div class="nav nav-tabs" role="tablist">
-                                    <a href="#theater" class="events__heading nav-item nav-link active" id="nav-theater" data-toggle="tab" role="tab" aria-controls="theater" aria-selected="true"><h2>THEATER</h2></a>
-                                    <a href="#dance" class="events__heading nav-item nav-link" id="nav-dance" data-toggle="tab" role="tab" aria-controls="dance" aria-selected="false"><h2>DANCE</h2></a>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="theater" role="tabpanel" aria-labelledby="theater-tab">
-                                    <div class="event-slider-secondary">
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="dance" role="tabpanel" aria-labelledby="dance-tab">
-                                    <div class="event-slider-secondary">
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-1.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="ongoing">ONGOING</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-2.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">20-07</span> <span class="month month--end">JUL</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-3.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                        <div class="event-thumbnail__event">
-                                            <div class="event-thumbnail__date"><span class="month month--start">JUN</span> <span class="day">28</span></div>
-                                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/event-image-4.png" alt="event image" class="event-thumbnail__image">
-                                            <p class="event-thumbnail__title">Title of Event Happening</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </section>
+                <?php endif; endwhile; endif; ?>
+            </section>
             <?php get_sidebar(); ?>
         </div>
     </div>

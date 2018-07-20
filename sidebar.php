@@ -18,11 +18,9 @@
 
     <?php 
         $query = new WP_Query( array( 'post_type' => 'sponsored', 'posts_per_page' => 5 ) );
-        while( $query->have_posts() ): $query->the_post(); ?>
-            <a href="<?php echo get_field( 'link' ); ?>"><img class="sidebar__sponsored" src="<?php echo get_field( 'image' ); ?>" alt=""></a>
-        <?php endwhile; ?>
-
-    <!-- <a href="#_"><img class="img-fluid sidebar__sponsored" src="http://dummyimage.com/800x600/b3c6e6/000&amp;text=Sponsored+Event+Space" alt="sponsored event"></a> -->
-    <!-- <a href="#_"><img class="img-fluid sidebar__sponsored" src="http://dummyimage.com/800x600/b3c6e6/000&amp;text=Sponsored+Event+Space" alt="sponsored event"></a> -->
-    <!-- <a href="#_"><img class="img-fluid sidebar__sponsored" src="http://dummyimage.com/800x600/b3c6e6/000&amp;text=Sponsored+Event+Space" alt="sponsored event"></a> -->
+        if( $query->have_posts() ): while( $query->have_posts() ): $query->the_post(); ?>
+            <a href="<?php echo get_field( 'link' ); ?>"><img class="sidebar__sponsored" src="<?php echo get_field( 'image' ); ?>" alt="" /></a>
+        <?php endwhile; 
+            wp_reset_postdata();
+            endif; ?>
 </aside>

@@ -56,7 +56,6 @@
                 <ul>
                     <li class="nav__item--header">
                         <a href="#_">VISUAL ARTS</a>
-
                         <ul class="submenu invisible">
                             <div class="submenu__column">
                                 <li class="submenu__item"><a href="#_">CERAMICS/POTTERY</a></li>
@@ -93,42 +92,20 @@
         <?php if(is_front_page()): ?>
         <div class="carousel slide" id="header-carousel" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="carousel__caption">
-                        <h1>Broadway Event Title 1</h1>
-                        <h2 class="carousel__caption__subheading">JUNE 12-28</h2>
-                        <div class="carousel__btns">
-                            <a href="#_" class="btn btn-header-carousel btn-secondary">GET TICKETS</a>
-                            <a href="#_" class="btn btn-header-carousel btn-white">ADD IT</a>
-                            <a href="#_" class="btn btn-header-carousel btn-primary">MORE INFO</a>
+                <?php if( have_rows( 'header_slider' ) ): $i=0; while( have_rows( 'header_slider' ) ): the_row(); ?>
+                    <div class="carousel-item <?php if( $i==0 ){ echo 'active'; } ?>">
+                        <div class="carousel__caption">
+                            <h1><?php the_sub_field( 'title' ); ?></h1>
+                            <h2 class="carousel__caption__subheading"><?php the_sub_field( 'dates' ); ?></h2>
+                            <div class="carousel__btns">
+                                <?php if( get_sub_field( 'tickets_link' ) ): ?><a href="<?php the_sub_field( 'tickets_link' ); ?>" class="btn btn-header-carousel btn-secondary">GET TICKETS</a><?php endif; ?>
+                                <?php if( get_sub_field( 'add_it_link' ) ): ?><a href="<?php the_sub_field( 'add_it_link' ); ?>" class="btn btn-header-carousel btn-white">ADD IT</a><?php endif; ?>
+                                <?php if( get_sub_field( 'more_info_link' ) ): ?><a href="<?php the_sub_field( 'more_info_link' ); ?>" class="btn btn-header-carousel btn-primary">MORE INFO</a><?php endif; ?>
+                            </div>
                         </div>
+                        <div class="carousel__image" style="background-image: url( '<?php the_sub_field( 'image' ); ?>' );"></div>
                     </div>
-                    <div class="carousel__image" style="background-image: url( '<?php echo get_stylesheet_directory_uri(); ?>/images/carousel-image.png' );"></div>
-                </div>
-                <div class="carousel-item">
-                    <div class="carousel__caption">
-                        <h1>Broadway Event Title 2</h1>
-                        <h2 class="carousel__caption__subheading">JUNE 12-28</h2>
-                        <div class="carousel__btns">
-                            <a href="#_" class="btn btn-header-carousel btn-secondary">GET TICKETS</a>
-                            <a href="#_" class="btn btn-header-carousel btn-white">ADD IT</a>
-                            <a href="#_" class="btn btn-header-carousel btn-primary">MORE INFO</a>
-                        </div>
-                    </div>
-                    <div class="carousel__image" style="background-image: url( '<?php echo get_stylesheet_directory_uri(); ?>/images/carousel-image.png' );"></div>
-                </div>
-                <div class="carousel-item">
-                    <div class="carousel__caption">
-                        <h1>Broadway Event Title 3</h1>
-                        <h2 class="carousel__caption__subheading">JUNE 12-28</h2>
-                        <div class="carousel__btns">
-                            <a href="#_" class="btn btn-header-carousel btn-secondary">GET TICKETS</a>
-                            <a href="#_" class="btn btn-header-carousel btn-white">ADD IT</a>
-                            <a href="#_" class="btn btn-header-carousel btn-primary">MORE INFO</a>
-                        </div>
-                    </div>
-                    <div class="carousel__image" style="background-image: url( '<?php echo get_stylesheet_directory_uri(); ?>/images/carousel-image.png' );"></div>
-                </div>
+                <?php $i++; endwhile; endif; ?>
             </div>
 
             <div class="carousel__arrows">
@@ -140,10 +117,10 @@
         <?php endif; ?>
     </header>
 
-    <section class="search">
+    <!-- <section class="search">
         <div class="container">
             <p class="search__text">Find an<br/><span>EVENT</span></p>
         </div>
-    </section>
+    </section> -->
 
     <?php if(!is_front_page()): get_template_part( 'tp-breadcrumbs' ); endif; ?>

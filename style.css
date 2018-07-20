@@ -1306,9 +1306,6 @@ img {
   .event__header {
     text-align: left;
   }
-  .event__header--featured {
-    margin-left: 30px;
-  }
   .event__info {
     display: flex;
   }

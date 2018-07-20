@@ -201,18 +201,19 @@
 </section>
 <?php endif; ?>
 
+<?php if( have_rows( 'sponsored_events' ) ): ?>
 <section>
     <div class="container">
         <div class="row">
+            <?php while( have_rows( 'sponsored_events' ) ): the_row(); ?>
             <div class="col-md-6">
-                <a href="#_"><img class="img-fluid" src="http://dummyimage.com/800x600/b3c6e6/000&amp;text=Sponsored+Event+Space" alt="sponsored event"></a>
+                <a href="<?php the_sub_field( 'link' ); ?>"><img class="img-fluid" src="<?php the_sub_field( 'image' ); ?>" alt=""></a>
             </div>
-            <div class="col-md-6">
-                <a href="#_"><img class="img-fluid" src="http://dummyimage.com/800x600/b3c6e6/000&amp;text=Sponsored+Event+Space" alt="sponsored event"></a>
-            </div>
+            <?php endwhile; ?>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <section>
     <div class="container">
@@ -318,11 +319,9 @@
         <p class="partners__heading">We couldn't do this without the support of our great partners</p>
 
         <div class="row partners__row">
-            <div class="col-sm-4"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partner-1.png" alt="" class="img-fluid"></div>
-            <div class="col-sm-4"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partner-2.png" alt="" class="img-fluid"></div>
-            <div class="col-sm-4"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partner-3.png" alt="" class="img-fluid"></div>
-            <div class="col-sm-4"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partner-4.png" alt="" class="img-fluid"></div>
-            <div class="col-sm-4"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/partner-5.png" alt="" class="img-fluid"></div>
+            <?php if( have_rows( 'partners' ) ): while( have_rows( 'partners' ) ): the_row(); ?>
+                <div class="col-sm-4"><a href="<?php the_sub_field( 'link' ); ?>"><img src="<?php the_sub_field( 'image' ); ?>" alt="" class="img-fluid"></a></div>
+            <?php endwhile; endif; ?>
         </div>
     </div>
 </section>

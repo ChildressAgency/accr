@@ -1,4 +1,8 @@
 <aside class="sidebar text-center col-md-3">
+    <?php tribe_get_template_part( 'modules/bar' ); ?>
+
+    <hr class="hr--light" />
+
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo" class="img-fluid">
     <a href="<?php echo( home_url( 'about-us' ) ); ?>" class="btn sidebar__btn btn-primary">ABOUT ACCR</a>
     <p class="sidebar__text">Help promote and sustain the region's art and culture life!</p>

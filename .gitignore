@@ -72,6 +72,7 @@ $RECYCLE.BIN/
 PSDs/
 customer_notes/
 Archive/
+events_calendar_files/
 *.txt
 *.docx
 *.map

@@ -1,7 +1,7 @@
 <aside class="sidebar text-center col-md-3">
-    <?php tribe_get_template_part( 'modules/bar' ); ?>
+    <?php //tribe_get_template_part( 'modules/bar' ); ?>
 
-    <hr class="hr--light" />
+    <!-- <hr class="hr--light" /> -->
 
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo" class="img-fluid">
     <a href="<?php echo( home_url( 'about-us' ) ); ?>" class="btn sidebar__btn btn-primary">ABOUT ACCR</a>
@@ -13,10 +13,10 @@
     <hr class="hr--light" />
 
     <h3 class="sidebar__heading">DIRECTORIES</h3>
-    <a href="#_" class="btn sidebar__btn btn-primary">ARTISTS</a>
-    <a href="#_" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
-    <a href="#_" class="btn sidebar__btn btn-primary">VENUES</a>
-    <a href="#_" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
+    <a href="<?php echo( home_url( 'artists' ) ); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
+    <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
+    <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
+    <a href="<?php echo( home_url( 'opportunities' ) ); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
 
     <hr class="hr--light" />
 

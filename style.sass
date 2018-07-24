@@ -575,8 +575,9 @@ img
             margin-bottom: $space-xs
 
     &__meta-data
-        color: $color-text-grey
-        margin: $space-sm 0
+        p
+            color: $color-text-grey
+            margin: $space-sm 0
 
     .event-thumbnail
         flex: 1.5
@@ -668,6 +669,7 @@ img
         display: flex
         justify-content: center
         margin: $space-md 0
+        min-height: 240px
         position: relative
         text-align: center
         width: 100%
@@ -847,6 +849,37 @@ img
         margin-bottom: 0
 
 ///////////////////////////////////////////////////////////////////////////////
+// TRIBE EVENTS CALENDAR                                                     //
+///////////////////////////////////////////////////////////////////////////////
+
+#tribe-bar-form
+    background-color: transparent
+
+#tribe-bar-form.tribe-bar-collapse .tribe-bar-filters
+    display: block
+
+#tribe-bar-form input[type='text']
+    @extend %font-barlow
+    background-color: $color-white
+    border: 0
+    font-style: normal
+    outline: 0
+    padding: $space-xs
+
+    &:focus
+        border: 0
+        outline: 0
+
+.tribe-bar-filters-inner > div
+    padding: $space-xs 0
+
+#tribe-bar-form .tribe-bar-submit input[type="submit"]
+    +font-size($font-size-sm)
+    background-color: $color-secondary
+    color: $color-dark-grey
+    padding: 0
+
+///////////////////////////////////////////////////////////////////////////////
 // SLIDERS                                                                   //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -873,7 +906,9 @@ img
         position: relative
 
     &__image
+        align-items: center
         box-shadow: 2px 2px 5px $color-transparent-black
+        display: flex
         height: 100%
         margin-bottom: $space-sm
         min-height: 150px

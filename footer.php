@@ -5,14 +5,15 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
-                                <li><strong><a href="#_">FIRST FRIDAY</a></strong></li>
-                                <li><strong><a href="#_">EXHIBITS</a></strong></li>
-                                <li><strong><a href="#_">THEATER</a></strong></li>
-                                <li><strong><a href="#_">DANCE</a></strong></li>
-                                <li><strong><a href="#_">MUSIC</a></strong></li>
-                                <li><strong><a href="#_">LITERARY/LECTURES</a></strong></li>
-                                <li><strong><a href="#_">CALENDAR</a></strong></li>
-                                <li><strong><a href="#_">DIRECTORY</a></strong></li>
+                                <?php 
+                                    $menuLocations = get_nav_menu_locations();
+                                    $menuID = $menuLocations['header-navbar'];
+                                    $primaryNav = wp_get_nav_menu_items( $menuID );
+
+                                    foreach( $primaryNav as $navItem ):
+                                    ?>
+                                        <li><strong><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></strong></li>
+                                    <?php endforeach; ?>
                             </ul>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">

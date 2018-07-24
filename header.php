@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <nav class="nav--header">
+        <!-- <nav class="nav--header">
             <div class="nav--header__sides"></div>
             <div class="text-center">
                 <ul>
@@ -87,7 +87,26 @@
                 </ul>
             </div>
             <div class="nav--header__sides"></div>
+        </nav> -->
+
+        <nav class="nav--header">
+            <div class="nav--header__sides"></div>
+            <div class="text-center">
+                <ul>
+                <?php 
+                    $menuLocations = get_nav_menu_locations();
+                    $menuID = $menuLocations['header-navbar'];
+                    $primaryNav = wp_get_nav_menu_items( $menuID );
+
+                    foreach( $primaryNav as $key => $navItem ):
+                    ?>
+                        <li class="nav__item--header <?php if( $key == count( $primaryNav ) - 1){ echo 'nav__accent'; } ?> ?>"><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="nav--header__sides"></div>
         </nav>
+
 
         <?php if(is_front_page()): ?>
         <div class="carousel slide" id="header-carousel" data-ride="carousel">

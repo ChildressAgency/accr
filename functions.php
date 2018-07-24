@@ -90,4 +90,20 @@
         remove_post_type_support( 'page', 'editor' );
         remove_post_type_support( 'sponsored', 'editor' );
     }
+
+    /*
+     * The Events Calendar - Add 'tags' support to venues and organizers
+    */
+    function tribe_tag_venues_and_orgs() {
+     
+        $tribe_venue_args = get_post_type_object('tribe_venue');
+        $tribe_venue_args->taxonomies = array('post_tag');
+
+        $tribe_organizer_args = get_post_type_object('tribe_organizer');
+        $tribe_organizer_args->taxonomies = array('post_tag');
+     
+        register_post_type( 'tribe_venue', $tribe_venue_args );
+        register_post_type( 'tribe_organizer', $tribe_organizer_args );
+    }
+    add_action( 'init', 'tribe_tag_venues_and_orgs', 100 );
 ?>

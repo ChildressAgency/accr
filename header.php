@@ -35,14 +35,14 @@
                     <p class="brand__text">Your guide to Arts &amp; Culture in the Central Rappahannock River Region</p>
                 </div>
                 <div class="separator--header"></div>
-                <ul class="member-links">
+                <!-- <ul class="member-links">
                     <li class="member-links__item"><a href="#_">LOG IN</a></li>
                     <li class="member-links__item"><a href="#_">REGISTER</a></li>
-                </ul>
+                </ul> -->
             </div>
             <div class="header__accr">
                 <p>An initiative of:</p>
-                <a href="#_"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo"></a>
+                <a href="<?php echo get_field( 'about_accr', 'option' ); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo"></a>
                 <div>
                     <a href="<?php the_field( 'twitter', 'option' ); ?>"><i class="icon fab fa-twitter"></i></a>
                     <a href="<?php the_field( 'facebook', 'option' ); ?>"><i class="icon fab fa-facebook-square"></i></a>
@@ -100,8 +100,9 @@
 
                     foreach( $primaryNav as $key => $navItem ):
                     ?>
-                        <li class="nav__item--header <?php if( $key == count( $primaryNav ) - 1){ echo 'nav__accent'; } ?> ?>"><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
+                        <li class="nav__item--header"><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
                     <?php endforeach; ?>
+                    <li class="nav__item--header nav__accent"><a href="<?php echo get_field( 'donate_link', 'option' ); ?>">Donate</a></li>
                 </ul>
             </div>
             <div class="nav--header__sides"></div>
@@ -118,7 +119,7 @@
                             <h2 class="carousel__caption__subheading"><?php the_sub_field( 'dates' ); ?></h2>
                             <div class="carousel__btns">
                                 <?php if( get_sub_field( 'tickets_link' ) ): ?><a href="<?php the_sub_field( 'tickets_link' ); ?>" class="btn btn-header-carousel btn-secondary">GET TICKETS</a><?php endif; ?>
-                                <?php if( get_sub_field( 'add_it_link' ) ): ?><a href="<?php the_sub_field( 'add_it_link' ); ?>" class="btn btn-header-carousel btn-white">ADD IT</a><?php endif; ?>
+                                <!-- <?php if( get_sub_field( 'add_it_link' ) ): ?><a href="<?php the_sub_field( 'add_it_link' ); ?>" class="btn btn-header-carousel btn-white">ADD IT</a><?php endif; ?> -->
                                 <?php if( get_sub_field( 'more_info_link' ) ): ?><a href="<?php the_sub_field( 'more_info_link' ); ?>" class="btn btn-header-carousel btn-primary">MORE INFO</a><?php endif; ?>
                             </div>
                         </div>
@@ -142,4 +143,10 @@
         </div>
     </section> -->
 
-    <?php if(!is_front_page()): get_template_part( 'tp-breadcrumbs' ); endif; ?>
+    <!-- <section class="search">
+        <div class="container">
+            <?php //echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
+        </div>
+    </section> -->
+
+    <?php //if(!is_front_page()): get_template_part( 'tp-breadcrumbs' ); endif; ?>

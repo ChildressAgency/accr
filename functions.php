@@ -106,4 +106,32 @@
         register_post_type( 'tribe_organizer', $tribe_organizer_args );
     }
     add_action( 'init', 'tribe_tag_venues_and_orgs', 100 );
+
+    /*
+     * By Barry and Cliff
+     * From https://gist.github.com/cliffordp/04b7bbe6e7d9009aec12acc0b9bd5bdd
+     * 
+     * Shortcode to display render Tribe Bar anywhere on site (e.g. website header)
+     * For https://theeventscalendar.com/support/forums/topic/insert-search-bar-on-top-of-a-page/ which also links to http://gregorypearcey.com/blog/add-tribe-events-search-bar-home-page/
+     *
+     * Notes: It's not pretty or perfect, but it's a start if you want to pull something like this off on your site. FYI: You're in unsupported / custom coding territory.
+     *
+     * Example: [tribe_bar_anywhere]
+     * Screenshot: https://cl.ly/3h1S3d3a3T30
+     */
+    function tribe_bar_anywhere_logic() {
+        if ( ! class_exists( 'Tribe__Events__Bar' ) ) {
+            return false;
+        }
+        wp_enqueue_script( 'jquery' );
+        Tribe__Events__Template_Factory::asset_package( 'bootstrap-datepicker' );
+        Tribe__Events__Template_Factory::asset_package( 'calendar-script' );
+        Tribe__Events__Template_Factory::asset_package( 'jquery-resize' );
+        Tribe__Events__Template_Factory::asset_package( 'events-css' );
+        Tribe__Events__Bar::instance()->load_script();
+        ob_start();
+        tribe_get_template_part( 'modules/bar' );
+        return ob_get_clean();
+    }
+    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );
 ?>

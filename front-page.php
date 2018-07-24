@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<section class="filter">
+<!-- <section class="filter">
     <div class="container">
         <ul class="filter__list">
             <li class="active"><a href="#_">All</a></li>|
@@ -12,52 +12,7 @@
             <li><a href="#_">Westmoreland</a></li>
         </ul>
     </div>
-</section>
-
-<?php if( false ): //if ( have_posts() ) : ?>
-    <section class="events">
-        <div class="container">
-
-            <?php
-                $events = tribe_get_events( array(
-                    'posts_per_page'    => 10,
-                    'start_date'        => date( 'Y-m-d' ),
-                    // 'tribe_events_cat'  => 'auditions'
-                ) );
-                $featuredEvents = tribe_get_events( array(
-                    'posts_per_page'    => 10,
-                    'start_date'        => date( 'Y-m-d' ),
-                    'featured'          => true
-                ) ); ?>
-
-            <div class="events__tabs-wrapper">
-                <a class="view-all" href="#_">View All</a>
-                <div class="nav nav-tabs" role="tablist">
-                    <a href="#featured" class="events__heading events__heading--featured nav-item nav-link active" id="nav-featured" data-toggle="tab" role="tab" aria-controls="featured" aria-selected="true"><h2>TEST EVENTS</h2></a>
-                </div>
-            </div>
-            <hr />
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
-                    <div class="event-slider">
-                        <?php foreach( $events as $event ): 
-                            $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
-                            $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
-                            ?>
-                            <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
-                                <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
-                                <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
-                                    <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
-                                </div>
-                                <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<?php endif; ?>
+</section> -->
 
 <?php if ( have_posts() ) : ?>
 <section class="events">
@@ -70,7 +25,7 @@
             ) ); ?>
 
         <div class="events__tabs-wrapper">
-            <a class="view-all" href="#_">View All</a>
+            <a class="view-all" href="<?php echo( home_url( 'events' ) ); ?>">View All</a>
             <div class="nav nav-tabs" role="tablist">
                 <a href="#featured" class="events__heading events__heading--featured nav-item nav-link active" id="nav-featured" data-toggle="tab" role="tab" aria-controls="featured" aria-selected="true"><h2>FEATURED EVENTS</h2></a>
             </div>
@@ -78,20 +33,24 @@
         <hr />
         <div class="tab-content">
             <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
-                <div class="event-slider">
-                    <?php foreach( $events as $event ): 
-                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
-                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
-                        ?>
-                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
-                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
-                            <div class="event-thumbnail__image">
-                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
-                            </div>
-                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
+                <?php if( $events ): ?>
+                    <div class="event-slider">
+                        <?php foreach( $events as $event ): 
+                            $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                            $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                            ?>
+                            <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                                <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                                <div class="event-thumbnail__image">
+                                    <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                                </div>
+                                <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <p>There are no upcoming events in this category.</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -102,7 +61,7 @@
 <section class="events">
     <div class="container">
         <div class="events__tabs-wrapper">
-            <a class="view-all" href="#_">View All</a>
+            <a class="view-all" href="<?php echo( home_url( 'events' ) ); ?>">View All</a>
             <div class="nav nav-tabs" role="tablist">
                 <a href="#all" class="events__heading nav-item nav-link active" id="nav-all" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true"><h2>ALL EVENTS</h2></a>
                 <a href="#family" class="events__heading nav-item nav-link" id="nav-family" data-toggle="tab" role="tab" aria-controls="family" aria-selected="false"><h2>FAMILY</h2></a>
@@ -152,20 +111,24 @@
                         'featured'          => true
                     ) );
                     ?>
-                <div class="event-slider">
-                    <?php foreach( $events as $event ): 
-                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
-                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
-                        ?>
-                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
-                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
-                            <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
-                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
-                            </div>
-                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
+                    <?php if( $events ): ?>
+                        <div class="event-slider">
+                            <?php foreach( $events as $event ): 
+                                $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                                $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                                ?>
+                                <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                                    <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                                    <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                        <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                                    </div>
+                                    <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <p>There are no upcoming events in this category.</p>
+                    <?php endif; ?>
             </div>
             <div class="tab-pane fade" id="free" role="tabpanel" aria-labelledby="free-tab">
                 <?php
@@ -181,20 +144,24 @@
                         'featured'          => true
                     ) );
                     ?>
-                <div class="event-slider">
-                    <?php foreach( $events as $event ): 
-                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
-                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
-                        ?>
-                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
-                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
-                            <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
-                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
-                            </div>
-                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
+                    <?php if( $events ): ?>
+                        <div class="event-slider">
+                            <?php foreach( $events as $event ): 
+                                $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                                $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                                ?>
+                                <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                                    <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                                    <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                        <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                                    </div>
+                                    <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <p>There are no upcoming events in this category.</p>
+                    <?php endif; ?>
             </div>
         </div>
     </div>
@@ -224,7 +191,7 @@
                     <section class="events">
                         <div class="container">
                             <div class="events__tabs-wrapper">
-                                <a class="view-all" href="#_">View All</a>
+                                <a class="view-all" href="<?php echo( home_url( 'events' ) ); ?>">View All</a>
                                 <div class="nav nav-tabs" role="tablist">
                                     <?php if( have_rows( 'tab' ) ): $i=0; while( have_rows( 'tab' ) ): the_row(); 
                                         $category = get_sub_field( 'category' );
@@ -294,7 +261,7 @@
     </div>
 </section>
 
-<section class="social-display">
+<!-- <section class="social-display">
     <div class="container text-center">
         <p class="social-display__heading">Around the town</p>
         <p class="social-display__subheading">Find us in Instagram at FredericksburgArts and tag us with #FXBGARTS</p>
@@ -307,7 +274,7 @@
             <div id="social-display__facebook" class="tab-pane fade" role="tabpanel"><?php echo do_shortcode('[custom-facebook-feed]'); ?></div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="twitter-bar text-center">
     <p>Stay up-to-date on the latest by following us on twitter!</p>

@@ -12,13 +12,13 @@
 
     <hr class="hr--light" />
 
-    <!-- <h3 class="sidebar__heading">DIRECTORIES</h3>
+    <h3 class="sidebar__heading">DIRECTORIES</h3>
     <a href="<?php echo( home_url( 'artists' ) ); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
     <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
     <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
-    <a href="<?php echo( home_url( 'opportunities' ) ); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a> -->
+    <a href="<?php echo( home_url( 'opportunities' ) ); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
 
-    <!-- <hr class="hr--light" /> -->
+    <hr class="hr--light" />
 
     <?php 
         $query = new WP_Query( array( 'post_type' => 'sponsored', 'posts_per_page' => 5 ) );

@@ -38,7 +38,7 @@
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
                                 <li><strong><a href="#_">OVERVIEW</a></strong></li>
-                                <li><a href="#_">About Us</a></li>
+                                <li><a href="<?php echo( home_url( 'about-us' ) ); ?>">About Us</a></li>
                                 <li><a href="#_">Calendar Partners</a></li>
                                 <li><a href="#_">Privacy Policy</a></li>
                                 <li><a href="#_">Terms of Use</a></li>

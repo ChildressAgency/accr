@@ -104,4 +104,9 @@ $( document ).ready(function(){
             }
         ]
     });
+
+    /*
+     * Don't autoplay certain bootstrap carousels
+     */
+    $('.no-autoplay').carousel({ interval: false });
 });

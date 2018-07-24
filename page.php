@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9 content-with-sidebar">
-                <?php get_template_part( 'tp-share' ); ?>
+                <?php //get_template_part( 'tp-share' ); ?>
 
                 <?php if(have_posts()): while(have_posts()): the_post(); ?>
                     <article>

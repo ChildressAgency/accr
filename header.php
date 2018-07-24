@@ -142,11 +142,3 @@
             <p class="search__text">Find an<br/><span>EVENT</span></p>
         </div>
     </section> -->
-
-    <!-- <section class="search">
-        <div class="container">
-            <?php //echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
-        </div>
-    </section> -->
-
-    <?php //if(!is_front_page()): get_template_part( 'tp-breadcrumbs' ); endif; ?>

@@ -63,7 +63,10 @@
     }
 
     function header_navbar() {
-        register_nav_menu( 'header-navbar', _( 'Header Navigation' ) );
+        register_nav_menus( array( 
+            'header-navbar' => __( 'Header Navigation' ),
+            'member-navbar' => __( 'Membership Navigation' )
+        ) );
     }
     add_action( 'init', 'header_navbar' );
 
@@ -95,7 +98,6 @@
      * The Events Calendar - Add 'tags' support to venues and organizers
     */
     function tribe_tag_venues_and_orgs() {
-     
         $tribe_venue_args = get_post_type_object('tribe_venue');
         $tribe_venue_args->taxonomies = array('post_tag');
 
@@ -105,7 +107,7 @@
         register_post_type( 'tribe_venue', $tribe_venue_args );
         register_post_type( 'tribe_organizer', $tribe_organizer_args );
     }
-    add_action( 'init', 'tribe_tag_venues_and_orgs', 100 );
+    add_action( 'init', 'tribe_tag_venues_and_orgs' );
 
     /*
      * By Barry and Cliff

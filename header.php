@@ -45,8 +45,6 @@
                         ?>
                             <li class="member-links__item"><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
                         <?php endforeach; ?>
-                    <!-- <li class="member-links__item"><a href="#_">LOG IN</a></li>
-                    <li class="member-links__item"><a href="#_">REGISTER</a></li> -->
                 </ul>
             </div>
             <div class="header__accr">
@@ -59,50 +57,11 @@
                 </div>
             </div>
         </div>
-        <!-- <nav class="nav--header">
-            <div class="nav--header__sides"></div>
-            <div class="text-center">
-                <ul>
-                    <li class="nav__item">
-                        <a href="#_">VISUAL ARTS</a>
-                        <ul class="submenu invisible">
-                            <div class="submenu__column">
-                                <li class="submenu__item"><a href="#_">CERAMICS/POTTERY</a></li>
-                                <li class="submenu__item"><a href="#_">DIGITAL</a></li>
-                                <li class="submenu__item"><a href="#_">DRAWING</a></li>
-                                <li class="submenu__item"><a href="#_">FASHION</a></li>
-                                <li class="submenu__item"><a href="#_">GLASS</a></li>
-                                <li class="submenu__item"><a href="#_">GRAPHIC DESIGN</a></li>
-                            </div>
-                            <div class="submenu__column">
-                                <li class="submenu__item"><a href="#_">JEWELRY</a></li>
-                                <li class="submenu__item"><a href="#_">MIXED MEDIA</a></li>
-                                <li class="submenu__item"><a href="#_">MURAL</a></li>
-                                <li class="submenu__item"><a href="#_">PAINTING</a></li>
-                                <li class="submenu__item"><a href="#_">PHOTOGRAPH</a></li>
-                                <li class="submenu__item"><a href="#_">SCULPTURE</a></li>
-                            </div>
-                        </ul>
-                    </li>
-                    <li class="nav__item"><a href="#_">MUSIC</a></li>
-                    <li class="nav__item"><a href="#_">THEATER</a></li>
-                    <li class="nav__item"><a href="#_">DANCE</a></li>
-                    <li class="nav__item"><a href="#_">FILM</a></li>
-                    <li class="nav__item"><a href="#_">LITERARY</a></li>
-                    <li class="nav__item"><a href="#_">LECTURES</a></li>
-                    <li class="nav__item"><a href="#_">FESTIVALS</a></li>
-                    <li class="nav__item"><a href="#_">GALA/FUND RAISERS</a></li>
-                    <li class="nav__item nav__accent"><a href="#_">DONATE</a></li>
-                </ul>
-            </div>
-            <div class="nav--header__sides"></div>
-        </nav> -->
 
         <nav class="nav--header navbar navbar-expand-lg">
             <div class="nav--header__sides"></div>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNav" aria-controls="headerNav" aria-expanded="false" aria-label="Toggle navigation">
-                <!-- <span class="navbar-toggler-icon"></span> -->
                 <i class="icon fas fa-bars"></i>
             </button>
 

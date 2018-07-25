@@ -261,20 +261,20 @@
     </div>
 </section>
 
-<!-- <section class="social-display">
+<section class="social-display">
     <div class="container text-center">
         <p class="social-display__heading">Around the town</p>
         <p class="social-display__subheading">Find us in Instagram at FredericksburgArts and tag us with #FXBGARTS</p>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item"><a href="#social-display__instagram" class="nav-link active" data-toggle="tab" role="tab"><i class="icon fab fa-instagram"></i></a></li>
-            <li class="nav-item"><a href="#social-display__facebook" class="nav-link" data-toggle="tab" role="tab"><i class="icon fab fa-facebook-square"></i></a></li>
+            <!-- <li class="nav-item"><a href="#social-display__facebook" class="nav-link" data-toggle="tab" role="tab"><i class="icon fab fa-facebook-square"></i></a></li> -->
         </ul>
         <div class="tab-content">
             <div id="social-display__instagram" class="tab-pane fade active show" role="tabpanel"><?php echo do_shortcode('[instagram-feed]'); ?></div>
             <div id="social-display__facebook" class="tab-pane fade" role="tabpanel"><?php echo do_shortcode('[custom-facebook-feed]'); ?></div>
         </div>
     </div>
-</section> -->
+</section>
 
 <section class="twitter-bar text-center">
     <p>Stay up-to-date on the latest by following us on twitter!</p>

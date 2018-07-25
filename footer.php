@@ -18,21 +18,21 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
-                                <li><strong><a href="#_">SUBMIT A LISTING</a></strong></li>
-                                <li><a href="#_">Event</a></li>
-                                <li><a href="#_">Organization</a></li>
-                                <li><a href="#_">Venue</a></li>
-                                <li><a href="#_">Artist</a></li>
-                                <li><a href="#_">How-To Guide</a></li>
+                                <li><strong><a href="http://dev.childressagency.com/accr/events/community/add">SUBMIT A LISTING</a></strong></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Event</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Organization</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Venue</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Artist</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">How-To Guide</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
-                                <li><strong><a href="#_">BECOME A MEMBER</a></strong></li>
+                                <li><strong><a href="<?php echo( home_url( 'register' ) ); ?>">BECOME A MEMBER</a></strong></li>
                                 <li><a href="#_">Organization</a></li>
                                 <li><a href="#_">Venue</a></li>
                                 <li><a href="#_">Artist</a></li>
-                                <li><a href="#_">Opportunities</a></li>
+                                <li><a href="<?php echo( home_url( 'opportunities' ) ); ?>">Opportunities</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">

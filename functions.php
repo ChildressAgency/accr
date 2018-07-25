@@ -96,7 +96,7 @@
 
     /*
      * The Events Calendar - Add 'tags' support to venues and organizers
-    */
+     */
     function tribe_tag_venues_and_orgs() {
         $tribe_venue_args = get_post_type_object('tribe_venue');
         $tribe_venue_args->taxonomies = array('post_tag');

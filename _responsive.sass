@@ -53,6 +53,13 @@
         .brand
             flex-direction: row
 
+    .carousel
+        &__heading
+            +font-size($font-size-xl)
+
+        &__subheading
+            +font-size($font-size-lg)
+
     .secondary-sliders
         margin-bottom: 0
 
@@ -88,12 +95,39 @@
             img
                 width: 250px
 
+        &--home
+            height: 100%
+
+    .nav--header
+        background-color: transparent
+
+        &__sides
+            display: block
+
+    .carousel
+        &__caption
+            bottom: $space-md
+            left: $space-md
+
+        &__heading
+            +font-size($font-size-xxl)
+
+        &__subheading
+            +font-size($font-size-xl)
+
+        &__arrows
+            bottom: $space-md
+            right: $space-md
+
+        &-control-prev,
+        &-control-next
+            +font-size($font-size-xxl)
+            height: $space-lg
+            width: $space-lg
+
     .event
         &__header
             text-align: left
-
-            &--featured
-                margin-left: $space-md
 
         &__info
             display: flex
@@ -126,5 +160,5 @@
         img
             width: 375px
 
-    .nav__item--header
+    .nav__item
         +font-size($font-size-md)

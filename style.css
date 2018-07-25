@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,700|Barlow:300,400,500,700|Domine:700|Montserrat:300&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890%20%21%22%23%24%25%26%27%28%29%2A%2B%2C%2D%2E%2F%5F%5C%A9");
-.footer__copyright, .register__form-input, .search__text span, .btn, .carousel__caption, h3, h2, h1, body,
+.footer__copyright, #tribe-bar-form input[type=text], .register__form-input, .search__text span, .btn, .carousel__caption, h3, h2, h1, body,
 p {
   font-family: "Barlow", sans-serif;
 }
@@ -193,7 +193,11 @@ img {
   z-index: 99;
 }
 .header--home {
-  height: 100%;
+  height: auto;
+}
+.header--home .carousel {
+  flex: 1 0 auto;
+  min-height: 300px;
 }
 
 .brand {
@@ -229,6 +233,7 @@ img {
   z-index: 99;
 }
 .nav--header {
+  background-color: #739cd2;
   display: flex;
   justify-content: space-around;
 }
@@ -237,26 +242,44 @@ img {
 }
 .nav--header__sides {
   background-color: #739cd2;
+  display: none;
   flex: 1;
 }
-.nav__item--header {
+.nav__item {
   font-size: 16px;
   font-size: 1.6rem;
   background-color: #739cd2;
-  margin: 0;
+  margin: 0 2px;
   overflow: visible;
   padding: 15px;
   position: relative;
 }
-.nav__item--header:hover {
+.nav__item:hover {
   background-color: #cfdaef;
 }
-.nav__item--header:hover a {
+.nav__item:hover a {
   color: #000;
   text-decoration: none;
 }
 .nav__accent {
   background-color: #ffe04f;
+}
+
+.navbar {
+  align-items: inherit;
+  padding: 0;
+}
+.navbar-expand-lg .navbar-collapse {
+  flex: 0 1 auto;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 0;
+}
+
+.navbar-toggler .icon {
+  font-size: 30px;
+  font-size: 3rem;
+  color: #fff;
 }
 
 .submenu {
@@ -299,15 +322,19 @@ img {
   width: 100%;
 }
 .carousel__caption {
-  bottom: 60px;
+  bottom: 15px;
   color: #fff;
-  left: 60px;
+  left: 15px;
   position: absolute;
   z-index: 1;
 }
-.carousel__caption__subheading {
-  font-size: 40px;
-  font-size: 4rem;
+.carousel__heading {
+  font-size: 30px;
+  font-size: 3rem;
+}
+.carousel__subheading {
+  font-size: 24px;
+  font-size: 2.4rem;
 }
 .carousel__image {
   height: 100%;
@@ -323,10 +350,10 @@ img {
   width: 100%;
 }
 .carousel__arrows {
-  bottom: 30px;
+  bottom: 15px;
   color: #fff;
   position: absolute;
-  right: 30px;
+  right: 15px;
 }
 .carousel__arrows p {
   padding-right: 7px;
@@ -336,18 +363,18 @@ img {
   height: 100%;
 }
 .carousel-control-prev, .carousel-control-next {
-  font-size: 60px;
-  font-size: 6rem;
+  font-size: 30px;
+  font-size: 3rem;
   background-color: #cfdaef;
   color: #000;
   display: inline-block;
-  height: 60px;
+  height: 30px;
   left: unset;
   margin: 7px;
   opacity: 1;
   position: relative;
   right: unset;
-  width: 60px;
+  width: 30px;
 }
 .carousel-control-prev:focus, .carousel-control-next:focus {
   color: #000;
@@ -654,7 +681,7 @@ img {
   display: block;
   margin-bottom: 7px;
 }
-.event__meta-data {
+.event__meta-data p {
   color: #666;
   margin: 15px 0;
 }
@@ -750,6 +777,7 @@ img {
   display: flex;
   justify-content: center;
   margin: 30px 0;
+  min-height: 240px;
   position: relative;
   text-align: center;
   width: 100%;
@@ -841,6 +869,7 @@ img {
 }
 .section--about p {
   color: #666;
+  line-height: 1.5;
 }
 
 .about-documents {
@@ -895,8 +924,24 @@ img {
   width: 100%;
 }
 
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  display: flex;
+}
+
+.slick-initialized .slick-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.um {
+  opacity: 1 !important;
+}
+
 .sidebar__sponsored {
   margin: 15px 0;
+  width: 100%;
 }
 .sidebar__btn {
   border: 1px solid #ccc;
@@ -920,6 +965,38 @@ img {
 }
 .sidebar__text {
   margin-bottom: 0;
+}
+
+#tribe-bar-form {
+  background-color: transparent;
+}
+
+#tribe-bar-form.tribe-bar-collapse .tribe-bar-filters {
+  display: block;
+}
+
+#tribe-bar-form input[type=text] {
+  background-color: #fff;
+  border: 0;
+  font-style: normal;
+  outline: 0;
+  padding: 7px;
+}
+#tribe-bar-form input[type=text]:focus {
+  border: 0;
+  outline: 0;
+}
+
+.tribe-bar-filters-inner > div {
+  padding: 7px 0;
+}
+
+#tribe-bar-form .tribe-bar-submit input[type=submit] {
+  font-size: 16px;
+  font-size: 1.6rem;
+  background-color: #ffe04f;
+  color: #4d4d4d;
+  padding: 0;
 }
 
 .events__heading {
@@ -946,8 +1023,12 @@ img {
   position: relative;
 }
 .event-thumbnail__image {
-  height: auto;
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 100%;
   margin-bottom: 15px;
+  min-height: 150px;
   width: 100%;
 }
 .event-thumbnail__image img {
@@ -971,6 +1052,7 @@ img {
   align-items: center;
   background-color: #cfdaef;
   border-radius: 0 100px 100px 0;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   display: flex;
   height: 4rem;
   margin-left: -30px;
@@ -1037,6 +1119,7 @@ img {
 }
 .slick-prev:focus,
 .slick-next:focus {
+  background-color: #cfdaef;
   color: #000;
 }
 .slick-prev:hover,
@@ -1247,6 +1330,15 @@ img {
     flex-direction: row;
   }
 
+  .carousel__heading {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  .carousel__subheading {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+
   .secondary-sliders {
     margin-bottom: 0;
   }
@@ -1286,12 +1378,42 @@ img {
   .header__accr img {
     width: 250px;
   }
+  .header--home {
+    height: 100%;
+  }
+
+  .nav--header {
+    background-color: transparent;
+  }
+  .nav--header__sides {
+    display: block;
+  }
+
+  .carousel__caption {
+    bottom: 30px;
+    left: 30px;
+  }
+  .carousel__heading {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  .carousel__subheading {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  .carousel__arrows {
+    bottom: 30px;
+    right: 30px;
+  }
+  .carousel-control-prev, .carousel-control-next {
+    font-size: 60px;
+    font-size: 6rem;
+    height: 60px;
+    width: 60px;
+  }
 
   .event__header {
     text-align: left;
-  }
-  .event__header--featured {
-    margin-left: 30px;
   }
   .event__info {
     display: flex;
@@ -1330,7 +1452,7 @@ img {
     width: 375px;
   }
 
-  .nav__item--header {
+  .nav__item {
     font-size: 24px;
     font-size: 2.4rem;
   }

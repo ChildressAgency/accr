@@ -63,7 +63,77 @@
     }
 
     function header_navbar() {
-        register_nav_menu( 'header-navbar', _( 'Header Navigation' ) );
+        register_nav_menus( array( 
+            'header-navbar' => __( 'Header Navigation' ),
+            'member-navbar' => __( 'Membership Navigation' )
+        ) );
     }
     add_action( 'init', 'header_navbar' );
+
+    // featured images
+    add_theme_support( 'post-thumbnails');
+
+    function sponsored_post_type() {
+      register_post_type( 'sponsored',
+        array(
+            'labels' => array(
+            'name' => __( 'Sponsored Events' ),
+            'singular_name' => __( 'Sponsored Event' )
+            ),
+            'public' => true,
+            'has_archive' => false
+        )
+      );
+    }
+    add_action( 'init', 'sponsored_post_type' );
+
+    // remove content editor
+    add_action('admin_init', 'remove_textarea');
+    function remove_textarea() {
+        remove_post_type_support( 'page', 'editor' );
+        remove_post_type_support( 'sponsored', 'editor' );
+    }
+
+    /*
+     * The Events Calendar - Add 'tags' support to venues and organizers
+     */
+    function tribe_tag_venues_and_orgs() {
+        $tribe_venue_args = get_post_type_object('tribe_venue');
+        $tribe_venue_args->taxonomies = array('post_tag');
+
+        $tribe_organizer_args = get_post_type_object('tribe_organizer');
+        $tribe_organizer_args->taxonomies = array('post_tag');
+     
+        register_post_type( 'tribe_venue', $tribe_venue_args );
+        register_post_type( 'tribe_organizer', $tribe_organizer_args );
+    }
+    add_action( 'init', 'tribe_tag_venues_and_orgs' );
+
+    /*
+     * By Barry and Cliff
+     * From https://gist.github.com/cliffordp/04b7bbe6e7d9009aec12acc0b9bd5bdd
+     * 
+     * Shortcode to display render Tribe Bar anywhere on site (e.g. website header)
+     * For https://theeventscalendar.com/support/forums/topic/insert-search-bar-on-top-of-a-page/ which also links to http://gregorypearcey.com/blog/add-tribe-events-search-bar-home-page/
+     *
+     * Notes: It's not pretty or perfect, but it's a start if you want to pull something like this off on your site. FYI: You're in unsupported / custom coding territory.
+     *
+     * Example: [tribe_bar_anywhere]
+     * Screenshot: https://cl.ly/3h1S3d3a3T30
+     */
+    function tribe_bar_anywhere_logic() {
+        if ( ! class_exists( 'Tribe__Events__Bar' ) ) {
+            return false;
+        }
+        wp_enqueue_script( 'jquery' );
+        Tribe__Events__Template_Factory::asset_package( 'bootstrap-datepicker' );
+        Tribe__Events__Template_Factory::asset_package( 'calendar-script' );
+        Tribe__Events__Template_Factory::asset_package( 'jquery-resize' );
+        Tribe__Events__Template_Factory::asset_package( 'events-css' );
+        Tribe__Events__Bar::instance()->load_script();
+        ob_start();
+        tribe_get_template_part( 'modules/bar' );
+        return ob_get_clean();
+    }
+    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );
 ?>

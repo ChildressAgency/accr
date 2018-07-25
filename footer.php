@@ -5,39 +5,40 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
-                                <li><strong><a href="#_">FIRST FRIDAY</a></strong></li>
-                                <li><strong><a href="#_">EXHIBITS</a></strong></li>
-                                <li><strong><a href="#_">THEATER</a></strong></li>
-                                <li><strong><a href="#_">DANCE</a></strong></li>
-                                <li><strong><a href="#_">MUSIC</a></strong></li>
-                                <li><strong><a href="#_">LITERARY/LECTURES</a></strong></li>
-                                <li><strong><a href="#_">CALENDAR</a></strong></li>
-                                <li><strong><a href="#_">DIRECTORY</a></strong></li>
+                                <?php 
+                                    $menuLocations = get_nav_menu_locations();
+                                    $menuID = $menuLocations['header-navbar'];
+                                    $primaryNav = wp_get_nav_menu_items( $menuID );
+
+                                    foreach( $primaryNav as $navItem ):
+                                    ?>
+                                        <li><strong><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></strong></li>
+                                    <?php endforeach; ?>
                             </ul>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
-                                <li><strong><a href="#_">SUBMIT A LISTING</a></strong></li>
-                                <li><a href="#_">Event</a></li>
-                                <li><a href="#_">Organization</a></li>
-                                <li><a href="#_">Venue</a></li>
-                                <li><a href="#_">Artist</a></li>
-                                <li><a href="#_">How-To Guide</a></li>
+                                <li><strong><a href="http://dev.childressagency.com/accr/events/community/add">SUBMIT A LISTING</a></strong></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Event</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Organization</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Venue</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Artist</a></li>
+                                <li><a href="http://dev.childressagency.com/accr/events/community/add">How-To Guide</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
-                                <li><strong><a href="#_">BECOME A MEMBER</a></strong></li>
+                                <li><strong><a href="<?php echo( home_url( 'register' ) ); ?>">BECOME A MEMBER</a></strong></li>
                                 <li><a href="#_">Organization</a></li>
                                 <li><a href="#_">Venue</a></li>
                                 <li><a href="#_">Artist</a></li>
-                                <li><a href="#_">Opportunities</a></li>
+                                <li><a href="<?php echo( home_url( 'opportunities' ) ); ?>">Opportunities</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
                                 <li><strong><a href="#_">OVERVIEW</a></strong></li>
-                                <li><a href="#_">About Us</a></li>
+                                <li><a href="<?php echo( home_url( 'about-us' ) ); ?>">About Us</a></li>
                                 <li><a href="#_">Calendar Partners</a></li>
                                 <li><a href="#_">Privacy Policy</a></li>
                                 <li><a href="#_">Terms of Use</a></li>
@@ -71,7 +72,7 @@
                         <div class="footer__mission-text">
                             <p><strong>THE ARTS AND CULTURE COUNCIL OF THE RAPPAHANNOCK</strong></p>
                             <p>The mission of The Arts & Cultural Council of the Rappahannock is to advance the arts and cultural life of the central Rappahannock region by supporting and strengthening the region’s arts and cultural organizations, and its arts and cultural offerings, for the benefit of all its citizens.</p>
-                            <p><strong>CONTACT US - </strong><a href="mailto:arts@rapp-arts.org">arts@rapp-arts.org</a> &#8226; <a href="tel:555.555.5555">555.555.5555</a></p>
+                            <p><strong>CONTACT US - </strong><a href="mailto:<?php the_field( 'email_accr', 'option' ); ?>"><?php the_field( 'email_accr', 'option' ); ?></a> &#8226; <a href="tel:<?php the_field( 'phone_accr', 'option' ); ?>"><?php the_field( 'phone_accr', 'option' ); ?></a></p>
                         </div>
                     </div>
                 </div>

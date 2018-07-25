@@ -193,7 +193,11 @@ img {
   z-index: 99;
 }
 .header--home {
-  height: 100%;
+  height: auto;
+}
+.header--home .carousel {
+  flex: 1 0 auto;
+  min-height: 300px;
 }
 
 .brand {
@@ -229,6 +233,7 @@ img {
   z-index: 99;
 }
 .nav--header {
+  background-color: #739cd2;
   display: flex;
   justify-content: space-around;
 }
@@ -237,26 +242,44 @@ img {
 }
 .nav--header__sides {
   background-color: #739cd2;
+  display: none;
   flex: 1;
 }
-.nav__item--header {
+.nav__item {
   font-size: 16px;
   font-size: 1.6rem;
   background-color: #739cd2;
-  margin: 0;
+  margin: 0 2px;
   overflow: visible;
   padding: 15px;
   position: relative;
 }
-.nav__item--header:hover {
+.nav__item:hover {
   background-color: #cfdaef;
 }
-.nav__item--header:hover a {
+.nav__item:hover a {
   color: #000;
   text-decoration: none;
 }
 .nav__accent {
   background-color: #ffe04f;
+}
+
+.navbar {
+  align-items: inherit;
+  padding: 0;
+}
+.navbar-expand-lg .navbar-collapse {
+  flex: 0 1 auto;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 0;
+}
+
+.navbar-toggler .icon {
+  font-size: 30px;
+  font-size: 3rem;
+  color: #fff;
 }
 
 .submenu {
@@ -299,15 +322,19 @@ img {
   width: 100%;
 }
 .carousel__caption {
-  bottom: 60px;
+  bottom: 15px;
   color: #fff;
-  left: 60px;
+  left: 15px;
   position: absolute;
   z-index: 1;
 }
-.carousel__caption__subheading {
-  font-size: 40px;
-  font-size: 4rem;
+.carousel__heading {
+  font-size: 30px;
+  font-size: 3rem;
+}
+.carousel__subheading {
+  font-size: 24px;
+  font-size: 2.4rem;
 }
 .carousel__image {
   height: 100%;
@@ -323,10 +350,10 @@ img {
   width: 100%;
 }
 .carousel__arrows {
-  bottom: 30px;
+  bottom: 15px;
   color: #fff;
   position: absolute;
-  right: 30px;
+  right: 15px;
 }
 .carousel__arrows p {
   padding-right: 7px;
@@ -336,18 +363,18 @@ img {
   height: 100%;
 }
 .carousel-control-prev, .carousel-control-next {
-  font-size: 60px;
-  font-size: 6rem;
+  font-size: 30px;
+  font-size: 3rem;
   background-color: #cfdaef;
   color: #000;
   display: inline-block;
-  height: 60px;
+  height: 30px;
   left: unset;
   margin: 7px;
   opacity: 1;
   position: relative;
   right: unset;
-  width: 60px;
+  width: 30px;
 }
 .carousel-control-prev:focus, .carousel-control-next:focus {
   color: #000;
@@ -908,6 +935,10 @@ img {
   justify-content: space-between;
 }
 
+.um {
+  opacity: 1 !important;
+}
+
 .sidebar__sponsored {
   margin: 15px 0;
   width: 100%;
@@ -1299,6 +1330,15 @@ img {
     flex-direction: row;
   }
 
+  .carousel__heading {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  .carousel__subheading {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+
   .secondary-sliders {
     margin-bottom: 0;
   }
@@ -1337,6 +1377,39 @@ img {
   }
   .header__accr img {
     width: 250px;
+  }
+  .header--home {
+    height: 100%;
+  }
+
+  .nav--header {
+    background-color: transparent;
+  }
+  .nav--header__sides {
+    display: block;
+  }
+
+  .carousel__caption {
+    bottom: 30px;
+    left: 30px;
+  }
+  .carousel__heading {
+    font-size: 60px;
+    font-size: 6rem;
+  }
+  .carousel__subheading {
+    font-size: 40px;
+    font-size: 4rem;
+  }
+  .carousel__arrows {
+    bottom: 30px;
+    right: 30px;
+  }
+  .carousel-control-prev, .carousel-control-next {
+    font-size: 60px;
+    font-size: 6rem;
+    height: 60px;
+    width: 60px;
   }
 
   .event__header {
@@ -1379,7 +1452,7 @@ img {
     width: 375px;
   }
 
-  .nav__item--header {
+  .nav__item {
     font-size: 24px;
     font-size: 2.4rem;
   }

@@ -118,7 +118,11 @@ img
             z-index: 99
 
     &--home
-        height: 100%
+        height: auto
+
+        .carousel
+            flex: 1 0 auto
+            min-height: 300px
 
 .brand
     align-items: center
@@ -152,6 +156,7 @@ img
     z-index: 99
 
     &--header
+        background-color: $color-primary
         display: flex
         justify-content: space-around
 
@@ -160,12 +165,13 @@ img
 
         &__sides
             background-color: $color-navbar
+            display: none
             flex: 1
 
-    &__item--header
+    &__item
         +font-size($font-size-sm)
         background-color: $color-navbar
-        margin: 0
+        margin: 0 2px
         overflow: visible
         padding: $space-sm
         position: relative
@@ -180,6 +186,22 @@ img
     &__accent
         @extend %font-bold
         background-color: $color-secondary
+
+.navbar
+    align-items: inherit
+    padding: 0
+
+    &-expand-lg
+        .navbar-collapse
+            flex: 0 1 auto
+
+        .navbar-nav .nav-link
+            padding: 0
+
+.navbar-toggler
+    .icon
+        +font-size($font-size-lg)
+        color: $color-white
 
 .submenu
     background-color: $color-primary-light
@@ -221,14 +243,17 @@ img
     &__caption
         @extend %font-barlow
         @extend %font-bold
-        bottom: $space-lg
+        bottom: $space-sm
         color: $color-white
-        left: $space-lg
+        left: $space-sm
         position: absolute
         z-index: 1
 
-    &__caption__subheading
-        +font-size($font-size-xl)
+    &__heading
+        +font-size($font-size-lg)
+
+    &__subheading
+        +font-size($font-size-md)
 
     &__image
         height: 100%
@@ -244,10 +269,10 @@ img
             width: 100%
 
     &__arrows
-        bottom: $space-md
+        bottom: $space-sm
         color: $color-white
         position: absolute
-        right: $space-md
+        right: $space-sm
 
         p
             padding-right: $space-xs
@@ -259,17 +284,17 @@ img
 
     &-control-prev,
     &-control-next
-        +font-size($font-size-xxl)
+        +font-size($font-size-lg)
         background-color: $color-primary-light
         color: $color-black
         display: inline-block
-        height: $space-lg
+        height: $space-md
         left: unset
         margin: $space-xs
         opacity: 1
         position: relative
         right: unset
-        width: $space-lg
+        width: $space-md
 
         &:focus
             color: $color-black
@@ -816,6 +841,10 @@ img
         display: flex
         flex-direction: column
         justify-content: space-between
+
+// Ultimate Member
+.um
+    opacity: 1 !important
 
 ///////////////////////////////////////////////////////////////////////////////
 // SIDEBAR                                                                   //

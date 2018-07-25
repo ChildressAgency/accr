@@ -26,14 +26,7 @@ $current_url = tribe_events_get_current_filter_url();
 <?php //do_action( 'tribe_events_bar_before_template' ) ?>
 <div id="tribe-events-bar" class="sidebar__find-event">
 
-	<!-- <h2 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search and Views Navigation', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h2> -->
-	<h3 class="sidebar__heading sidebar__heading--find-event">FIND AN EVENT</h3>
-
-	<form id="tribe-bar-form" class="tribe-clearfix" name="tribe-bar-form" method="post" action="<?php echo esc_attr( $current_url ); ?>">
-
-		<!-- Mobile Filters Toggle -->
-
-		
+	<form id="tribe-bar-form" class="tribe-clearfix" name="tribe-bar-form" method="post" action="<?php echo home_url( 'events' ); //echo esc_attr( $current_url ); ?>">
 
 		<?php if ( ! empty( $filters ) ) { ?>
 			<div class="tribe-bar-filters">
@@ -48,7 +41,7 @@ $current_url = tribe_events_get_current_filter_url();
 							class="tribe-events-button tribe-no-param"
 							type="submit"
 							name="submit-bar"
-							aria-label="<?php printf( esc_attr__( 'Submit %s search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
+							aria-label="SEARCH"
 							value="SEARCH"
 						/>
 					</div>

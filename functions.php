@@ -142,4 +142,16 @@ function show_template() {
         return ob_get_clean();
     }
     add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );
-?>
+
+add_action('widgets_init', 'accr_widgets_init');
+function accr_widgets_init(){
+  register_sidebar(array(
+    'name' => 'Events Sidebar',
+    'id' => 'sidebar-1',
+    'description' => 'Sidebar for events sections',
+    'before_widget' => '<div class="event-widget>',
+    'after_widget' => '</div>',
+    'before_title' => '<h3 class="event-widget-title>',
+    'after_title' => '</h3>'
+  ));
+}

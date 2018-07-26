@@ -2,6 +2,7 @@
     <!-- <?php //echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
 
     <hr class="hr--light" /> -->
+    <?php dynamic_sidebar('sidebar-1'); ?>
 
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo" class="img-fluid">
     <a href="<?php echo get_field( 'about_accr', 'option' ); ?>" class="btn sidebar__btn btn-primary">ABOUT ACCR</a>

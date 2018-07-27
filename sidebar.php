@@ -1,5 +1,5 @@
 <aside class="sidebar text-center col-md-3">
-    <!-- <?php //echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
+    <?php echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
 
     <hr class="hr--light" /> -->
     <?php dynamic_sidebar('sidebar-1'); ?>

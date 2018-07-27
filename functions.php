@@ -139,6 +139,7 @@ function show_template() {
         Tribe__Events__Bar::instance()->load_script();
         ob_start();
         tribe_get_template_part( 'modules/bar' );
+        //get_template_part('tribe-events/modules/bar');
         return ob_get_clean();
     }
     add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );

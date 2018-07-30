@@ -127,7 +127,7 @@ function show_template() {
      * Example: [tribe_bar_anywhere]
      * Screenshot: https://cl.ly/3h1S3d3a3T30
      */
-    function tribe_bar_anywhere_logic() {
+    /*function tribe_bar_anywhere_logic() {
         if ( ! class_exists( 'Tribe__Events__Bar' ) ) {
             return false;
         }
@@ -142,7 +142,7 @@ function show_template() {
         //get_template_part('tribe-events/modules/bar');
         return ob_get_clean();
     }
-    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );
+    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );*/
 
 add_action('widgets_init', 'accr_widgets_init');
 function accr_widgets_init(){
@@ -155,4 +155,16 @@ function accr_widgets_init(){
     'before_title' => '<h3 class="event-widget-title>',
     'after_title' => '</h3>'
   ));
+}
+
+add_action('tribe_events_before_header', 'accr_tribe_events_before_header');
+function accr_tribe_events_before_header(){
+    echo '<div class="row"><div class="col-sm-9">';
+}
+
+add_action('tribe_events_after_footer', 'accr_tribe_events_after_footer');
+function accr_tribe_events_after_footer(){
+    echo '</div><!-- .col-sm-9 -->';
+    get_sidebar();
+    echo '</div><!-- .row -->';
 }

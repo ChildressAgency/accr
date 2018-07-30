@@ -13,6 +13,7 @@
         </ul>
     </div>
 </section> -->
+<?php add_filter( 'tribe-events-bar-should-show', '__return_true' ); ?>
 
 <?php if ( have_posts() ) : ?>
 <section class="events">

@@ -114,12 +114,6 @@
     <!-- <section class="search">
         <div class="container">
             <p class="search__text">Find an<br/><span>EVENT</span></p>
+            <?php //echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
         </div>
     </section> -->
-
-    <section class="search">
-        <div class="container">
-            <p class="search__text">Find an<br/><span>EVENT</span></p>
-            <?php echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
-        </div>
-    </section>

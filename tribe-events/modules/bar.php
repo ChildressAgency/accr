@@ -28,7 +28,7 @@ $current_url = tribe_events_get_current_filter_url();
 
 	<h2 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search and Views Navigation', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h2>
 
-	<form id="tribe-bar-form" class="tribe-clearfix" name="tribe-bar-form" method="post" action="<?php echo esc_attr( $current_url ); ?>">
+	<form id="tribe-bar-form" class="tribe-clearfix" name="tribe-bar-form" method="post" action="<?php echo esc_url( home_url( 'events' ) ); ?>">
 
 		<!-- Mobile Filters Toggle -->
 

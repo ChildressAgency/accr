@@ -2,43 +2,31 @@
     <?php
 
     $filters = tribe_events_get_filters();
-    $views   = tribe_events_get_views();
 
     $current_url = tribe_events_get_current_filter_url();
     ?>
 
-    <form id="tribe-bar-form" class="" name="tribe-bar-form" method="post" action="<?php echo esc_attr( $current_url ); ?>">
-
+    <form id="tribe-bar-form" class="" name="tribe-bar-form" method="post" action="<?php echo esc_url( home_url( 'events' ) ); ?>">
         <?php if ( ! empty( $filters ) ) { ?>
-            <div class="search">
-                <h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h3>
-                
-                <div class="row">
-                    <?php foreach ( $filters as $filter ) : ?>
-                        <div class="col-sm-3">
-                            <div class="<?php echo esc_attr( $filter['name'] ) ?>-filter search__filter">
-                                <?php echo $filter['html'] ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                    <div class="col-sm-3">
-                        <div class="tribe-bar-submit">
-                            <input
-                                class="tribe-events-button tribe-no-param"
-                                type="submit"
-                                name="submit-bar"
-                                aria-label="<?php printf( esc_attr__( 'Submit %s search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
-                                value="<?php printf( esc_attr__( 'Find %s', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
-                            />
-                        </div>
+            <div class="search search--sidebar">
+                <h3 class="sidebar__heading sidebar__heading--find-event">FIND AN EVENT</h3>
+                <?php foreach ( $filters as $filter ) : ?>
+                    <div class="<?php echo esc_attr( $filter['name'] ) ?>-filter search__filter">
+                        <?php echo $filter['html'] ?>
                     </div>
-                </div><!-- .row -->
+                <?php endforeach; ?>
+                <div class="tribe-bar-submit">
+                    <input
+                        class="tribe-events-button tribe-no-param"
+                        type="submit"
+                        name="submit-bar"
+                        value="SEARCH"
+                    />
+                </div>
             </div><!-- .tribe-bar-submit -->
         <?php } // if ( !empty( $filters ) ) ?>
 
-    </form>
-    <!-- #tribe-bar-form -->
-
+    </form><!-- #tribe-bar-form -->
 
     <hr class="hr--light" />
     <?php //dynamic_sidebar('sidebar-1'); ?>

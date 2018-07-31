@@ -1,8 +1,47 @@
 <aside class="sidebar text-center col-md-3">
-    <?php //echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
+    <?php
 
-    <!-- <hr class="hr--light" />  -->
-    <?php dynamic_sidebar('sidebar-1'); ?>
+    $filters = tribe_events_get_filters();
+    $views   = tribe_events_get_views();
+
+    $current_url = tribe_events_get_current_filter_url();
+    ?>
+
+    <form id="tribe-bar-form" class="" name="tribe-bar-form" method="post" action="<?php echo esc_attr( $current_url ); ?>">
+
+        <?php if ( ! empty( $filters ) ) { ?>
+            <div class="search">
+                <h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h3>
+                
+                <div class="row">
+                    <?php foreach ( $filters as $filter ) : ?>
+                        <div class="col-sm-3">
+                            <div class="<?php echo esc_attr( $filter['name'] ) ?>-filter search__filter">
+                                <?php echo $filter['html'] ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                    <div class="col-sm-3">
+                        <div class="tribe-bar-submit">
+                            <input
+                                class="tribe-events-button tribe-no-param"
+                                type="submit"
+                                name="submit-bar"
+                                aria-label="<?php printf( esc_attr__( 'Submit %s search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
+                                value="<?php printf( esc_attr__( 'Find %s', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
+                            />
+                        </div>
+                    </div>
+                </div><!-- .row -->
+            </div><!-- .tribe-bar-submit -->
+        <?php } // if ( !empty( $filters ) ) ?>
+
+    </form>
+    <!-- #tribe-bar-form -->
+
+
+    <hr class="hr--light" />
+    <?php //dynamic_sidebar('sidebar-1'); ?>
 
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo" class="img-fluid">
     <a href="<?php echo get_field( 'about_accr', 'option' ); ?>" class="btn sidebar__btn btn-primary">ABOUT ACCR</a>

@@ -119,6 +119,7 @@ img
 
     &--home
         height: auto
+        overflow: hidden
 
         .carousel
             flex: 1 0 auto
@@ -454,8 +455,12 @@ img
 ///////////////////////////////////////////////////////////////////////////////
 
 .search
-    background-color: $color-primary
-    padding: $space-sm 0
+    align-items: center
+    background-color: transparent
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    padding: 0
 
     &__text
         @extend %font-barlow-condensed
@@ -463,12 +468,23 @@ img
         +font-size($font-size-sm)
         color: $color-white
         display: inline-block
+        margin-bottom: 0
         text-align: right
 
         span
             @extend %font-barlow
             +font-size($font-size-md)
             letter-spacing: .2rem
+
+    &__filter
+        float: none
+        margin-bottom: 0
+        max-width: 400px
+        padding: $space-sm 0
+        width: 100%
+
+    &--sidebar
+        background-color: $color-primary
 
 .filter
     +font-size($font-size-md)
@@ -918,17 +934,13 @@ img
 
 #tribe-events-bar
     background-color: $color-primary
-
-.tribe-bar-date-filter,
-.tribe-bar-search-filter,
-.tribe-bar-geoloc-filter
-    width: 100%
+    padding: 0 30px
 
 .tribe-bar-submit
     margin-left: 0
-    padding-top: 25px
+    padding: 0
     text-align: center
-    width: 100%
+    width: auto
 
 #tribe_events_filters_toggle
     display: none !important

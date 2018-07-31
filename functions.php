@@ -42,21 +42,6 @@ function show_template() {
         wp_enqueue_script('accr-script');
     }
     add_action('wp_enqueue_scripts', 'accr_scripts', 100);
-    
-    function accr_styles(){
-        wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-        wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');
-        wp_register_style('slick', get_template_directory_uri() . '/css/slick.css');
-        wp_register_style('slick-theme', get_template_directory_uri() . '/css/slick-theme.css');
-        wp_register_style('accr', get_template_directory_uri() . '/style.css');
-
-        wp_enqueue_style( 'bootstrap-css' );
-        wp_enqueue_style( 'fontawesome' );
-        wp_enqueue_style('slick');
-        wp_enqueue_style('slick-theme');
-        wp_enqueue_style( 'accr' );
-    }
-    add_action('wp_enqueue_scripts', 'accr_styles');
 
     if(function_exists('acf_add_options_page')){
         acf_add_options_page(array(
@@ -115,34 +100,6 @@ function show_template() {
     }
     add_action( 'init', 'tribe_tag_venues_and_orgs' );
 
-    /*
-     * By Barry and Cliff
-     * From https://gist.github.com/cliffordp/04b7bbe6e7d9009aec12acc0b9bd5bdd
-     * 
-     * Shortcode to display render Tribe Bar anywhere on site (e.g. website header)
-     * For https://theeventscalendar.com/support/forums/topic/insert-search-bar-on-top-of-a-page/ which also links to http://gregorypearcey.com/blog/add-tribe-events-search-bar-home-page/
-     *
-     * Notes: It's not pretty or perfect, but it's a start if you want to pull something like this off on your site. FYI: You're in unsupported / custom coding territory.
-     *
-     * Example: [tribe_bar_anywhere]
-     * Screenshot: https://cl.ly/3h1S3d3a3T30
-     */
-    /*function tribe_bar_anywhere_logic() {
-        if ( ! class_exists( 'Tribe__Events__Bar' ) ) {
-            return false;
-        }
-        wp_enqueue_script( 'jquery' );
-        Tribe__Events__Template_Factory::asset_package( 'bootstrap-datepicker' );
-        Tribe__Events__Template_Factory::asset_package( 'calendar-script' );
-        Tribe__Events__Template_Factory::asset_package( 'jquery-resize' );
-        Tribe__Events__Template_Factory::asset_package( 'events-css' );
-        Tribe__Events__Bar::instance()->load_script();
-        ob_start();
-        tribe_get_template_part( 'modules/bar' );
-        //get_template_part('tribe-events/modules/bar');
-        return ob_get_clean();
-    }
-    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );*/
 
 add_action('widgets_init', 'accr_widgets_init');
 function accr_widgets_init(){
@@ -201,3 +158,18 @@ function tribehome_enqueue_front_page_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tribehome_enqueue_front_page_scripts' );
+
+    function accr_styles(){
+        wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+        wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');
+        wp_register_style('slick', get_template_directory_uri() . '/css/slick.css');
+        wp_register_style('slick-theme', get_template_directory_uri() . '/css/slick-theme.css');
+        wp_register_style('accr', get_template_directory_uri() . '/style.css');
+
+        wp_enqueue_style( 'bootstrap-css' );
+        wp_enqueue_style( 'fontawesome' );
+        wp_enqueue_style('slick');
+        wp_enqueue_style('slick-theme');
+        wp_enqueue_style( 'accr' );
+    }
+    add_action('wp_enqueue_scripts', 'accr_styles');

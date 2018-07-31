@@ -1482,3 +1482,33 @@ img {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* NEW STYLES */
+
+.search {
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+}
+
+#tribe-events-bar {
+  padding: 0 30px;
+}
+
+#tribe-bar-form {
+  background-color: transparent;
+}
+
+#tribe-bar-filters-inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tribe-bar-date-filter, .tribe-bar-search-filter, .tribe-bar-geoloc-filter {
+  width: auto;
+}
+
+.tribe-bar-submit {
+  width: auto;
+}

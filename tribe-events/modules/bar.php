@@ -65,13 +65,18 @@ $current_url = tribe_events_get_current_filter_url();
 		<?php if ( ! empty( $filters ) ) { ?>
 			<div class="tribe-bar-filters">
 				<div class="tribe-bar-filters-inner tribe-clearfix">
-					<h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h3>
-					<?php foreach ( $filters as $filter ) : ?>
-						<div class="<?php echo esc_attr( $filter['name'] ) ?>-filter">
-							<label class="label-<?php echo esc_attr( $filter['name'] ) ?>" for="<?php echo esc_attr( $filter['name'] ) ?>"><?php echo $filter['caption'] ?></label>
-							<?php echo $filter['html'] ?>
-						</div>
-					<?php endforeach; ?>
+          <h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h3>
+
+          <div class="row">
+            <?php foreach ( $filters as $filter ) : ?>
+              <div class="col-sm-3">
+						    <div class="<?php echo esc_attr( $filter['name'] ) ?>-filter">
+							    <label class="label-<?php echo esc_attr( $filter['name'] ) ?>" for="<?php echo esc_attr( $filter['name'] ) ?>"><?php echo $filter['caption'] ?></label>
+							    <?php echo $filter['html'] ?>
+                </div>
+              </div><!-- .col-sm-6 .col-md-3 -->
+            <?php endforeach; ?>
+            <div class="col-sm-3">
 					<div class="tribe-bar-submit">
 						<input
 							class="tribe-events-button tribe-no-param"
@@ -80,7 +85,9 @@ $current_url = tribe_events_get_current_filter_url();
 							aria-label="<?php printf( esc_attr__( 'Submit %s search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
 							value="<?php printf( esc_attr__( 'Find %s', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
 						/>
-					</div>
+          </div>
+    </div>
+          </div><!-- .row -->
 					<!-- .tribe-bar-submit -->
 				</div>
 				<!-- .tribe-bar-filters-inner -->

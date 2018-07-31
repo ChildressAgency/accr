@@ -1,0 +1,17 @@
+#tribe-events-bar{
+  background-color:#739cd2;
+}
+.tribe-bar-date-filter,
+.tribe-bar-search-filter,
+.tribe-bar-geoloc-filter{
+  width:100%;
+}
+.tribe-bar-submit{
+  text-align:center; 
+  width:100%;
+  margin-left:0;
+}
+#tribe-bar-form .tribe-bar-submit input[type="submit"]{
+  width:auto;
+  padding:3px 30px;
+}

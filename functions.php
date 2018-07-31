@@ -159,17 +159,58 @@ function tribehome_enqueue_front_page_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'tribehome_enqueue_front_page_scripts' );
 
-    function accr_styles(){
-        wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-        wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');
-        wp_register_style('slick', get_template_directory_uri() . '/css/slick.css');
-        wp_register_style('slick-theme', get_template_directory_uri() . '/css/slick-theme.css');
-        wp_register_style('accr', get_template_directory_uri() . '/style.css');
+add_filter( 'tribe-events-bar-filters',  'tribe_events_add_category_filter', 1, 1 );
 
-        wp_enqueue_style( 'bootstrap-css' );
-        wp_enqueue_style( 'fontawesome' );
-        wp_enqueue_style('slick');
-        wp_enqueue_style('slick-theme');
-        wp_enqueue_style( 'accr' );
-    }
-    add_action('wp_enqueue_scripts', 'accr_styles');
+/*
+ * Add 'Category' field to event search bar
+ */
+function tribe_events_add_category_filter( $filters ) {
+    $args = array(
+    'show_option_all'    => esc_html__( "All", "the-events-calendar" ),
+    'show_option_none'   => '',
+    'option_none_value'  => '-1',
+    'orderby'            => 'title',
+    'order'              => 'ASC',
+    'show_count'         => 0,
+    'hide_empty'         => 0,
+    'child_of'           => 0,
+    'exclude'            => '',
+    'include'            => '',
+    'echo'               => 0,
+    'selected'           => '-1',
+    'hierarchical'       => 0,
+    'name'               => 'tribe_eventcategory',
+    'id'                 => '',
+    'class'              => '',
+    'depth'              => 0,
+    'tab_index'          => 0,
+    'taxonomy'           => 'tribe_events_cat',
+    'hide_if_empty'      => false,
+    'value_field'         => 'term_id',
+);
+ 
+$html = wp_dropdown_categories( $args );
+ 
+    $filters['tribe-bar-category'] = array(
+        'name' => 'tribe-bar-category',
+        'caption' => esc_html__( 'Category', 'the-events-calendar' ),
+        'html' => $html
+    );
+ 
+    return $filters;
+}
+
+function accr_styles(){
+    wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+    wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');
+    wp_register_style('slick', get_template_directory_uri() . '/css/slick.css');
+    wp_register_style('slick-theme', get_template_directory_uri() . '/css/slick-theme.css');
+    wp_register_style('accr', get_template_directory_uri() . '/style.css');
+
+    wp_enqueue_style( 'bootstrap-css' );
+    wp_enqueue_style( 'fontawesome' );
+    wp_enqueue_style('slick');
+    wp_enqueue_style('slick-theme');
+    wp_enqueue_style( 'accr' );
+}
+add_action('wp_enqueue_scripts', 'accr_styles');

@@ -1,7 +1,7 @@
 <aside class="sidebar text-center col-md-3">
     <?php //echo do_shortcode( '[tribe_bar_anywhere]' ); ?>
 
-    <hr class="hr--light" /> 
+    <!-- <hr class="hr--light" />  -->
     <?php dynamic_sidebar('sidebar-1'); ?>
 
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo" class="img-fluid">

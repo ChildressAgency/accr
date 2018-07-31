@@ -572,8 +572,17 @@ img {
   padding: 15px 0;
   width: 100%;
 }
+.search__filter select {
+  width: 100%;
+}
 .search--sidebar {
   background-color: #739cd2;
+  flex-direction: column;
+  padding: 15px;
+}
+.search--sidebar .search__filter {
+  padding: 7px 0;
+  width: 100%;
 }
 
 .filter {
@@ -1452,6 +1461,15 @@ img {
   .search__filter {
     padding: 0;
     width: auto;
+  }
+  .search--sidebar {
+    background-color: #739cd2;
+    flex-direction: column;
+    padding: 15px;
+  }
+  .search--sidebar .search__filter {
+    padding: 7px 0;
+    width: 100%;
   }
 
   .event__header {

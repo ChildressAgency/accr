@@ -1,4 +1,10 @@
 <?php
+add_action('wp_footer', 'show_template');
+function show_template() {
+	global $template;
+	print_r($template);
+}
+
     function jquery_cdn(){
         if(!is_admin()){
             wp_deregister_script('jquery');
@@ -121,7 +127,7 @@
      * Example: [tribe_bar_anywhere]
      * Screenshot: https://cl.ly/3h1S3d3a3T30
      */
-    function tribe_bar_anywhere_logic() {
+    /*function tribe_bar_anywhere_logic() {
         if ( ! class_exists( 'Tribe__Events__Bar' ) ) {
             return false;
         }
@@ -133,7 +139,65 @@
         Tribe__Events__Bar::instance()->load_script();
         ob_start();
         tribe_get_template_part( 'modules/bar' );
+        //get_template_part('tribe-events/modules/bar');
         return ob_get_clean();
     }
-    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );
-?>
+    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );*/
+
+add_action('widgets_init', 'accr_widgets_init');
+function accr_widgets_init(){
+  register_sidebar(array(
+    'name' => 'Events Sidebar',
+    'id' => 'sidebar-1',
+    'description' => 'Sidebar for events sections',
+    'before_widget' => '<div class="event-widget>',
+    'after_widget' => '</div>',
+    'before_title' => '<h3 class="event-widget-title>',
+    'after_title' => '</h3>'
+  ));
+}
+
+add_action('tribe_events_before_header', 'accr_tribe_events_before_header');
+function accr_tribe_events_before_header(){
+    echo '<div class="row"><div class="col-sm-9">';
+}
+
+add_action('tribe_events_after_footer', 'accr_tribe_events_after_footer');
+function accr_tribe_events_after_footer(){
+    echo '</div><!-- .col-sm-9 -->';
+    get_sidebar();
+    echo '</div><!-- .row -->';
+}
+
+//Add these scripts to only the front page
+function tribehome_enqueue_front_page_scripts() {
+    if( is_front_page() )
+    {
+
+	    //Add the stylesheet into the header
+		wp_enqueue_style("tribe.homepage",WP_PLUGIN_URL."/the-events-calendar/src/resources/css/tribe-events-full.min.css");
+
+		wp_enqueue_style("tribe.homepage.date",WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css");
+
+		//Add the scripts in the footer
+		wp_enqueue_script("jquery");
+
+		wp_enqueue_script(
+		"tribe.homepage.bar", WP_PLUGIN_URL."/the-events-calendar/src/resources/js/tribe-events-bar.min.js",
+		array("jquery"), "1.3.1",1);
+
+		wp_enqueue_script(
+		"tribe.homepage.events", WP_PLUGIN_URL."/the-events-calendar/src/resources/js/tribe-events.min.js",
+		array("jquery"), "1.3.1",1);
+
+		wp_enqueue_script(
+		"tribe.homepage.datepicker", WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+		array("jquery"), "1.3.1",1);
+
+		//wp_enqueue_script(
+		//"tribe.homepage.footer", WP_PLUGIN_URL."/tribe-homepage-search/js/footer.js",
+		//array("jquery"), "1.3.1",1);
+
+	}
+}
+add_action( 'wp_enqueue_scripts', 'tribehome_enqueue_front_page_scripts' );

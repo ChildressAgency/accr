@@ -1,4 +1,4 @@
-// sass-lint:disable nesting-depth
+// sass-lint:disable nesting-depth, no-important
 
 @import _variables.sass
 @import _reset.sass
@@ -195,8 +195,9 @@ img
         .navbar-collapse
             flex: 0 1 auto
 
-        .navbar-nav .nav-link
-            padding: 0
+        .navbar-nav
+            .nav-link
+                padding: 0
 
 .navbar-toggler
     .icon
@@ -881,33 +882,60 @@ img
 ///////////////////////////////////////////////////////////////////////////////
 // TRIBE EVENTS CALENDAR                                                     //
 ///////////////////////////////////////////////////////////////////////////////
+// sass-lint:disable no-ids, no-qualifying-elements
 
 #tribe-bar-form
     background-color: transparent
 
-#tribe-bar-form.tribe-bar-collapse .tribe-bar-filters
-    display: block
+    .tribe-bar-submit
+        input
+            &[type='submit']
+                +font-size($font-size-sm)
+                background-color: $color-secondary
+                color: $color-dark-grey
+                padding: 3px 30px
+                width: auto
 
-#tribe-bar-form input[type='text']
-    @extend %font-barlow
-    background-color: $color-white
-    border: 0
-    font-style: normal
-    outline: 0
-    padding: $space-xs
+    input
+        &[type='text']
+            @extend %font-barlow
+            background-color: $color-white
+            border: 0
+            font-style: normal
+            outline: 0
+            padding: $space-xs
 
-    &:focus
-        border: 0
-        outline: 0
+            &:focus
+                border: 0
+                outline: 0
+
+    &.tribe-bar-collapse
+        .tribe-bar-filters
+            display: block
 
 .tribe-bar-filters-inner > div
     padding: $space-xs 0
 
-#tribe-bar-form .tribe-bar-submit input[type="submit"]
-    +font-size($font-size-sm)
-    background-color: $color-secondary
-    color: $color-dark-grey
-    padding: 0
+#tribe-events-bar
+    background-color: $color-primary
+
+.tribe-bar-date-filter,
+.tribe-bar-search-filter,
+.tribe-bar-geoloc-filter
+    width: 100%
+
+.tribe-bar-submit
+    margin-left: 0
+    padding-top: 25px
+    text-align: center
+    width: 100%
+
+#tribe_events_filters_toggle
+    display: none !important
+
+#tribe_events_filter_control
+    text-align: right
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // SLIDERS                                                                   //

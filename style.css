@@ -970,11 +970,14 @@ img {
 #tribe-bar-form {
   background-color: transparent;
 }
-
-#tribe-bar-form.tribe-bar-collapse .tribe-bar-filters {
-  display: block;
+#tribe-bar-form .tribe-bar-submit input[type=submit] {
+  font-size: 16px;
+  font-size: 1.6rem;
+  background-color: #ffe04f;
+  color: #4d4d4d;
+  padding: 3px 30px;
+  width: auto;
 }
-
 #tribe-bar-form input[type=text] {
   background-color: #fff;
   border: 0;
@@ -986,17 +989,37 @@ img {
   border: 0;
   outline: 0;
 }
+#tribe-bar-form.tribe-bar-collapse .tribe-bar-filters {
+  display: block;
+}
 
 .tribe-bar-filters-inner > div {
   padding: 7px 0;
 }
 
-#tribe-bar-form .tribe-bar-submit input[type=submit] {
-  font-size: 16px;
-  font-size: 1.6rem;
-  background-color: #ffe04f;
-  color: #4d4d4d;
-  padding: 0;
+#tribe-events-bar {
+  background-color: #739cd2;
+}
+
+.tribe-bar-date-filter,
+.tribe-bar-search-filter,
+.tribe-bar-geoloc-filter {
+  width: 100%;
+}
+
+.tribe-bar-submit {
+  margin-left: 0;
+  padding-top: 25px;
+  text-align: center;
+  width: 100%;
+}
+
+#tribe_events_filters_toggle {
+  display: none !important;
+}
+
+#tribe_events_filter_control {
+  text-align: right;
 }
 
 .events__heading {

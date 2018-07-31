@@ -159,11 +159,11 @@ do_action( 'tribe_events_bar_after_template' ); ?>
                 <?php
                     $events = tribe_get_events( array(
                         'posts_per_page'    => 10,
-                        'eventDisplay'      => 'upcoming'
+                        'eventDisplay'      => 'list'
                     ) ); 
                     $featuredEvents = tribe_get_events( array(
                         'posts_per_page'    => 10,
-                        'eventDisplay'      => 'upcoming',
+                        'eventDisplay'      => 'list',
                         'featured'          => true
                     ) );
                     ?>
@@ -186,12 +186,12 @@ do_action( 'tribe_events_bar_after_template' ); ?>
                 <?php
                     $events = tribe_get_events( array(
                         'posts_per_page'    => 10,
-                        'eventDisplay'      => 'upcoming',
+                        'eventDisplay'      => 'list',
                         'tag'               => 'family'
                     ) ); 
                     $featuredEvents = tribe_get_events( array(
                         'posts_per_page'    => 10,
-                        'eventDisplay'      => 'upcoming',
+                        'eventDisplay'      => 'list',
                         'tag'               => 'family',
                         'featured'          => true
                     ) );
@@ -219,12 +219,12 @@ do_action( 'tribe_events_bar_after_template' ); ?>
                 <?php
                     $events = tribe_get_events( array(
                         'posts_per_page'    => 10,
-                        'eventDisplay'      => 'upcoming',
+                        'eventDisplay'      => 'list',
                         'tag'               => 'free'
                     ) ); 
                     $featuredEvents = tribe_get_events( array(
                         'posts_per_page'    => 10,
-                        'eventDisplay'      => 'upcoming',
+                        'eventDisplay'      => 'list',
                         'tag'               => 'free',
                         'featured'          => true
                     ) );
@@ -299,12 +299,12 @@ do_action( 'tribe_events_bar_after_template' ); ?>
                                     $category = strtolower( $category->name );
                                     $events = tribe_get_events( array(
                                         'posts_per_page'    => 10,
-                                        'eventDisplay'      => 'upcoming',
+                                        'eventDisplay'      => 'list',
                                         'tribe_events_cat'  => $category
                                     ) ); 
                                     $featuredEvents = tribe_get_events( array(
                                         'posts_per_page'    => 10,
-                                        'eventDisplay'      => 'upcoming',
+                                        'eventDisplay'      => 'list',
                                         'tribe_events_cat'  => $category,
                                         'featured'          => true
                                     ) );

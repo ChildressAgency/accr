@@ -1,9 +1,4 @@
 <?php
-add_action('wp_footer', 'show_template');
-function show_template() {
-	global $template;
-	print_r($template);
-}
 
     function jquery_cdn(){
         if(!is_admin()){
@@ -188,6 +183,18 @@ function tribe_events_add_category_filter( $filters ) {
     'hide_if_empty'      => false,
     'value_field'         => 'term_id',
 );
+
+function template_chooser($template)   
+{    
+  global $wp_query;   
+  $post_type = get_query_var('post_type');   
+  if( $wp_query->is_search && $post_type == 'venues' )   
+  {
+    return locate_template('search-venue.php');  //  redirect to search-venue.php
+  }   
+  return $template;   
+}
+add_filter('template_include', 'template_chooser');  
  
 $html = wp_dropdown_categories( $args );
  

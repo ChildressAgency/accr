@@ -29,7 +29,17 @@
     </form><!-- #tribe-bar-form -->
 
     <hr class="hr--light" />
-    <?php //dynamic_sidebar('sidebar-1'); ?>
+
+    <div class="search search--sidebar">
+        <h3 class="sidebar__heading sidebar__heading--find-event">FIND A VENUE</h3>
+        <form action="<?php echo site_url( '/' ); ?>" role="search" method="get" id="venue-search">
+            <div class="search__filter"><input class="" type="text" name="s" placeholder="Search Venues"></div>
+            <div class="search__filter"><input class="" type="hidden" name="post_type" value="venues"></div>
+            <div class="search__filter"><input class="" type="submit" value="Search"></div>
+        </form>
+    </div>
+
+    <hr class="hr--light" />
 
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo" class="img-fluid">
     <a href="<?php echo get_field( 'about_accr', 'option' ); ?>" class="btn sidebar__btn btn-primary">ABOUT ACCR</a>

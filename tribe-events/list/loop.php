@@ -23,7 +23,7 @@ $more = false;
 <div class="tribe-events-loop">
 
 	<?php if( have_posts() ): $i=0; while ( have_posts() ) : the_post(); ?>
-		<?php do_action( 'tribe_events_inside_before_loop' ); ?>
+		<?php //do_action( 'tribe_events_inside_before_loop' ); ?>
 
 		<!-- Month / Year Headers -->
 		<?php //tribe_events_list_the_date_headers(); ?>
@@ -51,7 +51,7 @@ $more = false;
 			<?php if( $i==0 ): ?>
 			<div class="event__header event__header--featured">
 			    <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
-			    <p class="event__subtitle">presented by: <?php echo $venue_details['linked_name']; ?></p>
+			    <?php if( $venue_details['linked_name'] ): ?><p class="event__subtitle">presented by: <?php echo $venue_details['linked_name']; ?></p><?php endif; ?>
 			</div>
 			<?php endif; ?>
 
@@ -71,7 +71,16 @@ $more = false;
 			        <?php if( $i==0 ): ?>
 			            <?php if( $post->post_excerpt ): ?><p><strong><?php echo $post->post_excerpt; ?></strong></p><?php endif; ?>
 			            <?php if( get_field( 'get_tickets_link', $post ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $post ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
-			            <a href="#_" class="btn btn-white">ADD IT</a>
+			            <?php 
+			                $start_date_day = tribe_get_start_date( $post, false, 'Ymd', null );
+			                $start_date_time = tribe_get_start_date( $post, false, 'His', null );
+			                $end_date_day = tribe_get_end_date( $post, false, 'Ymd', null );
+			                $end_date_time = tribe_get_end_date( $post, false, 'His', null );
+
+			                $date_start = $start_date_day . 'T' . $start_date_time . 'Z';
+			                $date_end = $end_date_day . 'T' . $end_date_time . 'Z';
+			                ?>
+			            <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $post->post_title; ?>&dates=<?php echo $date_start; ?>/<?php echo $date_end; ?>&details=&location=<?php echo tribe_get_venue( $post ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
 			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
 			            <a href="<?php echo get_permalink( $post ); ?>" class="view-more">View more</a>
 			        <?php elseif( $i<=5 ): ?>
@@ -81,7 +90,16 @@ $more = false;
 			            </div>
 			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
 			            <?php if( get_field( 'get_tickets_link', $post ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $post ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
-			            <a href="#_" class="btn btn-white">ADD IT</a>
+			            <?php 
+			                $start_date_day = tribe_get_start_date( $post, false, 'Ymd', null );
+			                $start_date_time = tribe_get_start_date( $post, false, 'His', null );
+			                $end_date_day = tribe_get_end_date( $post, false, 'Ymd', null );
+			                $end_date_time = tribe_get_end_date( $post, false, 'His', null );
+
+			                $date_start = $start_date_day . 'T' . $start_date_time . 'Z';
+			                $date_end = $end_date_day . 'T' . $end_date_time . 'Z';
+			                ?>
+			            <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $post->post_title; ?>&dates=<?php echo $date_start; ?>/<?php echo $date_end; ?>&details=&location=<?php echo tribe_get_venue( $post ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
 			        <?php else: ?>
 			            <div class="event__header">
 			                <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
@@ -94,12 +112,21 @@ $more = false;
 			    <?php if( $i > 5 ): ?>
 			        <div class="event__small-btns">
 			            <?php if( get_field( 'get_tickets_link', $post ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $post ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
-			            <a href="#_" class="btn btn-white">ADD IT</a>
+			            <?php 
+			                $start_date_day = tribe_get_start_date( $post, false, 'Ymd', null );
+			                $start_date_time = tribe_get_start_date( $post, false, 'His', null );
+			                $end_date_day = tribe_get_end_date( $post, false, 'Ymd', null );
+			                $end_date_time = tribe_get_end_date( $post, false, 'His', null );
+
+			                $date_start = $start_date_day . 'T' . $start_date_time . 'Z';
+			                $date_end = $end_date_day . 'T' . $end_date_time . 'Z';
+			                ?>
+			            <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $post->post_title; ?>&dates=<?php echo $date_start; ?>/<?php echo $date_end; ?>&details=&location=<?php echo tribe_get_venue( $post ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
 			        </div>
 			    <?php endif; ?>
 			</div>
 
-			<?php do_action( 'tribe_events_inside_after_loop' ); ?>
+			<?php //do_action( 'tribe_events_inside_after_loop' ); ?>
 		</div>
 
 		<hr class="hr--light" />

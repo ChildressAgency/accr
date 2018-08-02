@@ -535,6 +535,7 @@ img {
   justify-content: space-around;
 }
 .gallery__item {
+  align-self: center;
   margin: 15px 0;
   width: 100%;
 }
@@ -579,9 +580,14 @@ img {
   background-color: #739cd2;
   flex-direction: column;
   padding: 15px;
+  width: 100%;
 }
 .search--sidebar .search__filter {
   padding: 7px 0;
+  width: 100%;
+}
+.search--sidebar .search__filter input[type=text] {
+  padding: 7px;
   width: 100%;
 }
 
@@ -735,8 +741,16 @@ img {
 .single-event .event__info {
   display: block;
 }
+.single-event .event__info::after {
+  clear: both;
+  content: " ";
+  display: table;
+}
 .single-event .event__header {
   margin-left: 0;
+}
+.single-event .event-thumbnail {
+  min-width: 200px;
 }
 
 .show-more {
@@ -862,6 +876,7 @@ img {
   flex: 2;
 }
 .single-org__meta p {
+  color: #666;
   margin-bottom: 15px;
 }
 .single-org__desc {

@@ -442,6 +442,7 @@ img
     justify-content: space-around
 
     &__item
+        align-self: center
         margin: $space-sm 0
         width: 100%
 
@@ -656,8 +657,16 @@ img
         &__info
             display: block
 
+            &::after
+                clear: both
+                content: ' '
+                display: table
+
         &__header
             margin-left: 0
+
+        &-thumbnail
+            min-width: 200px
 
 .show-more
     text-align: center
@@ -779,6 +788,7 @@ img
         flex: 2
 
         p
+            color: $color-text-grey
             margin-bottom: $space-sm
 
     &__desc

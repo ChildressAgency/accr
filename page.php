@@ -2,8 +2,8 @@
 
 <section>
     <div class="container">
-        <?php 
-          if(is_page('events') || is_archive('events') || is_singular('event')){
+        <?php /*
+          if( is_page('venues') || is_singular('venue') ) {
             if(have_posts()){
               while(have_posts()){
                 the_post();
@@ -13,7 +13,7 @@
               }
             }
           }
-        else{ ?>
+        else{ */ ?>
             <div class="row">
                 <div class="col-md-9 content-with-sidebar">
                     <?php //get_template_part( 'tp-share' ); ?>
@@ -35,7 +35,7 @@
                 </div>
                 <?php get_sidebar(); ?>
             </div>
-        <?php } ?>
+        <?php //} ?>
     </div>
 </section>
 

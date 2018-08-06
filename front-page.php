@@ -76,6 +76,19 @@ $current_url = tribe_events_get_current_filter_url();
 
 <?php //end filter bar ?>
 
+<div class="localities">
+  <div class="container">
+    <ul class="list-unstyled list-inline">
+      <li style="color:#fead15;">Caroline</li>
+      <li style="color:#7f19ab;">Fredericksburg</li>
+      <li style="color:#10b5e3;">King George</li>
+      <li style="color:#b92f2f;">Spotsylvania</li>
+      <li style="color:#42ac0e;">Stafford</li>
+      <li style="color:#ed1dbb;">Westmoreland</li>
+    </ul>
+  </div>
+</div>
+
 <?php if ( have_posts() ) : ?>
 <section class="events">
     <div class="container">
@@ -273,7 +286,9 @@ $current_url = tribe_events_get_current_filter_url();
                             <div class="tab-content">
                                 <?php if( have_rows( 'tab' ) ): $i=0; while( have_rows( 'tab' ) ): the_row(); 
                                     $category = get_sub_field( 'category' );
-                                    $category = strtolower( $category->name );
+                                    //$category = strtolower( $category->name );
+                                    $category = $category->slug;
+
                                     $events = tribe_get_events( array(
                                         'posts_per_page'    => 10,
                                         'eventDisplay'      => 'list',
@@ -287,12 +302,23 @@ $current_url = tribe_events_get_current_filter_url();
                                     ) );
                                     ?>
                                     <div class="tab-pane fade <?php if( $i==0 ){ echo 'show active'; } ?>" id="<?php echo $category; ?>" role="tabpanel" aria-labelledby="<?php echo $category; ?>-tab">
-                                        <!-- <ul class="event-slider-secondary__filter">
-                                            <li><a class="active" href="#_">ALL</a></li>|
-                                            <li><a href="#_">Exhibits</a></li>|
-                                            <li><a href="#_">Opening</a></li>|
-                                            <li><a href="#_">First Friday</a></li>
-                                        </ul> -->
+
+                                      <?php if($category == 'art'): ?>
+                                        <ul class="event-slider-secondary__filter">
+                                            <li><a class="active" href="<?php echo esc_url(home_url('events/category/art')); ?>">ALL</a></li>|
+                                            <li><a href="<?php echo esc_url(home_url('events/tag/exhibits')); ?>">Exhibits</a></li>|
+                                            <li><a href="<?php echo esc_url(home_url('events/tag/opening')); ?>">Opening</a></li>|
+                                            <li><a href="<?php echo esc_url(home_url('events/tag/first-friday')); ?>">First Friday</a></li>
+                                        </ul>
+                                      <?php elseif($category == 'classes-workshops'): ?>
+                                        <ul class="event-slider-secondary__filter">
+                                          <li><a href="<?php echo esc_url(home_url('events/category/classes-workshops')); ?>" class="active">ALL</a></li>
+                                          <li><a href="<?php echo esc_url(home_url('events/tag/adult')); ?>">Adult</a></li>
+                                          <li><a href="<?php echo esc_url(home_url('events/tag/kids')); ?>">Kids</a></li>
+                                          <li><a href="<?php echo esc_url(home_url('events/tag/camps')); ?>">Camps</a></li>
+                                        </ul>
+                                      <?php endif; ?>
+
                                         <?php if( $events ): ?>
                                         <div class="event-slider-secondary">
                                             <?php foreach( $events as $event ): 
@@ -309,7 +335,7 @@ $current_url = tribe_events_get_current_filter_url();
                                             <?php endforeach; ?>
                                         </div>
                                         <?php else: ?>
-                                            <p>No upcoming events in this category</p>
+                                            <p style="margin-top:25px;">No upcoming events in this category</p>
                                         <?php endif; ?>
                                     </div>
                                 <?php $i++; endwhile; endif; ?>

@@ -2,6 +2,22 @@
 
 <section>
     <div class="container">
+      <?php
+        //$page_object = get_queried_object();
+        //$term_id = $page_object->term_taxonomy_id;
+        //$term = get_term($term_id);
+        //$term_name = $term->slug;
+        //var_dump($page_object);
+
+        if(is_post_type_archive('tribe_events') && !is_tax('tribe_events_cat')):
+          echo get_field('all_events_page_intro', 'option');
+        elseif(is_tax('tribe_events_cat')):
+          $page_object = get_queried_object();
+          //var_dump($page_object);
+          echo get_field('event_category_page_intro', $page_object);
+        endif;
+      ?>
+        
         <?php /*
           if( is_page('venues') || is_singular('venue') ) {
             if(have_posts()){

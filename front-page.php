@@ -375,7 +375,8 @@ $current_url = tribe_events_get_current_filter_url();
 
         <div class="row partners__row">
             <?php if( have_rows( 'partners' ) ): while( have_rows( 'partners' ) ): the_row(); ?>
-                <div class="col-sm-4"><a href="<?php the_sub_field( 'link' ); ?>"><img src="<?php the_sub_field( 'image' ); ?>" alt="" class="img-fluid"></a></div>
+                <?php $num_cols = get_sub_field('layout'); ?>
+                <div class="<?php echo $num_cols; ?>"><a href="<?php the_sub_field( 'link' ); ?>"><img src="<?php the_sub_field( 'image' ); ?>" alt="" class="img-fluid"></a></div>
             <?php endwhile; endif; ?>
         </div>
     </div>

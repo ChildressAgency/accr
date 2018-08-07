@@ -1,4 +1,5 @@
 <aside class="sidebar text-center col-md-3">
+  <a href="<?php echo esc_url(home_url('events/community/add')); ?>" class="btn sidebar__btn btn-primary">ADD AN EVENT</a>
     <?php
 
     $filters = tribe_events_get_filters();
@@ -52,11 +53,14 @@
 
     <h3 class="sidebar__heading">DIRECTORIES</h3>
     <p>Coming Soon!</p>
+    <?php if(!is_user_logged_in()): ?>
+      <a href="<?php echo esc_url(home_url('register')); ?> ?>" class="btn sidebar__btn btn-primary">REGISTER NOW</a>
+    <?php endif; ?>
     <!--
-    <a href="<?php echo( home_url( 'artists' ) ); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
-    <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
-    <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
-    <a href="<?php echo( home_url( 'opportunities' ) ); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
+    <a href="<?php //echo( home_url( 'artists' ) ); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
+    <a href="<?php //echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
+    <a href="<?php //echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
+    <a href="<?php //echo( home_url( 'opportunities' ) ); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
 -->
     <hr class="hr--light" />
 

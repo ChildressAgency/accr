@@ -51,11 +51,13 @@
     <hr class="hr--light" />
 
     <h3 class="sidebar__heading">DIRECTORIES</h3>
+    <p>Coming Soon!</p>
+    <!--
     <a href="<?php echo( home_url( 'artists' ) ); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
     <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
     <a href="<?php echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
     <a href="<?php echo( home_url( 'opportunities' ) ); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
-
+-->
     <hr class="hr--light" />
 
     <?php 

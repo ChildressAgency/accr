@@ -79,12 +79,12 @@ $current_url = tribe_events_get_current_filter_url();
 <div class="localities">
   <div class="container">
     <ul class="list-unstyled list-inline">
-      <li style="color:#fead15;">Caroline</li>
-      <li style="color:#7f19ab;">Fredericksburg</li>
-      <li style="color:#10b5e3;">King George</li>
-      <li style="color:#b92f2f;">Spotsylvania</li>
-      <li style="color:#42ac0e;">Stafford</li>
-      <li style="color:#ed1dbb;">Westmoreland</li>
+      <li><a href="<?php echo esc_url(home_url('events/category/caroline')); ?>" style="color:#fead15;">Caroline</a></li>
+      <li><a href="<?php echo esc_url(home_url('events/category/fredericksburg')); ?>" style="color:#7f19ab;">Fredericksburg</a></li>
+      <li><a href="<?php echo esc_url(home_url('events/category/king-george')); ?>" style="color:#10b5e3;">King George</a></li>
+      <li><a href="<?php echo esc_url(home_url('events/category/spotsylvania')); ?>" style="color:#b92f2f;">Spotsylvania</a></li>
+      <li><a href="<?php echo esc_url(home_url('events/category/stafford')); ?>" style="color:#42ac0e;">Stafford</a></li>
+      <li><a href="<?php echo esc_url(home_url('events/category/westmoreland')); ?>" style="color:#ed1dbb;">Westmoreland</a></li>
     </ul>
   </div>
 </div>

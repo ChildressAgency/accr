@@ -54,7 +54,7 @@
     <h3 class="sidebar__heading">DIRECTORIES</h3>
     <p>Coming Soon!</p>
     <?php if(!is_user_logged_in()): ?>
-      <a href="<?php echo esc_url(home_url('register')); ?> ?>" class="btn sidebar__btn btn-primary">REGISTER NOW</a>
+      <a href="<?php echo esc_url(home_url('register')); ?> ?>" class="btn sidebar__btn btn-primary">GET LISTED</a>
     <?php endif; ?>
     <!--
     <a href="<?php //echo( home_url( 'artists' ) ); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>

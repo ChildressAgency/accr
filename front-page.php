@@ -287,6 +287,8 @@ $current_url = tribe_events_get_current_filter_url();
                                 <?php if( have_rows( 'tab' ) ): $i=0; while( have_rows( 'tab' ) ): the_row(); 
                                     $category = get_sub_field( 'category' );
                                     //$category = strtolower( $category->name );
+                                    $category_id = $category->term_id;
+                                    $acf_category_id = 'post_tag' . '_' . $category_id;
                                     $category = $category->slug;
 
                                     $events = tribe_get_events( array(
@@ -302,20 +304,17 @@ $current_url = tribe_events_get_current_filter_url();
                                     ) );
                                     ?>
                                     <div class="tab-pane fade <?php if( $i==0 ){ echo 'show active'; } ?>" id="<?php echo $category; ?>" role="tabpanel" aria-labelledby="<?php echo $category; ?>-tab">
-
-                                      <?php if($category == 'art'): ?>
+                                      
+                                      <?php if(get_field('tag_filters', $acf_category_id)): ?>
                                         <ul class="event-slider-secondary__filter">
-                                            <li><a class="active" href="<?php echo esc_url(home_url('events/category/art')); ?>">ALL</a></li>|
-                                            <li><a href="<?php echo esc_url(home_url('events/tag/exhibits')); ?>">Exhibits</a></li>|
-                                            <li><a href="<?php echo esc_url(home_url('events/tag/opening')); ?>">Opening</a></li>|
-                                            <li><a href="<?php echo esc_url(home_url('events/tag/first-friday')); ?>">First Friday</a></li>
-                                        </ul>
-                                      <?php elseif($category == 'classes-workshops'): ?>
-                                        <ul class="event-slider-secondary__filter">
-                                          <li><a href="<?php echo esc_url(home_url('events/category/classes-workshops')); ?>" class="active">ALL</a></li>
-                                          <li><a href="<?php echo esc_url(home_url('events/tag/adult')); ?>">Adult</a></li>
-                                          <li><a href="<?php echo esc_url(home_url('events/tag/kids')); ?>">Kids</a></li>
-                                          <li><a href="<?php echo esc_url(home_url('events/tag/camps')); ?>">Camps</a></li>
+                                          <li><a href="<?php echo esc_url(home_url('events/category/' . $category)); ?>" class="active">ALL</a></li>|
+                                          <?php 
+                                            $tag_filters = get_field('tag_filters', $acf_category_id);
+                                            $bar_counter = 1;
+                                            $tag_filter_count = count($tag_filters);
+                                            foreach($tag_filters as $tag_filter): ?>
+                                              <li><a href="<?php echo esc_url(home_url('events/tag/' . $tag_filter->slug)); ?>"><?php echo $tag_filter->name; ?></a></li><?php if($bar_counter < $tag_filter_count){ echo '|'; } ?>
+                                          <?php $bar_counter++; endforeach; ?>
                                         </ul>
                                       <?php endif; ?>
 

@@ -287,7 +287,7 @@ $current_url = tribe_events_get_current_filter_url();
                                 <?php if( have_rows( 'tab' ) ): $i=0; while( have_rows( 'tab' ) ): the_row(); 
                                     $category = get_sub_field( 'category' );
                                     //$category = strtolower( $category->name );
-                                    $acf_category_id = 'post_tag' . '_' . $category->term_id;
+                                    $acf_category_id = 'post_tag_' . $category->term_id;
                                     $category = $category->slug;
 
                                     $events = tribe_get_events( array(

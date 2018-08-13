@@ -158,7 +158,8 @@ $current_url = tribe_events_get_current_filter_url();
                     ) );
                     ?>
                 <div class="event-slider">
-                    <?php foreach( $events as $event ): 
+                    <?php foreach( $events as $event ):
+                      if(!get_field('hide_from_all_events_section', $event->ID)) :
                         $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
                         $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
                         ?>
@@ -169,6 +170,7 @@ $current_url = tribe_events_get_current_filter_url();
                             </div>
                             <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
                         </a>
+                      <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             </div>

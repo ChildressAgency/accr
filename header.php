@@ -25,6 +25,15 @@
     }
     </style>
     <![endif]-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99227980-39"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-99227980-39');
+      </script>
 </head>
 <body>
     <header <?php if(is_front_page()): echo 'class="header--home"'; endif;?>>

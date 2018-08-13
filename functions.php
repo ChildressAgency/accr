@@ -57,7 +57,8 @@ function show_template() {
     function header_navbar() {
         register_nav_menus( array( 
             'header-navbar' => __( 'Header Navigation' ),
-            'member-navbar' => __( 'Membership Navigation' )
+            'member-navbar' => __( 'Membership Navigation' ),
+            'masthead-navbar' => __('Masthead Navigation')
         ) );
     }
     add_action( 'init', 'header_navbar' );

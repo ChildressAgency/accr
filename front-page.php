@@ -1,22 +1,5 @@
 <?php get_header(); ?>
 
-<!-- <section class="filter">
-    <div class="container">
-        <ul class="filter__list">
-            <li class="active"><a href="#_">All</a></li>|
-            <li><a href="#_">Caroline</a></li>|
-            <li><a href="#_">Fredericksburg</a></li>|
-            <li><a href="#_">King George</a></li>|
-            <li><a href="#_">Spotsylvania</a></li>|
-            <li><a href="#_">Stafford</a></li>|
-            <li><a href="#_">Westmoreland</a></li>
-        </ul>
-    </div>
-</section> -->
-<?php //add_filter( 'tribe-events-bar-should-show', '__return_true' ); ?>
-
-<?php //start filter bar ?>
-
 <?php
 
 $filters = tribe_events_get_filters();

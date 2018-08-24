@@ -688,7 +688,8 @@ img {
 }
 .event__desc-wrapper {
   flex: 3;
-  padding-top: 30px;
+  float: left;
+  padding-top: 0;
 }
 .event__desc-wrapper .btn {
   margin-bottom: 15px;

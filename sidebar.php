@@ -56,7 +56,12 @@
     <?php if(!is_user_logged_in()): ?>
       <a href="<?php echo esc_url(home_url('register')); ?> ?>" class="btn sidebar__btn btn-primary">GET LISTED</a>
     <?php endif; ?>
-    <!--
+  
+      <a href="<?php echo home_url('members'); ?>" class="btn sidebar__btn btn-primary">ALL MEMBERS</a>
+      <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Artist', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
+      <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Venue and Public Art', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
+      <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Arts & Cultural Organization', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
+<!--
     <a href="<?php //echo( home_url( 'artists' ) ); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
     <a href="<?php //echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
     <a href="<?php //echo( home_url( 'venues' ) ); ?>" class="btn sidebar__btn btn-primary">VENUES</a>

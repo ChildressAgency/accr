@@ -9,7 +9,7 @@
     <meta content="public" http-equiv="cache-control">
     <meta content="private" http-equiv="cache-control">
     
-    <title>Fredericksburg Arts</title>
+    <title>RappArts</title>
 
     <?php wp_head(); ?>
     
@@ -72,9 +72,9 @@
                 <p>An initiative of:</p>
                 <a href="<?php echo get_field( 'about_accr', 'option' ); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo"></a>
                 <div>
-                    <a href="<?php the_field( 'twitter', 'option' ); ?>"><i class="icon fab fa-twitter"></i></a>
-                    <a href="<?php the_field( 'facebook', 'option' ); ?>"><i class="icon fab fa-facebook-square"></i></a>
-                    <a href="<?php the_field( 'instagram', 'option' ); ?>"><i class="icon fab fa-instagram"></i></a>
+                    <a href="<?php the_field( 'twitter', 'option' ); ?>" target="_blank"><i class="icon fab fa-twitter"></i></a>
+                    <a href="<?php the_field( 'facebook', 'option' ); ?>" target="_blank"><i class="icon fab fa-facebook-square"></i></a>
+                    <a href="<?php the_field( 'instagram', 'option' ); ?>" target="_blank"><i class="icon fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>

@@ -1366,6 +1366,16 @@ img {
   display:block;
 }
 
+article .um .um-profile-photo a.um-profile-photo-img, 
+article .um .um-profile-photo img, 
+article .um .um-profile-photo span.um-profile-photo-overlay,
+article .um .um-profile-photo a.um-profile-photo-img, 
+article .um .um-profile-photo img, 
+article .um .um-profile-photo span.um-profile-photo-overlay,
+article .um-member-photo.radius-1 img{
+  border-radius:0 !important;
+}
+
 @media (max-width:767px){
   .visible-xs-block{
     display:block !important;

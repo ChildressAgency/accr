@@ -229,3 +229,48 @@ function show_template() {
     }
     add_action('wp_enqueue_scripts', 'accr_styles');
    
+add_filter('manage_users_columns', 'accr_modify_user_table');
+function accr_modify_user_table($column){
+  $column['profile_type'] = 'Profile Type';
+  $column['member'] = 'Member';
+  return $column;
+}
+add_action('manage_users_custom_column', 'accr_modify_user_table_row', 10, 3);
+function accr_modify_user_table_row($val, $column_name, $user_id){
+  switch($column_name){
+    case 'profile_type':
+      $profile_type = get_field('profile_type', 'user_' . $user_id);
+      return $profile_type;
+    break;
+    case 'member':
+      $is_a_member = get_field('is_this_a_member', 'user_' . $user_id);
+      if($is_a_member){
+        return 'Yes';
+      }
+    break;
+    //default:
+     
+  }
+ // return $val;
+}
+add_filter('manage_edit-users_sortable_columns', 'accr_sortable_users_columns');
+function accr_sortable_users_columns($columns){
+  $columns['profile_type'] = 'profile_type';
+  $columns['member'] = 'member';
+  return $columns;
+}
+
+add_action('pre_get_users', 'accr_users_orderby');
+function accr_users_orderby($query){
+  if(!is_admin() || !$query->is_main_query()){
+    return;
+  }
+  if($query->get('orderby') == 'profile_type'){
+    $query->set('orderby', 'meta_value');
+    $query->set('meta_key', 'profile_type');
+  }
+  elseif($query->get('orderby') == 'member'){
+    $query->set('orderby', 'meta_value');
+    $query->set('meta_key', 'is_this_a_member');
+  }
+}

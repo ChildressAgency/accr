@@ -9,7 +9,7 @@
     <meta content="public" http-equiv="cache-control">
     <meta content="private" http-equiv="cache-control">
     
-    <title>Fredericksburg Arts</title>
+    <title>RappArts</title>
 
     <?php wp_head(); ?>
     
@@ -25,9 +25,30 @@
     }
     </style>
     <![endif]-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99227980-39"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-99227980-39');
+      </script>
 </head>
 <body>
     <header <?php if(is_front_page()): echo 'class="header--home"'; endif;?>>
+      <div class="masthead">
+        <ul class="list-inline list-unstyled hidden-xs">
+          <?php 
+            $menuLocations = get_nav_menu_locations();
+            $mhMenuId = $menuLocations['masthead-navbar'];
+            $mastheadNav = wp_get_nav_menu_items($mhMenuId);
+
+            foreach($mastheadNav as $key => $navItem): ?>
+              <li><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
+          <?php endforeach; reset($mastheadNav); ?>
+        </ul>
+      </div>
         <div class="header__main">
             <div class="header__rapparts">
                 <div class="brand">
@@ -37,7 +58,7 @@
                 <div class="separator--header"></div>
                 <ul class="member-links">
                     <?php 
-                        $menuLocations = get_nav_menu_locations();
+                        //$menuLocations = get_nav_menu_locations();
                         $menuID = $menuLocations['member-navbar'];
                         $memberNav = wp_get_nav_menu_items( $menuID );
 
@@ -51,9 +72,9 @@
                 <p>An initiative of:</p>
                 <a href="<?php echo get_field( 'about_accr', 'option' ); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo"></a>
                 <div>
-                    <a href="<?php the_field( 'twitter', 'option' ); ?>"><i class="icon fab fa-twitter"></i></a>
-                    <a href="<?php the_field( 'facebook', 'option' ); ?>"><i class="icon fab fa-facebook-square"></i></a>
-                    <a href="<?php the_field( 'instagram', 'option' ); ?>"><i class="icon fab fa-instagram"></i></a>
+                    <a href="<?php the_field( 'twitter', 'option' ); ?>" target="_blank"><i class="icon fab fa-twitter"></i></a>
+                    <a href="<?php the_field( 'facebook', 'option' ); ?>" target="_blank"><i class="icon fab fa-facebook-square"></i></a>
+                    <a href="<?php the_field( 'instagram', 'option' ); ?>" target="_blank"><i class="icon fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -68,7 +89,7 @@
             <div class="text-center collapse navbar-collapse" id="headerNav">
                 <ul class="navbar-nav">
                 <?php 
-                    $menuLocations = get_nav_menu_locations();
+                    //$menuLocations = get_nav_menu_locations();
                     $menuID = $menuLocations['header-navbar'];
                     $primaryNav = wp_get_nav_menu_items( $menuID );
 
@@ -78,6 +99,13 @@
                     <?php endforeach; ?>
                     <li class="nav__item nav__accent"><a href="<?php echo get_field( 'donate_link', 'option' ); ?>">Donate</a></li>
                 </ul>
+                <div class="mobile-masthead visible-xs-block">
+                  <ul class="list-inline list-unstyled">
+                    <?php foreach($mastheadNav as $key=>$navItem): ?>
+                      <li><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
+                    <?php endforeach; ?>
+                  </ul>
+                </div>
             </div>
             <div class="nav--header__sides"></div>
         </nav>

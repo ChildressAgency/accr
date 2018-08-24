@@ -1,22 +1,19 @@
 <?php get_header(); ?>
 
 <section>
-
-      <?php
-        if(is_post_type_archive('tribe_events')){
-          if(is_tax('tribe_events_cat')){
-            $page_object = get_queried_object();
-            echo get_field('event_category_page_intro', $page_object);
+    <div class="container">
+        <?php /*
+          if( is_page('venues') || is_singular('venue') ) {
+            if(have_posts()){
+              while(have_posts()){
+                the_post();
+                echo '<article>';
+                the_content();
+                echo '</article>';
+              }
+            }
           }
-          elseif(is_tag()){
-            $page_object = get_queried_object();
-            echo get_field('event_tag_page_intro', $page_object);
-          }
-          else{
-            echo get_field('all_events_page_intro', 'option');
-          }
-        }
-      ?>
+        else{ */ ?>
             <div class="row">
                 <div class="col-md-9 content-with-sidebar">
                     <?php //get_template_part( 'tp-share' ); ?>

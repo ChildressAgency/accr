@@ -140,6 +140,7 @@ hr {
 
 img {
   max-width: 100%;
+  height:auto;
 }
 
 .header__main {
@@ -194,10 +195,11 @@ img {
 }
 .header--home {
   height: auto;
+  overflow: hidden;
 }
 .header--home .carousel {
-  flex: 1 0 auto;
-  min-height: 300px;
+  /*flex: 1 0 auto;*/
+  /*min-height: 300px;*/
 }
 
 .brand {
@@ -317,7 +319,7 @@ img {
 }
 
 .carousel {
-  flex: 1;
+  /*flex: 1;*/
   position: relative;
   width: 100%;
 }
@@ -360,7 +362,7 @@ img {
   text-align: right;
 }
 .carousel-inner, .carousel-item {
-  height: 100%;
+  height: 455px;
 }
 .carousel-control-prev, .carousel-control-next {
   font-size: 30px;
@@ -534,6 +536,7 @@ img {
   justify-content: space-around;
 }
 .gallery__item {
+  align-self: center;
   margin: 15px 0;
   width: 100%;
 }
@@ -544,20 +547,49 @@ img {
 }
 
 .search {
-  background-color: #739cd2;
-  padding: 15px 0;
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
 }
 .search__text {
   font-size: 16px;
   font-size: 1.6rem;
   color: #fff;
   display: inline-block;
+  margin-bottom: 0;
   text-align: right;
 }
 .search__text span {
   font-size: 24px;
   font-size: 2.4rem;
   letter-spacing: 0.2rem;
+}
+.search__filter {
+  float: none;
+  margin-bottom: 0;
+  max-width: 400px;
+  padding: 15px 0;
+  width: 100%;
+}
+.search__filter select {
+  width: 100%;
+}
+.search--sidebar {
+  background-color: #739cd2;
+  flex-direction: column;
+  padding: 15px;
+  width: 100%;
+}
+.search--sidebar .search__filter {
+  padding: 7px 0;
+  width: 100%;
+}
+.search--sidebar .search__filter input[type=text] {
+  padding: 7px;
+  width: 100%;
 }
 
 .filter {
@@ -710,8 +742,16 @@ img {
 .single-event .event__info {
   display: block;
 }
+.single-event .event__info::after {
+  clear: both;
+  content: " ";
+  display: table;
+}
 .single-event .event__header {
   margin-left: 0;
+}
+.single-event .event-thumbnail {
+  min-width: 200px;
 }
 
 .show-more {
@@ -837,6 +877,7 @@ img {
   flex: 2;
 }
 .single-org__meta p {
+  color: #666;
   margin-bottom: 15px;
 }
 .single-org__desc {
@@ -999,19 +1040,14 @@ img {
 
 #tribe-events-bar {
   background-color: #739cd2;
-}
-
-.tribe-bar-date-filter,
-.tribe-bar-search-filter,
-.tribe-bar-geoloc-filter {
-  width: 100%;
+  padding: 0 30px;
 }
 
 .tribe-bar-submit {
   margin-left: 0;
-  padding-top: 25px;
+  padding: 0;
   text-align: center;
-  width: 100%;
+  width: auto;
 }
 
 #tribe_events_filters_toggle {
@@ -1289,6 +1325,66 @@ img {
   height: 2px;
 }
 
+.localities{
+  text-align:center;
+}
+.localities .list-inline>li{
+  display:inline;
+  padding-left:10px;
+  padding-right:10px;
+  box-shadow:3px 0px 0px -1px #3973a1;
+  font-size:22px;
+}
+.localities .list-inline>li:last-child{
+  box-shadow:none;
+}
+
+.visible-xs-block{
+  display:none !important;
+}
+.masthead{
+  text-align:center;
+}
+.masthead .list-inline>li{
+  display:inline-block;
+  box-shadow:3px 0px 0px -1px #000;
+}
+.masthead .list-inline>li:last-child{
+  box-shadow:none;
+}
+.masthead ul>li>a{
+  font-size:18px;
+  padding:10px;
+}
+.mobile-masthead{
+  margin-top:20px;
+  margin-bottom:20px;
+}
+.mobile-masthead .list-inline>li>a{
+  font-size:18px;
+  padding:10px;
+  display:block;
+}
+
+article .um .um-profile-photo a.um-profile-photo-img, 
+article .um .um-profile-photo img, 
+article .um .um-profile-photo span.um-profile-photo-overlay,
+article .um .um-profile-photo a.um-profile-photo-img, 
+article .um .um-profile-photo img, 
+article .um .um-profile-photo span.um-profile-photo-overlay,
+article .um-member-photo.radius-1 img{
+  border-radius:0 !important;
+}
+
+@media (max-width:767px){
+  .visible-xs-block{
+    display:block !important;
+  }
+  .hidden-xs{
+    display:none !important;
+  }
+}
+
 @media screen and (min-width: 576px) {
   h2 {
     font-size: 24px;
@@ -1402,7 +1498,7 @@ img {
     width: 250px;
   }
   .header--home {
-    height: 100%;
+    /*height: 100%;*/
   }
 
   .nav--header {
@@ -1433,6 +1529,27 @@ img {
     font-size: 6rem;
     height: 60px;
     width: 60px;
+  }
+
+  .search {
+    flex-direction: row;
+  }
+  .search__filter {
+    padding: 0;
+    width: auto;
+  }
+  .tribe-bar-filters .search__filter{
+    margin-left:2px;
+    margin-right:2px;
+  }
+  .search--sidebar {
+    background-color: #739cd2;
+    flex-direction: column;
+    padding: 15px;
+  }
+  .search--sidebar .search__filter {
+    padding: 7px 0;
+    width: 100%;
   }
 
   .event__header {

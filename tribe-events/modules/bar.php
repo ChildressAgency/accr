@@ -28,7 +28,7 @@ $current_url = tribe_events_get_current_filter_url();
 
 	<h2 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search and Views Navigation', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h2>
 
-	<form id="tribe-bar-form" class="tribe-clearfix" name="tribe-bar-form" method="post" action="<?php echo esc_attr( $current_url ); ?>">
+	<form id="tribe-bar-form" class="tribe-clearfix" name="tribe-bar-form" method="post" action="<?php echo esc_url( home_url( 'events' ) ); ?>">
 
 		<!-- Mobile Filters Toggle -->
 
@@ -36,58 +36,33 @@ $current_url = tribe_events_get_current_filter_url();
 			<?php printf( esc_html__( 'Find %s', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?><span class="tribe-bar-toggle-arrow"></span>
 		</div>
 
-		<!-- Views -->
-		<?php if ( count( $views ) > 1 ) { ?>
-			<div id="tribe-bar-views">
-				<div class="tribe-bar-views-inner tribe-clearfix">
-					<h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Views Navigation', 'the-events-calendar' ), tribe_get_event_label_singular() ); ?></h3>
-					<label><?php esc_html_e( 'View As', 'the-events-calendar' ); ?></label>
-					<select
-						class="tribe-bar-views-select tribe-no-param"
-						name="tribe-bar-view"
-						aria-label="<?php printf( esc_attr__( 'View %s As', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
-					>
-						<?php foreach ( $views as $view ) : ?>
-							<option
-								<?php echo tribe_is_view( $view['displaying'] ) ? 'selected' : 'tribe-inactive' ?>
-								value="<?php echo esc_attr( $view['url'] ); ?>"
-								data-view="<?php echo esc_attr( $view['displaying'] ); ?>"
-							>
-								<?php echo $view['anchor']; ?>
-							</option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-				<!-- .tribe-bar-views-inner -->
-			</div><!-- .tribe-bar-views -->
-		<?php } // if ( count( $views ) > 1 ) ?>
-
 		<?php if ( ! empty( $filters ) ) { ?>
 			<div class="tribe-bar-filters">
 				<div class="tribe-bar-filters-inner tribe-clearfix">
-          <h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h3>
-
-          <div class="row">
-            <?php foreach ( $filters as $filter ) : ?>
-              <div class="col-sm-3">
-						    <div class="<?php echo esc_attr( $filter['name'] ) ?>-filter">
-							    <label class="label-<?php echo esc_attr( $filter['name'] ) ?>" for="<?php echo esc_attr( $filter['name'] ) ?>"><?php echo $filter['caption'] ?></label>
-							    <?php echo $filter['html'] ?>
-                </div>
-              </div><!-- .col-sm-6 .col-md-3 -->
-            <?php endforeach; ?>
-            <div class="col-sm-3">
-					<div class="tribe-bar-submit">
-						<input
-							class="tribe-events-button tribe-no-param"
-							type="submit"
-							name="submit-bar"
-							aria-label="<?php printf( esc_attr__( 'Submit %s search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
-							value="<?php printf( esc_attr__( 'Find %s', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
-						/>
-          </div>
-    </div>
-          </div><!-- .row -->
+					<div class="search">
+						<h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?></h3>
+						
+						<div class="row">
+							<?php foreach ( $filters as $filter ) : ?>
+								<div class="col-sm-3">
+									<div class="<?php echo esc_attr( $filter['name'] ) ?>-filter search__filter">
+										<?php echo $filter['html'] ?>
+									</div>
+								</div><!-- .col-sm-6 .col-md-3 -->
+							<?php endforeach; ?>
+							<div class="col-sm-3">
+								<div class="tribe-bar-submit">
+									<input
+										class="tribe-events-button tribe-no-param"
+										type="submit"
+										name="submit-bar"
+										aria-label="<?php printf( esc_attr__( 'Submit %s search', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
+										value="<?php printf( esc_attr__( 'Find %s', 'the-events-calendar' ), tribe_get_event_label_plural() ); ?>"
+									/>
+								</div>
+							</div>
+						</div><!-- .row -->
+					</div>
 					<!-- .tribe-bar-submit -->
 				</div>
 				<!-- .tribe-bar-filters-inner -->

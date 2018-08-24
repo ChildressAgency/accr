@@ -16,17 +16,16 @@
                                     <?php endforeach; ?>
                             </ul>
                         </div>
+                        <?php if( have_rows( 'link_group', 'option' ) ): while( have_rows( 'link_group', 'option' ) ): the_row(); ?>
                         <div class="col-12 col-sm-6 col-md-3">
                             <ul>
-                                <li><strong><a href="http://dev.childressagency.com/accr/events/community/add">SUBMIT A LISTING</a></strong></li>
-                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Event</a></li>
-                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Organization</a></li>
-                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Venue</a></li>
-                                <li><a href="http://dev.childressagency.com/accr/events/community/add">Artist</a></li>
-                                <li><a href="http://dev.childressagency.com/accr/events/community/add">How-To Guide</a></li>
+                                <?php if( have_rows( 'links' ) ): $i=0; while( have_rows( 'links' ) ): the_row(); ?>
+                                <li><?php if($i==0){ echo '<strong>'; } ?><a href="<?php the_sub_field( 'url' ); ?>"><?php the_sub_field( 'title' ); ?></a><?php if($i==0){ echo '</strong>'; } ?></li>
+                                <?php $i++; endwhile; endif; ?>
                             </ul>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <?php endwhile; endif; ?>
+                        <!-- <div class="col-12 col-sm-6 col-md-3">
                             <ul>
                                 <li><strong><a href="<?php echo( home_url( 'register' ) ); ?>">BECOME A MEMBER</a></strong></li>
                                 <li><a href="#_">Organization</a></li>
@@ -43,7 +42,7 @@
                                 <li><a href="#_">Privacy Policy</a></li>
                                 <li><a href="#_">Terms of Use</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

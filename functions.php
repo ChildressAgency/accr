@@ -1,4 +1,5 @@
 <?php
+
 add_action('wp_footer', 'show_template');
 function show_template() {
 	global $template;
@@ -8,7 +9,7 @@ function show_template() {
     function jquery_cdn(){
         if(!is_admin()){
             wp_deregister_script('jquery');
-            wp_register_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', false, null, true);
+            wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', false, null, true);
             wp_enqueue_script('jquery');
         }
     }
@@ -42,21 +43,6 @@ function show_template() {
         wp_enqueue_script('accr-script');
     }
     add_action('wp_enqueue_scripts', 'accr_scripts', 100);
-    
-    function accr_styles(){
-        wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-        wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');
-        wp_register_style('slick', get_template_directory_uri() . '/css/slick.css');
-        wp_register_style('slick-theme', get_template_directory_uri() . '/css/slick-theme.css');
-        wp_register_style('accr', get_template_directory_uri() . '/style.css');
-
-        wp_enqueue_style( 'bootstrap-css' );
-        wp_enqueue_style( 'fontawesome' );
-        wp_enqueue_style('slick');
-        wp_enqueue_style('slick-theme');
-        wp_enqueue_style( 'accr' );
-    }
-    add_action('wp_enqueue_scripts', 'accr_styles');
 
     if(function_exists('acf_add_options_page')){
         acf_add_options_page(array(
@@ -71,7 +57,8 @@ function show_template() {
     function header_navbar() {
         register_nav_menus( array( 
             'header-navbar' => __( 'Header Navigation' ),
-            'member-navbar' => __( 'Membership Navigation' )
+            'member-navbar' => __( 'Membership Navigation' ),
+            'masthead-navbar' => __('Masthead Navigation')
         ) );
     }
     add_action( 'init', 'header_navbar' );
@@ -96,7 +83,7 @@ function show_template() {
     // remove content editor
     add_action('admin_init', 'remove_textarea');
     function remove_textarea() {
-        remove_post_type_support( 'page', 'editor' );
+        //remove_post_type_support( 'page', 'editor' );
         remove_post_type_support( 'sponsored', 'editor' );
     }
 
@@ -115,89 +102,175 @@ function show_template() {
     }
     add_action( 'init', 'tribe_tag_venues_and_orgs' );
 
-    /*
-     * By Barry and Cliff
-     * From https://gist.github.com/cliffordp/04b7bbe6e7d9009aec12acc0b9bd5bdd
-     * 
-     * Shortcode to display render Tribe Bar anywhere on site (e.g. website header)
-     * For https://theeventscalendar.com/support/forums/topic/insert-search-bar-on-top-of-a-page/ which also links to http://gregorypearcey.com/blog/add-tribe-events-search-bar-home-page/
-     *
-     * Notes: It's not pretty or perfect, but it's a start if you want to pull something like this off on your site. FYI: You're in unsupported / custom coding territory.
-     *
-     * Example: [tribe_bar_anywhere]
-     * Screenshot: https://cl.ly/3h1S3d3a3T30
-     */
-    /*function tribe_bar_anywhere_logic() {
-        if ( ! class_exists( 'Tribe__Events__Bar' ) ) {
-            return false;
-        }
-        wp_enqueue_script( 'jquery' );
-        Tribe__Events__Template_Factory::asset_package( 'bootstrap-datepicker' );
-        Tribe__Events__Template_Factory::asset_package( 'calendar-script' );
-        Tribe__Events__Template_Factory::asset_package( 'jquery-resize' );
-        Tribe__Events__Template_Factory::asset_package( 'events-css' );
-        Tribe__Events__Bar::instance()->load_script();
-        ob_start();
-        tribe_get_template_part( 'modules/bar' );
-        //get_template_part('tribe-events/modules/bar');
-        return ob_get_clean();
+
+    add_action('widgets_init', 'accr_widgets_init');
+    function accr_widgets_init(){
+      register_sidebar(array(
+        'name' => 'Events Sidebar',
+        'id' => 'sidebar-1',
+        'description' => 'Sidebar for events sections',
+        'before_widget' => '<div class="event-widget>',
+        'after_widget' => '</div>',
+        'before_title' => '<h3 class="event-widget-title>',
+        'after_title' => '</h3>'
+      ));
     }
-    add_shortcode( 'tribe_bar_anywhere', 'tribe_bar_anywhere_logic' );*/
 
-add_action('widgets_init', 'accr_widgets_init');
-function accr_widgets_init(){
-  register_sidebar(array(
-    'name' => 'Events Sidebar',
-    'id' => 'sidebar-1',
-    'description' => 'Sidebar for events sections',
-    'before_widget' => '<div class="event-widget>',
-    'after_widget' => '</div>',
-    'before_title' => '<h3 class="event-widget-title>',
-    'after_title' => '</h3>'
-  ));
+    add_action('tribe_events_before_header', 'accr_tribe_events_before_header');
+    function accr_tribe_events_before_header(){
+        echo '<div class="row"><div class="col-sm-9">';
+    }
+
+    add_action('tribe_events_after_footer', 'accr_tribe_events_after_footer');
+    function accr_tribe_events_after_footer(){
+        echo '</div><!-- .col-sm-9 -->';
+        get_sidebar();
+        echo '</div><!-- .row -->';
+    }
+
+    //Add these scripts to only the front page
+    function tribehome_enqueue_front_page_scripts() {
+        if( is_front_page() )
+        {
+
+    	    //Add the stylesheet into the header
+    		wp_enqueue_style("tribe.homepage",WP_PLUGIN_URL."/the-events-calendar/src/resources/css/tribe-events-full.min.css");
+
+    		wp_enqueue_style("tribe.homepage.date",WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css");
+
+    		//Add the scripts in the footer
+    		wp_enqueue_script("jquery");
+
+    		wp_enqueue_script(
+    		"tribe.homepage.bar", WP_PLUGIN_URL."/the-events-calendar/src/resources/js/tribe-events-bar.min.js",
+    		array("jquery"), "1.3.1",1);
+
+    		wp_enqueue_script(
+    		"tribe.homepage.events", WP_PLUGIN_URL."/the-events-calendar/src/resources/js/tribe-events.min.js",
+    		array("jquery"), "1.3.1",1);
+
+    		wp_enqueue_script(
+    		"tribe.homepage.datepicker", WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+    		array("jquery"), "1.3.1",1);
+
+    		//wp_enqueue_script(
+    		//"tribe.homepage.footer", WP_PLUGIN_URL."/tribe-homepage-search/js/footer.js",
+    		//array("jquery"), "1.3.1",1);
+
+    	}
+    }
+    add_action( 'wp_enqueue_scripts', 'tribehome_enqueue_front_page_scripts' );
+
+    add_filter( 'tribe-events-bar-filters',  'tribe_events_add_category_filter', 1, 1 );
+
+    /*
+     * Add 'Category' field to event search bar
+     */
+    function tribe_events_add_category_filter( $filters ) {
+        $args = array(
+        'show_option_all'    => esc_html__( "All", "the-events-calendar" ),
+        'show_option_none'   => '',
+        'option_none_value'  => '-1',
+        'orderby'            => 'title',
+        'order'              => 'ASC',
+        'show_count'         => 0,
+        'hide_empty'         => 0,
+        'child_of'           => 0,
+        'exclude'            => '',
+        'include'            => '',
+        'echo'               => 0,
+        'selected'           => '-1',
+        'hierarchical'       => 0,
+        'name'               => 'tribe_eventcategory',
+        'id'                 => '',
+        'class'              => '',
+        'depth'              => 0,
+        'tab_index'          => 0,
+        'taxonomy'           => 'tribe_events_cat',
+        'hide_if_empty'      => false,
+        'value_field'         => 'term_id',
+    );
+/*
+    function accr_template_chooser($template)   
+    {    
+      global $wp_query;   
+      $post_type = get_query_var('post_type');   
+      if( $wp_query->is_search && $post_type == 'venues' )   
+      {
+        return locate_template('search-venue.php');  //  redirect to search-venue.php
+      }   
+      return $template;   
+    }*/
+    //add_filter('template_include', 'accr_template_chooser');  
+     
+    $html = wp_dropdown_categories( $args );
+     
+        $filters['tribe-bar-category'] = array(
+            'name' => 'tribe-bar-category',
+            'caption' => esc_html__( 'Category', 'the-events-calendar' ),
+            'html' => $html
+        );
+     
+        return $filters;
+    }
+
+    function accr_styles(){
+        wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+        wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');
+        wp_register_style('slick', get_template_directory_uri() . '/css/slick.css');
+        wp_register_style('slick-theme', get_template_directory_uri() . '/css/slick-theme.css');
+        wp_register_style('accr', get_template_directory_uri() . '/style.css');
+
+        wp_enqueue_style( 'bootstrap-css' );
+        wp_enqueue_style( 'fontawesome' );
+        wp_enqueue_style('slick');
+        wp_enqueue_style('slick-theme');
+        wp_enqueue_style( 'accr' );
+    }
+    add_action('wp_enqueue_scripts', 'accr_styles');
+   
+add_filter('manage_users_columns', 'accr_modify_user_table');
+function accr_modify_user_table($column){
+  $column['profile_type'] = 'Profile Type';
+  $column['member'] = 'Member';
+  return $column;
+}
+add_action('manage_users_custom_column', 'accr_modify_user_table_row', 10, 3);
+function accr_modify_user_table_row($val, $column_name, $user_id){
+  switch($column_name){
+    case 'profile_type':
+      $profile_type = get_field('profile_type', 'user_' . $user_id);
+      return $profile_type;
+    break;
+    case 'member':
+      $is_a_member = get_field('is_this_a_member', 'user_' . $user_id);
+      if($is_a_member){
+        return 'Yes';
+      }
+    break;
+    //default:
+     
+  }
+ // return $val;
+}
+add_filter('manage_edit-users_sortable_columns', 'accr_sortable_users_columns');
+function accr_sortable_users_columns($columns){
+  $columns['profile_type'] = 'profile_type';
+  $columns['member'] = 'member';
+  return $columns;
 }
 
-add_action('tribe_events_before_header', 'accr_tribe_events_before_header');
-function accr_tribe_events_before_header(){
-    echo '<div class="row"><div class="col-sm-9">';
+add_action('pre_get_users', 'accr_users_orderby');
+function accr_users_orderby($query){
+  if(!is_admin() || !$query->is_main_query()){
+    return;
+  }
+  if($query->get('orderby') == 'profile_type'){
+    $query->set('orderby', 'meta_value');
+    $query->set('meta_key', 'profile_type');
+  }
+  elseif($query->get('orderby') == 'member'){
+    $query->set('orderby', 'meta_value');
+    $query->set('meta_key', 'is_this_a_member');
+  }
 }
-
-add_action('tribe_events_after_footer', 'accr_tribe_events_after_footer');
-function accr_tribe_events_after_footer(){
-    echo '</div><!-- .col-sm-9 -->';
-    get_sidebar();
-    echo '</div><!-- .row -->';
-}
-
-//Add these scripts to only the front page
-function tribehome_enqueue_front_page_scripts() {
-    if( is_front_page() )
-    {
-
-	    //Add the stylesheet into the header
-		wp_enqueue_style("tribe.homepage",WP_PLUGIN_URL."/the-events-calendar/src/resources/css/tribe-events-full.min.css");
-
-		wp_enqueue_style("tribe.homepage.date",WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css");
-
-		//Add the scripts in the footer
-		wp_enqueue_script("jquery");
-
-		wp_enqueue_script(
-		"tribe.homepage.bar", WP_PLUGIN_URL."/the-events-calendar/src/resources/js/tribe-events-bar.min.js",
-		array("jquery"), "1.3.1",1);
-
-		wp_enqueue_script(
-		"tribe.homepage.events", WP_PLUGIN_URL."/the-events-calendar/src/resources/js/tribe-events.min.js",
-		array("jquery"), "1.3.1",1);
-
-		wp_enqueue_script(
-		"tribe.homepage.datepicker", WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
-		array("jquery"), "1.3.1",1);
-
-		//wp_enqueue_script(
-		//"tribe.homepage.footer", WP_PLUGIN_URL."/tribe-homepage-search/js/footer.js",
-		//array("jquery"), "1.3.1",1);
-
-	}
-}
-add_action( 'wp_enqueue_scripts', 'tribehome_enqueue_front_page_scripts' );

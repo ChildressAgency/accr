@@ -37,18 +37,24 @@
 </head>
 <body>
     <header <?php if(is_front_page()): echo 'class="header--home"'; endif;?>>
-      <div class="masthead">
-        <ul class="list-inline list-unstyled hidden-xs">
-          <?php 
-            $menuLocations = get_nav_menu_locations();
-            $mhMenuId = $menuLocations['masthead-navbar'];
-            $mastheadNav = wp_get_nav_menu_items($mhMenuId);
+        <nav class="navbar navbar-expand-lg">
+            <div class="masthead--sides"></div>
 
-            foreach($mastheadNav as $key => $navItem): ?>
-              <li><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
-          <?php endforeach; reset($mastheadNav); ?>
-        </ul>
-      </div>
+            <div class="masthead text-center">
+                <ul class="list-inline list-unstyled hidden-xs">
+                    <?php 
+                    $menuLocations = get_nav_menu_locations();
+                    $mhMenuId = $menuLocations['masthead-navbar'];
+                    $mastheadNav = wp_get_nav_menu_items($mhMenuId);
+
+                    foreach($mastheadNav as $key => $navItem): ?>
+                        <li><a href="<?php echo $navItem->url; ?>"><?php echo $navItem->title; ?></a></li>
+                    <?php endforeach; reset($mastheadNav); ?>
+                </ul>
+            </div>
+
+            <!-- <div class="masthead--sides"></div> -->
+        </nav>
         <div class="header__main">
             <div class="header__rapparts">
                 <div class="brand">
@@ -69,7 +75,6 @@
                 </ul>
             </div>
             <div class="header__accr">
-                <p>An initiative of:</p>
                 <a href="<?php echo get_field( 'about_accr', 'option' ); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo"></a>
                 <div>
                     <a href="<?php the_field( 'twitter', 'option' ); ?>" target="_blank"><i class="icon fab fa-twitter"></i></a>
@@ -80,7 +85,7 @@
         </div>
 
         <nav class="nav--header navbar navbar-expand-lg">
-            <div class="nav--header__sides"></div>
+            <div class="nav--header-sides"></div>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNav" aria-controls="headerNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="icon fas fa-bars"></i>
@@ -107,7 +112,7 @@
                   </ul>
                 </div>
             </div>
-            <div class="nav--header__sides"></div>
+            <div class="nav--header-sides"></div>
         </nav>
 
 

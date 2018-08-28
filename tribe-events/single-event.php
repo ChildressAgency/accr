@@ -18,6 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 $events_label_singular = tribe_get_event_label_singular();
 $events_label_plural   = tribe_get_event_label_plural();
 $venue_details = tribe_get_venue_details();
+$organizer_link = tribe_get_organizer_link();
+$organizer_name = tribe_get_organizer();
 
 $event_id = get_the_ID();
 $event = tribe_events_get_event( $event_id );
@@ -33,13 +35,16 @@ $end_date_time = tribe_get_end_date( $event, false, 'His', null );
     <div class="event single-event">
         <div class="event__header event__header--featured">
             <h3 class="event__title"><?php echo $event->post_title; ?></h3>
-            <?php if( $venue_details['linked_name'] ): ?><p class="event__subtitle">presented by: <?php echo $venue_details['linked_name']; ?></p><?php endif; ?>
+            <p class="event__subtitle">
+                <?php if( $venue_details['linked_name'] ): ?>presented by: <?php echo $venue_details['linked_name']; ?><?php endif; ?>
+                <?php if( $organizer_name ): ?><br/>organized by: <?php echo $organizer_link; ?><?php endif; ?>
+            </p>
         </div>
     
         <div class="event__info">
             <div class="event-thumbnail">
                 <div class="event-thumbnail__event">
-                    <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                    <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date_day, $end_date_day)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
                     <div class="event-thumbnail__image">
                         <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
                     </div>
@@ -56,8 +61,7 @@ $end_date_time = tribe_get_end_date( $event, false, 'His', null );
 				    ?>
 				<a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $event->post_title; ?>&dates=<?php echo $date_start; ?>/<?php echo $date_end; ?>&details=&location=<?php echo tribe_get_venue( $event ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
 
-                <!-- <a href="#_" class="btn btn-white">ADD IT</a> -->
-                <p class="event__desc"><?php echo $event->post_content; ?></p>
+                <p class="event__desc"><?php the_content(); ?></p>
             </div>
         </div>
     </div>
@@ -73,20 +77,57 @@ $isAllDay = tribe_event_is_all_day( $event_id );
 
 if( $start_date_day ): ?>
 <section class="event__meta-data">
-    <h2 class="section-tab section-tab__active">Dates and Times <!-- <i class="icon fas fa-ticket-alt"> --></i></h2>
+    <h2 class="section-tab section-tab__active">Details</i></h2>
     <hr />
-    <p><strong><?php echo $start_date_day; 
-    if( !$isAllDay ){ 
-        echo ' ' . $start_date_time; 
-    } 
-    if( strcmp( $start_date_day, $end_date_day ) ){ 
-        echo ' - ' . $end_date_day;
+    <?php if( $start_date_day ): ?>
+        <p><strong>Dates and Times:</strong></p>
+        <p><?php echo $start_date_day; 
         if( !$isAllDay ){ 
-            echo ' ' . $end_date_time; 
+            echo ' ' . $start_date_time; 
         } 
-    } elseif( !$isAllDay ){
-        echo ' - ' . $end_date_time;
-    } ?></strong></p>
+        if( strcmp( $start_date_day, $end_date_day ) ){ 
+            echo ' - ' . $end_date_day;
+            if( !$isAllDay ){ 
+                echo ' ' . $end_date_time; 
+            } 
+        } elseif( !$isAllDay ){
+            echo ' - ' . $end_date_time;
+        } ?></p>
+    <?php endif; ?>
+
+    <?php
+    $cats = tribe_get_event_categories(
+        get_the_id(), array(
+            'before'       => '',
+            'sep'          => ', ',
+            'after'        => '',
+            'label'        => 'Categories',
+            'label_before' => '<p><strong>',
+            'label_after'  => '</strong></p>',
+            'wrap_before'  => '<p>',
+            'wrap_after'   => '</p>'
+        )
+    );
+    
+    if( $cats ){
+        echo $cats;
+    }
+    ?>
+    
+    <?php 
+    $tags = get_the_term_list( get_the_ID(), 'post_tag', '', ', ', '' );
+    if( $tags ): ?>
+        <p><strong>Tags</strong>:</p>
+        <p><?php echo $tags; ?></p>
+    <?php endif; ?>
+
+    <?php 
+    $website = tribe_get_event_website_link();
+
+    if( $website ): ?>
+        <p><strong>Website</strong>:</p>
+        <p><?php echo $website; ?></p>
+    <?php endif; ?>
 </section>
 <?php endif; ?>
 
@@ -94,7 +135,7 @@ if( $start_date_day ): ?>
 $map = tribe_get_embedded_map();
 if( $map || $venue_details['linked_name'] || $venue_details['address'] ): ?>
 <section class="event__meta-data">
-    <h2 class="section-tab section-tab__active">Location <!-- <i class="icon fas fa-ticket-alt"> --></i></h2>
+    <h2 class="section-tab section-tab__active">Location</i></h2>
     <hr />
     <p><strong><?php echo $venue_details['linked_name']; ?></strong></p>
     <p><?php echo $venue_details['address']; ?></p>
@@ -109,7 +150,7 @@ if( $map || $venue_details['linked_name'] || $venue_details['address'] ): ?>
 
 <?php if( have_rows( 'info_section' ) ): while( have_rows( 'info_section' ) ): the_row(); ?>
 <section class="event__meta-data">
-    <h2 class="section-tab section-tab__active"><?php the_sub_field( 'title' ); ?> <!-- <i class="icon fas fa-ticket-alt"> --></i></h2>
+    <h2 class="section-tab section-tab__active"><?php the_sub_field( 'title' ); ?></i></h2>
     <hr />
     <?php the_sub_field( 'info' ); ?>
 </section>
@@ -120,7 +161,7 @@ $related_events = tribe_get_related_posts( 10, $event_id );
 if( $related_events ):
 ?>
 <section class="event__meta-data">
-    <h2 class="section-tab section-tab__active">Related <!-- <i class="icon fas fa-ticket-alt"> --></i></h2>
+    <h2 class="section-tab section-tab__active">Related</i></h2>
     <hr />
 
     <?php foreach( $related_events as $related ): 

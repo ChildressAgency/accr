@@ -336,7 +336,7 @@ $current_url = tribe_events_get_current_filter_url();
 <section class="social-display">
     <div class="container text-center">
         <p class="social-display__heading">Around the town</p>
-        <p class="social-display__subheading">Find us in Instagram at FredericksburgArts and tag us with #FXBGARTS</p>
+        <p class="social-display__subheading">Find us in Instagram at RappahannockArts and tag us with #RAPPARTS</p>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item"><a href="#social-display__instagram" class="nav-link active" data-toggle="tab" role="tab"><i class="icon fab fa-instagram"></i></a></li>
             <!-- <li class="nav-item"><a href="#social-display__facebook" class="nav-link" data-toggle="tab" role="tab"><i class="icon fab fa-facebook-square"></i></a></li> -->

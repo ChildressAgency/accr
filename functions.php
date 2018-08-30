@@ -194,7 +194,7 @@ function show_template() {
      */
     function tribe_events_add_category_filter( $filters ) {
         $args = array(
-        'show_option_all'    => esc_html__( "All", "the-events-calendar" ),
+        'show_option_all'    => esc_html__( "All Categories", "the-events-calendar" ),
         'show_option_none'   => '',
         'option_none_value'  => '-1',
         'orderby'            => 'title',
@@ -234,7 +234,7 @@ function show_template() {
      */
     function tribe_events_add_location_filter( $filters ) {
         $args = array(
-        'show_option_all'    => 0,
+        'show_option_all'    => esc_html__( "All Locations", "the-events-calendar" ),
         'show_option_none'   => '',
         'option_none_value'  => '-1',
         'orderby'            => 'title',

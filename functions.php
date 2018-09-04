@@ -230,7 +230,7 @@ function show_template() {
     add_filter( 'tribe-events-bar-filters',  'tribe_events_add_category_filter', 1, 1 );
 
     /*
-     * Add 'Category' field to event search bar
+     * Add 'Location' field to event search bar
      */
     function tribe_events_add_location_filter( $filters ) {
         $args = array(
@@ -269,6 +269,7 @@ function show_template() {
     }
     add_filter( 'tribe-events-bar-filters',  'tribe_events_add_location_filter', 1, 1 );
      
+    // Remove old location filter from filter bar
     function remove_search_from_bar( $filters ) {
       if ( isset( $filters['tribe-bar-geoloc'] ) ) {
             unset( $filters['tribe-bar-geoloc'] );
@@ -278,6 +279,7 @@ function show_template() {
     }
     add_filter( 'tribe-events-bar-filters',  'remove_search_from_bar', 1000, 1 );
 
+    // load styles
     function accr_styles(){
         wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
         wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');

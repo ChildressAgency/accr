@@ -36,7 +36,6 @@ $end_date_time = tribe_get_end_date( $event, false, 'His', null );
         <div class="event__header event__header--featured">
             <h3 class="event__title"><?php echo $event->post_title; ?></h3>
             <p class="event__subtitle">
-                <?php if( $venue_details['linked_name'] ): ?>presented by: <?php echo $venue_details['linked_name']; ?><?php endif; ?>
                 <?php if( $organizer_name ): ?><br/>organized by: <?php echo $organizer_link; ?><?php endif; ?>
             </p>
         </div>

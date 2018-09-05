@@ -36,8 +36,15 @@ $end_date_time = tribe_get_end_date( $event, false, 'His', null );
         <div class="event__header event__header--featured">
             <h3 class="event__title"><?php echo $event->post_title; ?></h3>
             <p class="event__subtitle">
-                <?php if( $venue_details['linked_name'] ): ?>presented by: <?php echo $venue_details['linked_name']; ?><?php endif; ?>
                 <?php if( $organizer_name ): ?><br/>organized by: <?php echo $organizer_link; ?><?php endif; ?>
+                <?php 
+                    if( $start_date_day ){ echo $start_date_day; } 
+                    if( $start_date_time ){ echo ' ' . $start_date_time; } 
+                    if( strcmp($start_date_day, $end_date_day )){ 
+                        echo ' - ' . $end_date_day;
+                        if( $end_date_time ){ echo ' ' . $end_date_time; } 
+                    }
+                    ?>
             </p>
         </div>
     
@@ -155,58 +162,3 @@ if( $map || $venue_details['linked_name'] || $venue_details['address'] ): ?>
     <?php the_sub_field( 'info' ); ?>
 </section>
 <?php endwhile; endif; ?>
-
-<?php 
-$related_events = tribe_get_related_posts( 10, $event_id );
-if( $related_events ):
-?>
-<section class="event__meta-data">
-    <h2 class="section-tab section-tab__active">Related</i></h2>
-    <hr />
-
-    <?php foreach( $related_events as $related ): 
-    $venue_details = tribe_get_venue_details( $related );
-    $start_date_day = tribe_get_start_date( $related, false, 'M d, Y', null );
-    ?>
-    <div class="event">
-        <div class="event__info">
-            <?php 
-            $thumbnail = get_the_post_thumbnail_url( $related ); 
-            if( $thumbnail ): ?>
-            <div class="event-thumbnail event-thumbnail--small">
-                <div class="event-thumbnail__event">
-                    <div class="event-thumbnail__image">
-                        <img src="<?php echo $thumbnail; ?>" alt="">
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
-            
-            <div class="event__desc-wrapper">
-                <div class="event__header">
-                    <h3 class="event__title"><a href="<?php echo get_permalink( $related ); ?>"><?php echo $related->post_title; ?></a></h3>
-                    <?php if( $venue_details['linked_name'] ): ?><p class="event__subtitle">presented by: <?php echo $venue_details['linked_name']; ?></p><?php endif; ?>
-                    <p class="event__small-date"><?php echo $start_date_day; ?></p>
-                </div>
-            </div>
-
-            <div class="event__small-btns">
-                <?php if( get_field( 'get_tickets_link', $related ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $related ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
-
-                <?php
-                    $start_date_day = tribe_get_start_date( $related, false, 'Ymd', null );
-                    $start_date_time = tribe_get_start_date( $related, false, 'His', null );
-                    $end_date_day = tribe_get_end_date( $related, false, 'Ymd', null );
-                    $end_date_time = tribe_get_end_date( $related, false, 'His', null );
-                    $date_start = $start_date_day . 'T' . $start_date_time . 'Z';
-                    $date_end = $end_date_day . 'T' . $end_date_time . 'Z';
-                    ?>
-                <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $related->post_title; ?>&dates=<?php echo $date_start; ?>/<?php echo $date_end; ?>&details=&location=<?php echo tribe_get_venue( $related ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
-            </div>
-        </div>
-    </div>
-
-    <hr class="hr--light" />
-    <?php endforeach; ?>
-</section>
-<?php endif; ?>

@@ -42,6 +42,8 @@ $more = false;
 
 		// Organizer
 		$organizer = tribe_get_organizer();
+		$organizer_link = tribe_get_organizer_link();
+		$organizer_name = tribe_get_organizer();
 
 		$start_date = tribe_get_start_date( $post, false, 'M d, Y', null );
 		$end_date = tribe_get_end_date( $post, false, 'M d, Y', null );
@@ -51,7 +53,15 @@ $more = false;
 			<?php if( $i==0 ): ?>
 			<div class="event__header event__header--featured">
 			    <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
-			    <?php if( $venue_details['linked_name'] ): ?><p class="event__subtitle">presented by: <?php echo $venue_details['linked_name']; ?></p><?php endif; ?>
+			    <?php if( $organizer_name ): ?><br/>organized by: <?php echo $organizer_link; ?><?php endif; ?>
+			    <?php
+                    if( $start_date_day ){ echo $start_date_day; } 
+                    if( $start_date_time ){ echo ' ' . $start_date_time; } 
+                    if( strcmp($start_date_day, $end_date_day )){ 
+                        echo ' - ' . $end_date_day;
+                        if( $end_date_time ){ echo ' ' . $end_date_time; } 
+                    }
+                    ?>
 			</div>
 			<?php endif; ?>
 

@@ -80,6 +80,34 @@ function show_template() {
     }
     add_action( 'init', 'sponsored_post_type' );
 
+    // locations taxonomy
+    function location_init() {
+        $labels = array(
+            'name' => _x( 'Locations', 'taxonomy general name' ),
+            'singular_name' => _x( 'Location', 'taxonomy singular name' ),
+            'search_items' =>  __( 'Search Locations' ),
+            'all_items' => __( 'All Locations' ),
+            'parent_item' => __( 'Parent Location' ),
+            'parent_item_colon' => __( 'Parent Location:' ),
+            'edit_item' => __( 'Edit Location' ), 
+            'update_item' => __( 'Update Location' ),
+            'add_new_item' => __( 'Add New Location' ),
+            'new_item_name' => __( 'New Location Name' ),
+            'menu_name' => __( 'Locations' ),
+          );    
+         
+        // Now register the taxonomy
+        register_taxonomy('locations', array('tribe_events'), array(
+            'hierarchical' => true,
+            'labels' => $labels,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'query_var' => true,
+            'rewrite' => array( 'slug' => 'location' ),
+        ));
+    }
+    add_action( 'init', 'location_init' );
+
     // remove content editor
     add_action('admin_init', 'remove_textarea');
     function remove_textarea() {
@@ -161,14 +189,12 @@ function show_template() {
     }
     add_action( 'wp_enqueue_scripts', 'tribehome_enqueue_front_page_scripts' );
 
-    add_filter( 'tribe-events-bar-filters',  'tribe_events_add_category_filter', 1, 1 );
-
     /*
      * Add 'Category' field to event search bar
      */
     function tribe_events_add_category_filter( $filters ) {
         $args = array(
-        'show_option_all'    => esc_html__( "All", "the-events-calendar" ),
+        'show_option_all'    => esc_html__( "All Categories", "the-events-calendar" ),
         'show_option_none'   => '',
         'option_none_value'  => '-1',
         'orderby'            => 'title',
@@ -189,21 +215,9 @@ function show_template() {
         'taxonomy'           => 'tribe_events_cat',
         'hide_if_empty'      => false,
         'value_field'         => 'term_id',
-    );
-/*
-    function accr_template_chooser($template)   
-    {    
-      global $wp_query;   
-      $post_type = get_query_var('post_type');   
-      if( $wp_query->is_search && $post_type == 'venues' )   
-      {
-        return locate_template('search-venue.php');  //  redirect to search-venue.php
-      }   
-      return $template;   
-    }*/
-    //add_filter('template_include', 'accr_template_chooser');  
+        );
      
-    $html = wp_dropdown_categories( $args );
+        $html = wp_dropdown_categories( $args );
      
         $filters['tribe-bar-category'] = array(
             'name' => 'tribe-bar-category',
@@ -213,7 +227,59 @@ function show_template() {
      
         return $filters;
     }
+    add_filter( 'tribe-events-bar-filters',  'tribe_events_add_category_filter', 1, 1 );
 
+    /*
+     * Add 'Location' field to event search bar
+     */
+    function tribe_events_add_location_filter( $filters ) {
+        $args = array(
+        'show_option_all'    => esc_html__( "All Locations", "the-events-calendar" ),
+        'show_option_none'   => '',
+        'option_none_value'  => '-1',
+        'orderby'            => 'title',
+        'order'              => 'ASC',
+        'show_count'         => 0,
+        'hide_empty'         => 0,
+        'child_of'           => 0,
+        'exclude'            => '',
+        'include'            => '',
+        'echo'               => 0,
+        'selected'           => '-1',
+        'hierarchical'       => 0,
+        'name'               => 'location',
+        'id'                 => '',
+        'class'              => '',
+        'depth'              => 0,
+        'tab_index'          => 0,
+        'taxonomy'           => 'locations',
+        'hide_if_empty'      => false,
+        'value_field'         => 'term_id',
+        );
+     
+        $html = wp_dropdown_categories( $args );
+     
+        $filters['location'] = array(
+            'name' => 'location',
+            'caption' => 'Location',
+            'html' => $html
+        );
+     
+        return $filters;
+    }
+    add_filter( 'tribe-events-bar-filters',  'tribe_events_add_location_filter', 1, 1 );
+     
+    // Remove old location filter from filter bar
+    function remove_search_from_bar( $filters ) {
+      if ( isset( $filters['tribe-bar-geoloc'] ) ) {
+            unset( $filters['tribe-bar-geoloc'] );
+        }
+     
+        return $filters;
+    }
+    add_filter( 'tribe-events-bar-filters',  'remove_search_from_bar', 1000, 1 );
+
+    // load styles
     function accr_styles(){
         wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
         wp_register_style('fontawesome', '//use.fontawesome.com/releases/v5.1.0/css/all.css');
@@ -223,8 +289,8 @@ function show_template() {
 
         wp_enqueue_style( 'bootstrap-css' );
         wp_enqueue_style( 'fontawesome' );
-        wp_enqueue_style('slick');
-        wp_enqueue_style('slick-theme');
+        wp_enqueue_style( 'slick' );
+        wp_enqueue_style( 'slick-theme' );
         wp_enqueue_style( 'accr' );
     }
     add_action('wp_enqueue_scripts', 'accr_styles');

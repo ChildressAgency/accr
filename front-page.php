@@ -121,43 +121,14 @@ $current_url = tribe_events_get_current_filter_url();
         <div class="events__tabs-wrapper">
             <a class="view-all" href="<?php echo( home_url( 'events' ) ); ?>">View All</a>
             <div class="nav nav-tabs" role="tablist">
-                <a href="#all" class="events__heading nav-item nav-link active" id="nav-all" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true"><h2>ALL EVENTS</h2></a>
-                <a href="#family" class="events__heading nav-item nav-link" id="nav-family" data-toggle="tab" role="tab" aria-controls="family" aria-selected="false"><h2>FAMILY</h2></a>
+                <a href="#family" class="events__heading nav-item nav-link active" id="nav-family" data-toggle="tab" role="tab" aria-controls="family" aria-selected="false"><h2>FAMILY</h2></a>
                 <a href="#free" class="events__heading nav-item nav-link" id="nav-free" data-toggle="tab" role="tab" aria-controls="free" aria-selected="false"><h2>FREE</h2></a>
+                <a href="#all" class="events__heading nav-item nav-link" id="nav-all" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true"><h2>ALL EVENTS</h2></a>
             </div>
         </div>
         <hr />
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                <?php
-                    $events = tribe_get_events( array(
-                        'posts_per_page'    => 10,
-                        'eventDisplay'      => 'list'
-                    ) ); 
-                    $featuredEvents = tribe_get_events( array(
-                        'posts_per_page'    => 10,
-                        'eventDisplay'      => 'list',
-                        'featured'          => true
-                    ) );
-                    ?>
-                <div class="event-slider">
-                    <?php foreach( $events as $event ):
-                      if(!get_field('hide_from_all_events_section', $event->ID)) :
-                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
-                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
-                        ?>
-                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
-                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
-                            <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
-                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
-                            </div>
-                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
-                        </a>
-                      <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="family" role="tabpanel" aria-labelledby="family-tab">
+            <div class="tab-pane fade show active" id="family" role="tabpanel" aria-labelledby="family-tab">
                 <?php
                     $events = tribe_get_events( array(
                         'posts_per_page'    => 10,
@@ -222,6 +193,35 @@ $current_url = tribe_events_get_current_filter_url();
                     <?php else: ?>
                         <p>There are no upcoming events in this category.</p>
                     <?php endif; ?>
+            </div>
+            <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <?php
+                    $events = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'list'
+                    ) ); 
+                    $featuredEvents = tribe_get_events( array(
+                        'posts_per_page'    => 10,
+                        'eventDisplay'      => 'list',
+                        'featured'          => true
+                    ) );
+                    ?>
+                <div class="event-slider">
+                    <?php foreach( $events as $event ):
+                      if(!get_field('hide_from_all_events_section', $event->ID)) :
+                        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+                        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+                        ?>
+                        <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                            <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $event, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $event, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $event, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $event, false, 'M', null )); endif;?></span></div>
+                            <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                                <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+                            </div>
+                            <p class="event-thumbnail__title"><?php echo $event->post_title; ?></p>
+                        </a>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     </div>
@@ -336,7 +336,7 @@ $current_url = tribe_events_get_current_filter_url();
 <section class="social-display">
     <div class="container text-center">
         <p class="social-display__heading">Around the town</p>
-        <p class="social-display__subheading">Find us in Instagram at FredericksburgArts and tag us with #FXBGARTS</p>
+        <p class="social-display__subheading">Find us in Instagram at RappahannockArts and tag us with #RAPPARTS</p>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item"><a href="#social-display__instagram" class="nav-link active" data-toggle="tab" role="tab"><i class="icon fab fa-instagram"></i></a></li>
             <!-- <li class="nav-item"><a href="#social-display__facebook" class="nav-link" data-toggle="tab" role="tab"><i class="icon fab fa-facebook-square"></i></a></li> -->

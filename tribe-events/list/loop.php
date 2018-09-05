@@ -53,20 +53,29 @@ $more = false;
 			<?php if( $i==0 ): ?>
 			<div class="event__header event__header--featured">
 			    <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
-			    <?php if( $organizer_name ): ?><p class="event__subtitle">organized by: <?php echo $organizer_link; ?></p><?php endif; ?>
-			    <?php
-			    	$start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
-			    	$end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
-			    	$start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
-			    	$end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
-			    	
-                    if( $start_date_day ){ echo $start_date_day; } 
-                    if( $start_date_time ){ echo ' ' . $start_date_time; } 
-                    if( strcmp($start_date_day, $end_date_day )){ 
-                        echo ' - ' . $end_date_day;
-                        if( $end_date_time ){ echo ' ' . $end_date_time; } 
-                    }
-                    ?>
+			    <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+				    <?php 
+				    	$start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
+				    	$end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
+				    	$start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
+				    	$end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
+				    	$isAllDay = tribe_event_is_all_day( $event_id );
+
+				    	if( $start_date_day ): ?>
+				        <?php echo $start_date_day; 
+				        if( !$isAllDay ){ 
+				            echo ' ' . $start_date_time; 
+				        } 
+				        if( strcmp( $start_date_day, $end_date_day ) ){ 
+				            echo ' - ' . $end_date_day;
+				            if( !$isAllDay ){ 
+				                echo ' ' . $end_date_time; 
+				            } 
+				        } elseif( !$isAllDay ){
+				            echo ' - ' . $end_date_time;
+				        } ?>
+				    <?php endif; ?>
+                </p>
 			</div>
 			<?php endif; ?>
 
@@ -101,7 +110,28 @@ $more = false;
 			        <?php elseif( $i<=5 ): ?>
 			            <div class="event__header">
 			                <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
-			                <p class="event__subtitle">presented by: <?php echo $venue_details['linked_name']; ?></p>
+			                <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+							    <?php 
+							    	$start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
+							    	$end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
+							    	$start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
+							    	$end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
+
+							    	if( $start_date_day ): ?>
+							        <?php echo $start_date_day; 
+							        if( !$isAllDay ){ 
+							            echo ' ' . $start_date_time; 
+							        } 
+							        if( strcmp( $start_date_day, $end_date_day ) ){ 
+							            echo ' - ' . $end_date_day;
+							            if( !$isAllDay ){ 
+							                echo ' ' . $end_date_time; 
+							            } 
+							        } elseif( !$isAllDay ){
+							            echo ' - ' . $end_date_time;
+							        } ?>
+							    <?php endif; ?>
+			                </p>
 			            </div>
 			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
 			            <?php if( get_field( 'get_tickets_link', $post ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $post ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
@@ -118,8 +148,28 @@ $more = false;
 			        <?php else: ?>
 			            <div class="event__header">
 			                <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
-			                <p class="event__subtitle">presented by: <?php echo $venue_details['linked_name']; ?></p>
-			                <p class="event__small-date"><?php echo $start_date; if( strcmp( $start_date, $end_date ) ){ echo ' - ' . $end_date; } ?></p>
+			                <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+							    <?php 
+							    	$start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
+							    	$end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
+							    	$start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
+							    	$end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
+
+							    	if( $start_date_day ): ?>
+							        <?php echo $start_date_day; 
+							        if( !$isAllDay ){ 
+							            echo ' ' . $start_date_time; 
+							        } 
+							        if( strcmp( $start_date_day, $end_date_day ) ){ 
+							            echo ' - ' . $end_date_day;
+							            if( !$isAllDay ){ 
+							                echo ' ' . $end_date_time; 
+							            } 
+							        } elseif( !$isAllDay ){
+							            echo ' - ' . $end_date_time;
+							        } ?>
+							    <?php endif; ?>
+			                </p>
 			            </div>
 			        <?php endif; ?>
 			    </div>

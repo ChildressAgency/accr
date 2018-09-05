@@ -24,10 +24,10 @@ $organizer_name = tribe_get_organizer();
 $event_id = get_the_ID();
 $event = tribe_events_get_event( $event_id );
 
-$start_date_day = tribe_get_start_date( $event, false, 'Ymd', null );
-$start_date_time = tribe_get_start_date( $event, false, 'His', null );
-$end_date_day = tribe_get_end_date( $event, false, 'Ymd', null );
-$end_date_time = tribe_get_end_date( $event, false, 'His', null );
+$start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
+$end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
+$start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
+$end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
 
 ?>
 
@@ -38,7 +38,7 @@ $end_date_time = tribe_get_end_date( $event, false, 'His', null );
             <p class="event__subtitle">
                 <?php if( $organizer_name ): ?><p class="event__subtitle">organized by: <?php echo $organizer_link; ?></p><?php endif; ?>
                 <?php 
-                    if( $start_date_day ){ echo $start_date_day; } 
+                    if( $start_date_day ){ echo '<br/>' . $start_date_day; } 
                     if( $start_date_time ){ echo ' ' . $start_date_time; } 
                     if( strcmp($start_date_day, $end_date_day )){ 
                         echo ' - ' . $end_date_day;
@@ -75,10 +75,10 @@ $end_date_time = tribe_get_end_date( $event, false, 'His', null );
 </section>
 
 <?php
-$start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
-$end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
-$start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
-$end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
+// $start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
+// $end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
+// $start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
+// $end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
 
 $isAllDay = tribe_event_is_all_day( $event_id );
 

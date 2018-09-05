@@ -55,6 +55,11 @@ $more = false;
 			    <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
 			    <?php if( $organizer_name ): ?><p class="event__subtitle">organized by: <?php echo $organizer_link; ?></p><?php endif; ?>
 			    <?php
+			    	$start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
+			    	$end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
+			    	$start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
+			    	$end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
+			    	
                     if( $start_date_day ){ echo $start_date_day; } 
                     if( $start_date_time ){ echo ' ' . $start_date_time; } 
                     if( strcmp($start_date_day, $end_date_day )){ 

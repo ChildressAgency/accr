@@ -1,3 +1,9 @@
+<div id="layout-modifier">
+  <a href="#" id="list-layout" class="btn-layout"></a>
+  <a href="#" id="grid-layout" class="btn-layout"></a>
+</div>
+<div class="clearfix"></div>
+
 <div class="um-members">
 			
 	<div class="um-gutter-sizer"></div>

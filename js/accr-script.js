@@ -109,4 +109,28 @@ $( document ).ready(function(){
      * Don't autoplay certain bootstrap carousels
      */
     $('.no-autoplay').carousel({ interval: false });
+
+    /*
+     * Members directory layout changes
+     */
+    $('.btn-layout').on('click', function(e){
+      e.preventDefault();
+      var layoutChoice = $(this).attr('id');
+      var $directoryContainer = $('.um-directory');
+
+      if(layoutChoice == 'list-layout'){
+        $directoryContainer.addClass('list-layout');
+        $('.um-members').each(function(){
+          //$(this).masonry('reload');
+          UM_Member_Grid($(this));
+        });
+      }
+      else{
+        $directoryContainer.removeClass('list-layout');
+        $('.um-members').each(function(){
+          //$(this).masonry('reload');
+          UM_Member_Grid($(this));
+        })
+      }
+    });
 });

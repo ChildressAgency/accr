@@ -1403,6 +1403,12 @@ article .um-member-photo.radius-1 img{
 .masonry-brick{
   max-width:30% !important;
 }
+.list-layout .masonry-brick{
+  max-width:none !important;
+}
+.list-layout.um-directory .um-member{
+  width:100% !important;
+}
 .um-member{
   border:none !important;
 }
@@ -1443,6 +1449,31 @@ article .um-member-photo.radius-1 img{
 .um-member-tagline>p{
   overflow:hidden;
   height:180px;
+}
+
+#layout-modifier{
+  margin-bottom:80px;
+}
+#layout-modifier .btn-layout{
+  float:right;
+  height:45px;
+  width:45px;
+  background-image:url(images/members-layout-sprite.png);
+  background-repeat:no-repeat;
+  margin-left:10px;
+  display:block;
+}
+#list-layout.btn-layout{
+  background-position:0px -50px;
+}
+.list-layout #list-layout.btn-layout{
+  background-position:-49px -50px;
+}
+#grid-layout.btn-layout{
+  background-position:0px 0px;
+}
+.list-layout #grid-layout.btn-layout{
+  background-position:-50px 0px;
 }
 
 /* end member styles */

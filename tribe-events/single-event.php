@@ -28,6 +28,7 @@ $start_date_day = tribe_get_start_date( $event, false, 'M d, Y', null );
 $end_date_day = tribe_get_end_date( $event, false, 'M d, Y', null );
 $start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
 $end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
+$isAllDay = tribe_event_is_all_day( $event_id );
 
 ?>
 
@@ -36,15 +37,22 @@ $end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
         <div class="event__header event__header--featured">
             <h3 class="event__title"><?php echo $event->post_title; ?></h3>
             <p class="event__subtitle">
-                <?php if( $organizer_name ): ?><p class="event__subtitle">organized by: <?php echo $organizer_link; ?></p><?php endif; ?>
-                <?php 
-                    if( $start_date_day ){ echo '<br/>' . $start_date_day; } 
-                    if( $start_date_time ){ echo ' ' . $start_date_time; } 
-                    if( strcmp($start_date_day, $end_date_day )){ 
-                        echo ' - ' . $end_date_day;
-                        if( $end_date_time ){ echo ' ' . $end_date_time; } 
-                    }
-                    ?>
+                <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+                    <?php if( $start_date_day ): ?>
+                        <?php echo $start_date_day; 
+                        if( !$isAllDay ){ 
+                            echo ' ' . $start_date_time; 
+                        } 
+                        if( strcmp( $start_date_day, $end_date_day ) ){ 
+                            echo ' - ' . $end_date_day;
+                            if( !$isAllDay ){ 
+                                echo ' ' . $end_date_time; 
+                            } 
+                        } elseif( !$isAllDay ){
+                            echo ' - ' . $end_date_time;
+                        } ?>
+                    <?php endif; ?>
+                </p>
             </p>
         </div>
     
@@ -80,7 +88,7 @@ $end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
 // $start_date_time = tribe_get_start_date( $event, false, 'h:i a', null );
 // $end_date_time = tribe_get_end_date( $event, false, 'h:i a', null );
 
-$isAllDay = tribe_event_is_all_day( $event_id );
+// $isAllDay = tribe_event_is_all_day( $event_id );
 
 if( $start_date_day ): ?>
 <section class="event__meta-data">

@@ -1399,6 +1399,55 @@ article .um-member-photo.radius-1 img{
   margin-bottom: 15px;
 }
 
+/* member styles */
+.masonry-brick{
+  max-width:30% !important;
+}
+.um-member{
+  border:none !important;
+}
+.um-member-metaline{
+  padding:0 !important;
+}
+.member-block{
+  position:relative;
+}
+.member-block-overlay{
+  position:absolute;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  background-color:#cfdaef;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.um-member-tagline{
+  position:absolute;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  color:#000 !important;
+  opacity:0;
+  transition:opacity .4s ease;
+  background-color:#cfdaef;
+  padding:0 !important;
+}
+.um-member-tagline>*{
+  padding:10px;
+}
+.member-block:hover .um-member-tagline{
+  opacity:1;
+}
+.um-member-tagline>p{
+  overflow:hidden;
+  height:180px;
+}
+
+/* end member styles */
+
+
 @media (max-width:767px){
   .visible-xs-block{
     display:block !important;

@@ -53,7 +53,7 @@ $more = false;
 			<?php if( $i==0 ): ?>
 			<div class="event__header event__header--featured">
 			    <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
-			    <?php if( $organizer_name ): ?><br/>organized by: <?php echo $organizer_link; ?><?php endif; ?>
+			    <?php if( $organizer_name ): ?><p class="event__subtitle">organized by: <?php echo $organizer_link; ?></p><?php endif; ?>
 			    <?php
                     if( $start_date_day ){ echo $start_date_day; } 
                     if( $start_date_time ){ echo ' ' . $start_date_time; } 

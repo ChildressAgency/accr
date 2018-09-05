@@ -171,6 +171,7 @@ $more = false;
 							    <?php endif; ?>
 			                </p>
 			            </div>
+			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
 			        <?php endif; ?>
 			    </div>
 

@@ -340,3 +340,5 @@ function accr_users_orderby($query){
     $query->set('meta_key', 'is_this_a_member');
   }
 }
+
+//member directory functions

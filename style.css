@@ -1475,6 +1475,28 @@ article .um-member-photo.radius-1 img{
 .list-layout #grid-layout.btn-layout{
   background-position:-50px 0px;
 }
+article .um-profile .um-profile-photo a.um-profile-photo-img.accr_profile-photo{
+  top:auto !important;
+}
+article .um-header.no-cover .um-profile-meta{
+  text-align:left !important;
+}
+.accr_member-name{
+  font-size:30px;
+  font-weight:500;
+  color:#000;
+}
+.accr_discipline{
+  font-size:16px;
+  color:#000;
+  font-weight:normal;
+  line-height:1em;
+  margin-bottom:15px;
+}
+.accr_meta{
+  color:#000;
+  margin-top:15px;
+}
 
 /* end member styles */
 

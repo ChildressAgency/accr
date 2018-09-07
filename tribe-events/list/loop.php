@@ -174,6 +174,7 @@ $more = false;
 			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
 			        <?php endif; ?>
 			    </div>
+			    <div class="clearfix"></div>
 
 			    <?php if( $i > 5 ): ?>
 			        <div class="event__small-btns">

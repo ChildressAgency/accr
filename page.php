@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <section>
-
+  <div class="container">
       <?php
         if(is_post_type_archive('tribe_events')){
           if(is_tax('tribe_events_cat')){

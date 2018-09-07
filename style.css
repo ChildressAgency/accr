@@ -1448,7 +1448,7 @@ article .um-member-photo.radius-1 img{
 }
 .um-member-tagline>p{
   overflow:hidden;
-  height:180px;
+  height:185px;
 }
 
 #layout-modifier{
@@ -1475,6 +1475,58 @@ article .um-member-photo.radius-1 img{
 .list-layout #grid-layout.btn-layout{
   background-position:-50px 0px;
 }
+.list-layout .member-block{
+  border-bottom:2px solid #c6c6c6;
+}
+.list-layout .member-block:before,
+.list-layout .member-block:after{
+  content:"";
+  display:block;
+  clear:both;
+}
+.list-layout .member-block>.um-member-photo{
+  float:left;
+  padding-top:0;
+  width:30%;
+}
+.list-layout .accr_member-block-info{
+  width:65%;
+  float:left;
+  text-align:left;
+  padding:10px;
+  min-height:170px;
+}
+.list-layout .accr_member-block-info:hover{
+  background-color:#cfdaef;
+}
+.list-layout .um-member-name{
+  display:inline;
+}
+.list-layout .um-member-meta-main{
+  display:inline;
+}
+.list-layout .um-member-metaline>span{
+  display:inline;
+}
+.list-layout .um-member-metaline{
+  display:inline;
+  vertical-align:bottom;
+  margin-left:20px;
+}
+.list-layout .um-member-tagline{
+  opacity:1;
+  position:relative;
+  background-color:transparent;
+}
+.list-layout .um-member-tagline>.um-member-name{
+  display:none;
+}
+.list-layout .um-member-tagline>p{
+  line-height:1.2em;
+  height:auto;
+  padding-left:0;
+}
+
 article .um-profile .um-profile-photo a.um-profile-photo-img.accr_profile-photo{
   top:auto !important;
 }
@@ -1497,7 +1549,70 @@ article .um-header.no-cover .um-profile-meta{
   color:#000;
   margin-top:15px;
 }
-
+article .um-profile-nav{
+  background-color:transparent;
+  margin-top:25px;
+  border-bottom:2px solid #739cd2;
+  height:33px;
+}
+article .um .um-profile-nav-item>a:first-child{
+  display:none;
+}
+article .um .um-profile-nav-item>a:last-child{
+  display:block;
+  margin-right:10px;
+  background-color:#cfdaef;
+}
+article .um .um-profile-nav-item.active>a:last-child{
+  background-color:#739cd2;
+}
+article .um .um-profile-nav-item>a>i{
+  display:none;
+}
+.accr_member-event{
+  display:block;
+  padding:30px 0px;
+  border-bottom:2px solid #e5e5e5;
+}
+.accr_member-event:before,
+.accr_member-event:after{
+  content:"";
+  display:block;
+  clear:both;
+}
+.accr_member-event .event-thumbnail__event{
+  padding:0;
+  padding-top:0;
+}
+.accr_member-event .event-thumbnail__image{
+  box-shadow:none;
+}
+.accr_member-event .event-thumbnail__image img{
+  box-shadow:2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.accr_member-event .event-thumbnail__title{
+  font-size:30px;
+}
+.accr_upcoming-events .accr_member-upcoming-events-titlebar{
+  border-bottom:2px solid #739cd2;
+}
+.accr_upcoming-events .accr_member-upcoming-events-titlebar>a{
+  padding:10px;
+  display:inline-block;
+  background-color:#739cd2;
+  color:#fff;
+  font-weight:500;
+}
+.accr_member-presenter{
+  font-size:16px;
+  color:#666;
+  font-style:italic;
+}
+.accr_member-date{
+  margin-top:25px;
+  color:#666;
+  font-weight:500;
+}
 /* end member styles */
 
 

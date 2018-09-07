@@ -24,7 +24,7 @@
           
               <div class="um-member-photo radius-<?php echo $corner; ?>"><a href="<?php echo um_user_profile_url(); ?>" title="<?php echo esc_attr(um_user('display_name')); ?>"><?php echo get_avatar(um_user('ID'), $default_size); ?></a></div>
           <?php endif; //end member photo ?>
-
+          <div class="accr_member-block-info">
           <?php //member name 
             if($show_name): ?>
               <div class="um-member-name"><a href="<?php echo um_user_profile_url(); ?>" title="<?php echo esc_attr(um_user('display_name')); ?>"><?php echo um_user('display_name', 'html'); ?></a></div>
@@ -54,7 +54,7 @@
               foreach($tagline_fields as $key){
                 if($key /*&& um_filtered_value( $key )*/){
                   $value = um_filtered_value($key);
-                  $value = strlen($value) > 245 ? substr($value, 0, 245) . '<a href="' . um_user_profile_url() . '">[...]</a>' : $value;
+                  $value = strlen($value) > 245 ? substr($value, 0, 245) . '<a href="' . um_user_profile_url() . '">...[read more]</a>' : $value;
                 if(!$value){ continue; } ?>
         
                 <div class="um-member-tagline um-member-tagline-<?php echo $key;?>">
@@ -69,6 +69,7 @@
                 <a href="<?php echo um_edit_profile_url() ?>" class="um-edit-profile-btn um-button um-alt"><?php _e('Edit profile','ultimate-member') ?></a>
               </div>
           <?php endif; //end edit profile button ?>
+          </div><?php //end accr_member-block-info ?>
         </div><?php //end member block ?>
 
       </div><?php //end um-member ?>

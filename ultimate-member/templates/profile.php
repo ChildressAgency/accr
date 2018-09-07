@@ -522,7 +522,7 @@ do_action('accr_profile_header', $args);
 		$nav = UM()->profile()->active_tab;
 		$subnav = ( get_query_var('subnav') ) ? get_query_var('subnav') : 'default';
 
-		print "<div class='um-profile-body $nav $nav-$subnav'>";
+print "<div class='um-profile-body $nav $nav-$subnav'>";
 
 			// Custom hook to display tabbed content
 		/**
@@ -544,7 +544,14 @@ do_action('accr_profile_header', $args);
 		 * }
 		 * ?>
 		 */
-		do_action("um_profile_content_{$nav}", $args);
+    add_action('um_before_form', 'accr_before_form', 10, 1);
+    function accr_before_form($args){
+      echo '<div class="accr_member-bio"><p>' . esc_html(um_user('description')) . '</p></div>';
+      echo '<div class="accr_member-additional-info"><p>' . esc_html(um_user('additional_information')) . '</p></div>';
+    }
+    do_action("um_profile_content_{$nav}", $args);
+    
+
 
 		/**
 		 * UM hook
@@ -573,4 +580,90 @@ do_action('accr_profile_header', $args);
 			</form>
 		<?php } ?>
 	</div>
+</div>
+
+<div class="accr_upcoming-events">
+  <div class="accr_member-upcoming-events-titlebar">
+     <a href="#">Upcoming Events</a>
+  </div>
+  <?php 
+    $user_id = um_user('ID');
+    $venue_or_artist = get_field('venue_or_artist', 'user_' . $user_id);
+    $events_profile_type = '';
+    $events_meta_key = '';
+
+    if($venue_or_artist == 'Venue'){
+      $events_profile_type = get_field('events_venue', 'user_' . $user_id, false);
+      $events_meta_key = '_EventVenueID';
+    }
+    else if($venue_or_artist == 'Artist'){
+      $events_profile_type = get_field('events_artist', 'user_' . $user_id, false);
+      $events_meta_key = '_EventOrganizerID';
+    }
+    //var_dump($events_profile_type);
+    if($events_profile_type){
+    $events_profile_type_id = $events_profile_type[0];
+
+    $events = tribe_get_events(array(
+      'eventDisplay' => 'list',
+      'posts_per_page' => 10,
+      'meta_key' => $events_meta_key,
+      'meta_value' => $events_profile_type_id
+    ));
+
+    $featuredEvents = tribe_get_events(array(
+      'posts_per_page' => 10,
+      'eventDisplay' => 'list',
+      'meta_key' => $events_meta_key,
+      'meta_value' => $events_profile_type_id,
+      'featured' => true
+    ));
+
+    //var_dump($events);
+    if(empty($events)){
+      echo '<p>This ' . $venue_or_artist . ' does not currently have any upcoming events.';
+    }
+    else{
+      foreach($events as $event){
+        $start_date = tribe_get_start_date( $event, false, 'M d, Y', null );
+        $end_date = tribe_get_end_date( $event, false, 'M d, Y', null );
+        ?>
+        <div class="accr_member-event">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="event-thumbnail__image <?php if( in_array( $event, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+                <a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event">
+                  <img src="<?php echo get_the_post_thumbnail_url( $event ); ?>" alt="">
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <div class="accr_member-event-info">
+                <h3 class="event-thumbnail__title"><a href="<?php echo get_permalink($event); ?>" class="event-thumbnail__event"><?php echo $event->post_title; ?></a></h3>
+                <p class="accr_member-presenter">presented by: <?php echo tribe_get_organizer($event->ID); ?></p>
+                <p class="accr_member-date"><?php echo $start_date; echo strcmp($start_date, $end_date) ? ' - ' . $end_date : ''; ?></p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+			        <div class="event__small-btns">
+                <?php if( get_field( 'get_tickets_link', $event ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $event ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
+                <?php 
+                    $start_date_day = tribe_get_start_date( $event, false, 'Ymd', null );
+                    $start_date_time = tribe_get_start_date( $event, false, 'His', null );
+                    $end_date_day = tribe_get_end_date( $event, false, 'Ymd', null );
+                    $end_date_time = tribe_get_end_date( $event, false, 'His', null );
+
+                    $date_start = $start_date_day . 'T' . $start_date_time . 'Z';
+                    $date_end = $end_date_day . 'T' . $end_date_time . 'Z';
+                    ?>
+                <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $event->post_title; ?>&dates=<?php echo $date_start; ?>/<?php echo $date_end; ?>&details=&location=<?php echo tribe_get_venue( $event ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
+			        </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+  <?php
+      } 
+    }
+    }
+  ?>
 </div>

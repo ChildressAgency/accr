@@ -123,7 +123,7 @@ function accr_profile_header( $args ) {
 		<div class="um-profile-photo" data-user_id="<?php echo um_profile_id(); ?>">
 
 			<a href="<?php echo um_user_profile_url(); ?>" class="um-profile-photo-img accr_profile-photo"
-			   title="<?php echo um_user( 'display_name' ); ?>"><?php echo $overlay . get_avatar( um_user( 'ID' ), $default_size ); ?></a>
+			   title="<?php echo um_user( 'organization' ); ?>"><?php echo $overlay . get_avatar( um_user( 'ID' ), $default_size ); ?></a>
 
 			<?php
 
@@ -234,9 +234,14 @@ function accr_profile_header( $args ) {
 
 				<?php if ( $args['show_name'] ) { ?>
 					<div class="um-name">
-
+            <?php
+              $display_name = um_user('first_name') . ' ' . um_user('last_name');
+              if(um_user('organization')){
+                $display_name = um_user('organization');
+              }
+            ?>
 						<a href="<?php echo um_user_profile_url(); ?>"
-               title="<?php echo um_user( 'display_name' ); ?>" class="accr_member-name"><?php echo um_user( 'display_name', 'html' ); ?></a>
+               title="<?php echo $display_name; ?>" class="accr_member-name"><?php echo $display_name; ?></a>
             <div class="accr_discipline">
               <?php 
                 $discipline = um_user('discipline');

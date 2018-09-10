@@ -145,6 +145,17 @@ if( $start_date_day ): ?>
 </section>
 <?php endif; ?>
 
+<?php if( tribe_has_organizer( $event_id ) ): ?>
+<section class="event__meta-data">
+    <h2 class="section-tab section-tab__active">Organizer</i></h2>
+    <hr />
+    <p><strong><?php echo tribe_get_organizer_link( $event_id ); ?></strong></p>
+    <?php if( tribe_get_organizer_email( $event_id ) ): ?><p><strong>Email: </strong><?php echo tribe_get_organizer_email( $event_id ); ?></p><?php endif; ?>
+    <?php if( tribe_get_organizer_phone( $event_id ) ): ?><p><strong>Phone: </strong><?php echo tribe_get_organizer_phone( $event_id ); ?></p><?php endif; ?>
+    <?php if( tribe_get_organizer_website_link( $event_id ) ): ?><p><strong>Website: </strong><?php echo tribe_get_organizer_website_link( $event_id ); ?></p><?php endif; ?>
+</section>
+<?php endif; ?>
+
 <?php 
 $map = tribe_get_embedded_map();
 if( $map || $venue_details['linked_name'] || $venue_details['address'] ): ?>

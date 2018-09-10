@@ -686,6 +686,7 @@ img {
 .event__subtitle {
   color: #666;
   font-style: italic;
+  margin-top: -20px;
 }
 .event__info {
   display: block;

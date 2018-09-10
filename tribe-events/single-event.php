@@ -37,22 +37,21 @@ $isAllDay = tribe_event_is_all_day( $event_id );
         <div class="event__header event__header--featured">
             <h3 class="event__title"><?php echo $event->post_title; ?></h3>
             <p class="event__subtitle">
-                <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
-                    <?php if( $start_date_day ): ?>
-                        <?php echo $start_date_day; 
+                <?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+                <?php if( $start_date_day ): ?>
+                    <?php echo $start_date_day; 
+                    if( !$isAllDay ){ 
+                        echo ' ' . $start_date_time; 
+                    } 
+                    if( strcmp( $start_date_day, $end_date_day ) ){ 
+                        echo ' - ' . $end_date_day;
                         if( !$isAllDay ){ 
-                            echo ' ' . $start_date_time; 
+                            echo ' ' . $end_date_time; 
                         } 
-                        if( strcmp( $start_date_day, $end_date_day ) ){ 
-                            echo ' - ' . $end_date_day;
-                            if( !$isAllDay ){ 
-                                echo ' ' . $end_date_time; 
-                            } 
-                        } elseif( !$isAllDay ){
-                            echo ' - ' . $end_date_time;
-                        } ?>
-                    <?php endif; ?>
-                </p>
+                    } elseif( !$isAllDay ){
+                        echo ' - ' . $end_date_time;
+                    } ?>
+                <?php endif; ?>
             </p>
         </div>
     

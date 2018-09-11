@@ -353,17 +353,4 @@ $current_url = tribe_events_get_current_filter_url();
     <a href="<?php the_field( 'twitter', 'option' ); ?>"><i class="icon fab fa-twitter"></i></a>
 </section>
 
-<section class="partners text-center">
-    <div class="container">
-        <p class="partners__heading">We couldn't do this without the support of our great partners</p>
-
-        <div class="row partners__row">
-            <?php if( have_rows( 'partners' ) ): while( have_rows( 'partners' ) ): the_row(); ?>
-                <?php $num_cols = get_sub_field('layout'); ?>
-                <div class="<?php echo $num_cols; ?>"><a href="<?php the_sub_field( 'link' ); ?>"><img src="<?php the_sub_field( 'image' ); ?>" alt="" class="img-fluid"></a></div>
-            <?php endwhile; endif; ?>
-        </div>
-    </div>
-</section>
-
 <?php get_footer(); ?>

@@ -597,14 +597,25 @@ print "<div class='um-profile-body $nav $nav-$subnav'>";
     $events_profile_type = '';
     $events_meta_key = '';
 
-    if($venue_or_artist == 'Venue'){
-      $events_profile_type = get_field('events_venue', 'user_' . $user_id, false);
-      $events_meta_key = '_EventVenueID';
+    switch($venue_or_artist){
+      case 'Venue':
+        $events_profile_type = get_field('events_venue', 'user_' . $user_id, false);
+        $events_meta_key = '_EventVenueID';
+      break;
+
+      case 'Artist':
+        $events_profile_type = get_field('events_artist', 'user_' . $user_id, false);
+        $events_meta_key = '_EventOrganizerID';
+      break;
+
+      case 'Organization':
+        $events_profile_type = get_field('events_organization', 'user_' . $user_id, false);
+        $events_meta_key = '_EventsOrganizerID';
+      break;
+
+      default:
     }
-    else if($venue_or_artist == 'Artist'){
-      $events_profile_type = get_field('events_artist', 'user_' . $user_id, false);
-      $events_meta_key = '_EventOrganizerID';
-    }
+
     //var_dump($events_profile_type);
     if($events_profile_type){
     $events_profile_type_id = $events_profile_type[0];

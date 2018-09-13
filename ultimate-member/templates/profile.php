@@ -623,12 +623,14 @@ print "<div class='um-profile-body $nav $nav-$subnav'>";
     $events = tribe_get_events(array(
       'eventDisplay' => 'list',
       'posts_per_page' => 10,
+      'start_date' => date('Y-m-d H:i:s'),
       'meta_key' => $events_meta_key,
       'meta_value' => $events_profile_type_id
     ));
 
     $featuredEvents = tribe_get_events(array(
       'posts_per_page' => 10,
+      'start_date' => date('Y-m-d H:i:s'),
       'eventDisplay' => 'list',
       'meta_key' => $events_meta_key,
       'meta_value' => $events_profile_type_id,

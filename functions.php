@@ -342,3 +342,13 @@ function accr_users_orderby($query){
 }
 
 //member directory functions
+        //add_filter('um_prepare_user_query_args', 'accr_prepare_user_query_args', 10, 2);
+        //function accr_prepare_user_query_args($query_args, $directory_settings){
+          //$query_args = array('meta_key' => 'is_this_a_member', 'meta_value' => 1);
+          //$query_args['meta_key'] = 'is_this_a_member';
+          //$query_args['meta_value'] = 1;
+          //$query_args['orderby'] = 'meta_value';
+          //$query_args['order'] = 'DESC';
+          
+          //return $query_args;
+        //}

@@ -1409,7 +1409,11 @@ article .um-member-photo.radius-1 img{
 }
 
 article ul {
-  list-style-type: default;
+  list-style-type: disc;
+}
+
+article li {
+  list-style-type: decimal;
 }
 
 .entry-content ul {

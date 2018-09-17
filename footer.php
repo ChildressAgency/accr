@@ -88,9 +88,9 @@
                         </div>
                     </div>
                 </div>
-                <hr class="footer__hr" />
+                <!-- <hr class="footer__hr" /> -->
             </div>
-            <p class="footer__copyright"><i>COPYRIGHT INFORMATION 2018 &copy;</i></p>
+            <!-- <p class="footer__copyright"><i>COPYRIGHT INFORMATION 2018 &copy;</i></p> -->
         </div>
     </footer>
     

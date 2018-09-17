@@ -1087,6 +1087,11 @@ img {
   bottom: 7px;
   position: absolute;
   right: 0;
+  display: none;
+}
+
+.nav-link.active ~ .view-all {
+  display: inline-block;
 }
 
 .event-thumbnail__event {

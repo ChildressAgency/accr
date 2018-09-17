@@ -88,9 +88,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <hr class="footer__hr" /> -->
+                <hr class="footer__hr" />
             </div>
-            <!-- <p class="footer__copyright"><i>COPYRIGHT INFORMATION 2018 &copy;</i></p> -->
+            <p class="footer__copyright"><i>&copy; <?php echo date("Y"); ?> The Arts & Cultural Council of the Rappahannock<br/>Website designed by <a href="https://childressagency.com/">The Childress Agency</a></i></p>
         </div>
     </footer>
     

@@ -83,10 +83,12 @@ $current_url = tribe_events_get_current_filter_url();
             ) ); ?>
 
         <div class="events__tabs-wrapper">
-            <a class="view-all" href="<?php echo( home_url( 'events' ) ); ?>">View All</a>
-            <div class="nav nav-tabs" role="tablist">
-                <a href="#featured" class="events__heading events__heading--featured nav-item nav-link active" id="nav-featured" data-toggle="tab" role="tab" aria-controls="featured" aria-selected="true"><h2>FEATURED EVENTS</h2></a>
-            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a href="#featured" class="events__heading events__heading--featured nav-link active" id="nav-featured" data-toggle="tab" role="tab" aria-controls="featured" aria-selected="true"><h2>FEATURED EVENTS</h2></a>
+                    <a class="view-all" href="<?php echo( home_url( 'events/featured/' ) ); ?>">View All</a>
+                </li>
+            </ul>
         </div>
         <hr />
         <div class="tab-content">
@@ -119,12 +121,20 @@ $current_url = tribe_events_get_current_filter_url();
 <section class="events">
     <div class="container">
         <div class="events__tabs-wrapper">
-            <a class="view-all" href="<?php echo( home_url( 'events' ) ); ?>">View All</a>
-            <div class="nav nav-tabs" role="tablist">
-                <a href="#family" class="events__heading nav-item nav-link active" id="nav-family" data-toggle="tab" role="tab" aria-controls="family" aria-selected="false"><h2>FAMILY</h2></a>
-                <a href="#free" class="events__heading nav-item nav-link" id="nav-free" data-toggle="tab" role="tab" aria-controls="free" aria-selected="false"><h2>FREE</h2></a>
-                <a href="#all" class="events__heading nav-item nav-link" id="nav-all" data-toggle="tab" role="tab" aria-controls="all" aria-selected="true"><h2>ALL EVENTS</h2></a>
-            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="events__heading nav-link active" id="family-tab" data-toggle="tab" href="#family" role="tab" aria-controls="family" aria-selected="true"><h2>Family</h2></a>
+                <a class="view-all" href="<?php echo( home_url( 'events/category/family/' ) ); ?>">View All</a>
+              </li>
+              <li class="nav-item">
+                <a class="events__heading nav-link" id="free-tab" data-toggle="tab" href="#free" role="tab" aria-controls="free" aria-selected="false"><h2>Free</h2></a>
+                <a class="view-all" href="<?php echo( home_url( 'events/category/free/' ) ); ?>">View All</a>
+              </li>
+              <li class="nav-item">
+                <a class="events__heading nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false"><h2>All</h2></a>
+                <a class="view-all" href="<?php echo( home_url( 'events/' ) ); ?>">View All</a>
+              </li>
+            </ul>
         </div>
         <hr />
         <div class="tab-content">
@@ -251,8 +261,7 @@ $current_url = tribe_events_get_current_filter_url();
                     <section class="events">
                         <div class="container">
                             <div class="events__tabs-wrapper">
-                                <a class="view-all" href="<?php echo( home_url( 'events' ) ); ?>">View All</a>
-                                <div class="nav nav-tabs" role="tablist">
+                                <ul class="nav nav-tabs" role="tablist">
                                     <?php if( have_rows( 'tab' ) ): $i=0; while( have_rows( 'tab' ) ): the_row(); 
                                         $category = get_sub_field( 'category' );
                                         $category = strtolower( $category->name );
@@ -262,10 +271,15 @@ $current_url = tribe_events_get_current_filter_url();
                                             $title = $category;
                                         }
                                         $title = strtoupper( $title );
+
+                                        $category = str_replace( str_split('\\/:*?"<>| '), '-', $category );
                                         ?>
-                                        <a href="#<?php echo $category; ?>" class="events__heading nav-item nav-link <?php if($i==0){ echo 'active'; } ?>" id="nav-<?php echo $category; ?>" data-toggle="tab" role="tab" aria-controls="<?php echo $category; ?>" aria-selected="true"><h2><?php echo $title; ?></h2></a>
+                                        <li class="nav-item">
+                                            <a href="#<?php echo $category; ?>" class="events__heading nav-link <?php if($i==0){ echo 'active'; } ?>" id="nav-<?php echo $category; ?>" data-toggle="tab" role="tab" aria-controls="<?php echo $category; ?>" aria-selected="true"><h2><?php echo $title; ?></h2></a>
+                                            <a class="view-all" href="<?php echo( esc_url( home_url( 'events/category/' . $category . '/' ) ) ); ?>">View All</a>
+                                        </li>
                                     <?php $i++; endwhile; endif; ?>
-                                </div>
+                                </ul>
                             </div>
                             <hr />
                             <div class="tab-content">
@@ -351,19 +365,6 @@ $current_url = tribe_events_get_current_filter_url();
 <section class="twitter-bar text-center">
     <p>Stay up-to-date on the latest by following us on twitter!</p>
     <a href="<?php the_field( 'twitter', 'option' ); ?>"><i class="icon fab fa-twitter"></i></a>
-</section>
-
-<section class="partners text-center">
-    <div class="container">
-        <p class="partners__heading">We couldn't do this without the support of our great partners</p>
-
-        <div class="row partners__row">
-            <?php if( have_rows( 'partners' ) ): while( have_rows( 'partners' ) ): the_row(); ?>
-                <?php $num_cols = get_sub_field('layout'); ?>
-                <div class="<?php echo $num_cols; ?>"><a href="<?php the_sub_field( 'link' ); ?>"><img src="<?php the_sub_field( 'image' ); ?>" alt="" class="img-fluid"></a></div>
-            <?php endwhile; endif; ?>
-        </div>
-    </div>
 </section>
 
 <?php get_footer(); ?>

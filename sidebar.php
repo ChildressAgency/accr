@@ -1,5 +1,5 @@
 <aside class="sidebar text-center col-md-3">
-  <a href="<?php echo esc_url(home_url('events/community/add')); ?>" class="btn sidebar__btn btn-primary">ADD AN EVENT</a>
+  <a href="<?php echo esc_url(home_url('event-eligibility')); ?>" class="btn sidebar__btn btn-primary">ADD AN EVENT</a>
     <?php
 
     $filters = tribe_events_get_filters();

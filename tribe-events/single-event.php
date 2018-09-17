@@ -37,22 +37,21 @@ $isAllDay = tribe_event_is_all_day( $event_id );
         <div class="event__header event__header--featured">
             <h3 class="event__title"><?php echo $event->post_title; ?></h3>
             <p class="event__subtitle">
-                <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
-                    <?php if( $start_date_day ): ?>
-                        <?php echo $start_date_day; 
+                <?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+                <?php if( $start_date_day ): ?>
+                    <?php echo $start_date_day; 
+                    if( !$isAllDay ){ 
+                        echo ' ' . $start_date_time; 
+                    } 
+                    if( strcmp( $start_date_day, $end_date_day ) ){ 
+                        echo ' - ' . $end_date_day;
                         if( !$isAllDay ){ 
-                            echo ' ' . $start_date_time; 
+                            echo ' ' . $end_date_time; 
                         } 
-                        if( strcmp( $start_date_day, $end_date_day ) ){ 
-                            echo ' - ' . $end_date_day;
-                            if( !$isAllDay ){ 
-                                echo ' ' . $end_date_time; 
-                            } 
-                        } elseif( !$isAllDay ){
-                            echo ' - ' . $end_date_time;
-                        } ?>
-                    <?php endif; ?>
-                </p>
+                    } elseif( !$isAllDay ){
+                        echo ' - ' . $end_date_time;
+                    } ?>
+                <?php endif; ?>
             </p>
         </div>
     
@@ -143,6 +142,17 @@ if( $start_date_day ): ?>
         <p><strong>Website</strong>:</p>
         <p><?php echo $website; ?></p>
     <?php endif; ?>
+</section>
+<?php endif; ?>
+
+<?php if( tribe_has_organizer( $event_id ) ): ?>
+<section class="event__meta-data">
+    <h2 class="section-tab section-tab__active">Organizer</i></h2>
+    <hr />
+    <p><strong><?php echo tribe_get_organizer_link( $event_id ); ?></strong></p>
+    <?php if( tribe_get_organizer_email( $event_id ) ): ?><p><strong>Email: </strong><?php echo tribe_get_organizer_email( $event_id ); ?></p><?php endif; ?>
+    <?php if( tribe_get_organizer_phone( $event_id ) ): ?><p><strong>Phone: </strong><?php echo tribe_get_organizer_phone( $event_id ); ?></p><?php endif; ?>
+    <?php if( tribe_get_organizer_website_link( $event_id ) ): ?><p><strong>Website: </strong><?php echo tribe_get_organizer_website_link( $event_id ); ?></p><?php endif; ?>
 </section>
 <?php endif; ?>
 

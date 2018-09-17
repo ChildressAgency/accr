@@ -232,6 +232,8 @@ function show_template() {
     /*
      * Add 'Location' field to event search bar
      */
+    /*
+    new Tribe__Events__Filterbar__Filters__Location( __( 'Location', 'tribe-events-filter-view' ), 'location' );
     function tribe_events_add_location_filter( $filters ) {
         $args = array(
         'show_option_all'    => esc_html__( "All Locations", "the-events-calendar" ),
@@ -246,7 +248,7 @@ function show_template() {
         'include'            => '',
         'echo'               => 0,
         'selected'           => '-1',
-        'hierarchical'       => 0,
+        'hierarchical'       => 1,
         'name'               => 'location',
         'id'                 => '',
         'class'              => '',
@@ -268,6 +270,7 @@ function show_template() {
         return $filters;
     }
     add_filter( 'tribe-events-bar-filters',  'tribe_events_add_location_filter', 1, 1 );
+    */
      
     // Remove old location filter from filter bar
     function remove_search_from_bar( $filters ) {

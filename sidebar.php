@@ -58,6 +58,8 @@
     <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Artist', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
     <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Venue and Public Art', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
     <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Arts & Cultural Organization', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
+
+    <a href="<?php echo esc_url(home_url('opportunities')); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
     <hr class="hr--light" />
 
     <?php 

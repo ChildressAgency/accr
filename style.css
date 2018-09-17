@@ -1408,6 +1408,10 @@ article .um-member-photo.radius-1 img{
   border-radius:0 !important;
 }
 
+article ul {
+  list-style-type: default;
+}
+
 .entry-content ul {
   list-style-position: inside;
   list-style-type: disc;

@@ -271,10 +271,12 @@ $current_url = tribe_events_get_current_filter_url();
                                             $title = $category;
                                         }
                                         $title = strtoupper( $title );
+
+                                        $category = str_replace( str_split('\\/:*?"<>| '), '-', $category );
                                         ?>
                                         <li class="nav-item">
                                             <a href="#<?php echo $category; ?>" class="events__heading nav-link <?php if($i==0){ echo 'active'; } ?>" id="nav-<?php echo $category; ?>" data-toggle="tab" role="tab" aria-controls="<?php echo $category; ?>" aria-selected="true"><h2><?php echo $title; ?></h2></a>
-                                            <a class="view-all" href="<?php echo( esc_url( home_url( 'events/category/' . str_replace( '/', '-', $category ) . '/' ) ) ); ?>">View All</a>
+                                            <a class="view-all" href="<?php echo( esc_url( home_url( 'events/category/' . $category . '/' ) ) ); ?>">View All</a>
                                         </li>
                                     <?php $i++; endwhile; endif; ?>
                                 </ul>

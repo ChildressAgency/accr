@@ -1,5 +1,5 @@
 <div class="um <?php echo $this->get_class( $mode ); ?> um-<?php echo esc_attr( $form_id ); ?> um-role-<?php echo um_user( 'role' ); ?> ">
-
+<?php $user_id = um_user('ID'); ?>
 	<div class="um-form">
 	
 		<?php
@@ -551,8 +551,8 @@ print "<div class='um-profile-body $nav $nav-$subnav'>";
 		 */
     add_action('um_before_form', 'accr_before_form', 10, 1);
     function accr_before_form($args){
-      echo '<div class="accr_member-bio"><p>' . esc_html(um_user('description')) . '</p></div>';
-      echo '<div class="accr_member-additional-info"><p>' . esc_html(um_user('additional_information')) . '</p></div>';
+      echo '<div class="accr_member-bio">' . wpautop(um_user('description')) . '</div>';
+      echo '<div class="accr_member-additional-info">' . wpautop(um_user('additional_information')) . '</div>';
     }
     do_action("um_profile_content_{$nav}", $args);
     
@@ -592,39 +592,53 @@ print "<div class='um-profile-body $nav $nav-$subnav'>";
      <a href="#">Upcoming Events</a>
   </div>
   <?php 
-    $user_id = um_user('ID');
+    //$user_id = um_user('ID');
     $venue_or_artist = get_field('venue_or_artist', 'user_' . $user_id);
     $events_profile_type = '';
     $events_meta_key = '';
+//var_dump(um_user('ID'));
+    switch($venue_or_artist){
+      case 'Venue':
+        $events_profile_type = get_field('events_venue', 'user_' . $user_id, false);
+        $events_meta_key = '_EventVenueID';
+      break;
 
-    if($venue_or_artist == 'Venue'){
-      $events_profile_type = get_field('events_venue', 'user_' . $user_id, false);
-      $events_meta_key = '_EventVenueID';
+      case 'Artist':
+        $events_profile_type = get_field('events_artist', 'user_' . $user_id, false);
+        $events_meta_key = '_EventOrganizerID';
+      break;
+
+      case 'Organization':
+        $events_profile_type = get_field('events_organization', 'user_' . $user_id, false);
+        $events_meta_key = '_EventsOrganizerID';
+      break;
+
+      default:
     }
-    else if($venue_or_artist == 'Artist'){
-      $events_profile_type = get_field('events_artist', 'user_' . $user_id, false);
-      $events_meta_key = '_EventOrganizerID';
-    }
+
     //var_dump($events_profile_type);
     if($events_profile_type){
     $events_profile_type_id = $events_profile_type[0];
-
+//var_dump($events_profile_type_id);
     $events = tribe_get_events(array(
       'eventDisplay' => 'list',
       'posts_per_page' => 10,
+      'start_date' => date('Y-m-d H:i:s'),
       'meta_key' => $events_meta_key,
-      'meta_value' => $events_profile_type_id
+      'meta_value' => $events_profile_type_id,
+      'tribeHideRecurrence' => true
     ));
 
     $featuredEvents = tribe_get_events(array(
       'posts_per_page' => 10,
+      'start_date' => date('Y-m-d H:i:s'),
       'eventDisplay' => 'list',
       'meta_key' => $events_meta_key,
       'meta_value' => $events_profile_type_id,
       'featured' => true
     ));
 
-    //var_dump($events);
+   // var_dump($events);
     if(empty($events)){
       echo '<p>This ' . $venue_or_artist . ' does not currently have any upcoming events.';
     }

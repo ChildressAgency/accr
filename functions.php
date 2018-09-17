@@ -137,9 +137,9 @@ function show_template() {
         'name' => 'Events Sidebar',
         'id' => 'sidebar-1',
         'description' => 'Sidebar for events sections',
-        'before_widget' => '<div class="event-widget>',
+        'before_widget' => '<div class="event-widget">',
         'after_widget' => '</div>',
-        'before_title' => '<h3 class="event-widget-title>',
+        'before_title' => '<h3 class="event-widget-title">',
         'after_title' => '</h3>'
       ));
     }
@@ -345,3 +345,19 @@ function accr_users_orderby($query){
 }
 
 //member directory functions
+add_filter('um_prepare_user_query_args', 'accr_prepare_user_query_args', 10, 2);
+function accr_prepare_user_query_args($query_args, $directory_settings){
+  if(isset($_GET['member']) && $_GET['member'] == true){
+    //$query_args['meta_key'] = 'is_this_a_member';
+    //$query_args['meta_value'] = '1';
+    $query_args['meta_query'] = array(
+      'relation' => 'AND',
+      array(
+        'key' => 'is_this_a_member',
+        'value' => '1',
+        'compare' => '='
+      )
+    );
+  }
+  return $query_args;
+}

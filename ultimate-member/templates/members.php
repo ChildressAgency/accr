@@ -22,7 +22,7 @@
 		 * }
 		 * ?>
 		 */
-		do_action( 'um_members_directory_search', $args );
+    do_action( 'um_members_directory_search', $args );
 
 		/**
 		 * UM hook
@@ -64,6 +64,7 @@
 		 * }
 		 * ?>
 		 */
+
 		do_action( 'um_members_directory_display', $args );
 
 		/**

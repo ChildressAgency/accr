@@ -1618,6 +1618,29 @@ article .um .um-profile-nav-item>a>i{
 .um-directory .tab-pane{
   overflow:hidden;
 }
+.um-search-area .screen-reader-text{
+  border:0;
+  clip:rect(0,0,0,0);
+  height:1px;
+  margin:-1px;
+  overflow:hidden;
+  padding:0;
+  position:absolute;
+  width:1px;
+  white-space:nowrap;
+  clip-path:inset(50%);
+}
+.event-widget .um-search-area .um-search-field{
+  border:none;
+  padding:7px;
+  width:100%;
+}
+.search--sidebar .event-widget-title{
+  font-size:2.4rem;
+  color:#fff;
+  font-weight:500;
+  margin-bottom:10px;
+}
 /* end member styles */
 
 

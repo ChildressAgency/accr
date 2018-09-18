@@ -1698,6 +1698,24 @@ article .um .um-profile-nav-item>a>i{
 }
 /* end member styles */
 
+.sponsor__title {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.sponsor__img {
+  width: 100%;
+}
+
+.sponsor__message {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
 
 @media (max-width:767px){
   .visible-xs-block{

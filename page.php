@@ -13,30 +13,24 @@
             if(is_post_type_archive('tribe_events')){
                 if(is_tax('tribe_events_cat')){
                     $page_object = get_queried_object();
-                    $intro = get_field('event_category_page_intro', $page_object);
-                    // if( $intro ) {
-                    //     echo $intro;
-                    // }
-                    // else { 
-                        ?>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="sponsor__title">Page Sponsored by:</p>
-                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/page-sponsored-by.png" class="sponsor__img">
-                                </div>
-                                <div class="col-6 text-center">
-                                    <?php if( $intro ) {
-                                        echo $intro;
-                                    } else { ?>
-                                        <p class="sponsor__message"><strong>Sponsor this page today and get your logo here.</strong></p>
-                                        <a href="#" class="btn btn-secondary">BECOME A SPONSOR</a>
-                                    <?php } ?>
-                                </div>
+                    $intro = get_field('event_category_page_intro', $page_object); ?>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <p class="sponsor__title">Page Sponsored by:</p>
+                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/page-sponsored-by.png" class="sponsor__img">
+                            </div>
+                            <div class="col-12 col-md-6 text-center">
+                                <?php if( $intro ) {
+                                    echo $intro;
+                                } else { ?>
+                                    <p class="sponsor__message"><strong>Sponsor this page today and get your logo here.</strong></p>
+                                    <a href="<?php echo esc_url( home_url( 'sponsorships' ) ); ?>" class="btn btn-secondary">BECOME A SPONSOR</a>
+                                <?php } ?>
                             </div>
                         </div>
-                    <?php //}
-                }
+                    </div>
+                <?php }
                 elseif(is_tag()){
                     $page_object = get_queried_object();
                     echo get_field('event_tag_page_intro', $page_object);

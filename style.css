@@ -1700,15 +1700,17 @@ article .um .um-profile-nav-item>a>i{
 
 .sponsor__title {
   position: absolute;
-  top: 30%;
+  top: 15%;
   left: 30%;
   color: #fff;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 16px;
+  display: none;
 }
 
 .sponsor__img {
   width: 100%;
+  display: none;
 }
 
 .sponsor__message {
@@ -1827,6 +1829,10 @@ article .um .um-profile-nav-item>a>i{
   .gallery__item {
     width: 30%;
   }
+
+  .sponsor__title, .sponsor__img {
+    display: block;
+  }
 }
 @media screen and (min-width: 992px) {
   .header__main {
@@ -1921,6 +1927,11 @@ article .um .um-profile-nav-item>a>i{
     width: auto;
   }
 
+  .sponsor__title {
+    font-size: 20px;
+    top: 25%;
+  }
+
   .footer__upper {
     flex-direction: row;
   }
@@ -1936,6 +1947,12 @@ article .um .um-profile-nav-item>a>i{
   .nav__item {
     font-size: 24px;
     font-size: 2.4rem;
+  }
+
+  .sponsor__title {
+    font-size: 24px;
+    font-size: 2.4rem;
+    top: 30%;
   }
 }
 

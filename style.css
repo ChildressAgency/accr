@@ -1718,6 +1718,10 @@ article .um .um-profile-nav-item>a>i{
   font-size: 24px;
 }
 
+.tribe-events-nav-next.tribe-events-nav-right {
+  float: right;
+}
+
 
 @media (max-width:767px){
   .visible-xs-block{

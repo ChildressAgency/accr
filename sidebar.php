@@ -1,5 +1,5 @@
 <aside class="sidebar text-center col-md-3">
-  <a href="<?php echo esc_url(home_url('events/community/add')); ?>" class="btn sidebar__btn btn-primary">ADD AN EVENT</a>
+  <a href="<?php echo esc_url(home_url('event-eligibility')); ?>" class="btn sidebar__btn btn-primary">ADD AN EVENT</a>
     <?php
 
     $filters = tribe_events_get_filters();
@@ -43,11 +43,11 @@
     <hr class="hr--light" />
 
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-accr.png" alt="accr logo" class="img-fluid">
-    <a href="<?php echo get_field( 'about_accr', 'option' ); ?>" class="btn sidebar__btn btn-primary">ABOUT ACCR</a>
+    <a href="<?php echo esc_url( home_url( 'about-us' ) ); ?>" class="btn sidebar__btn btn-primary">ABOUT ACCR</a>
     <p class="sidebar__text">Help promote and sustain the region's art and culture life!</p>
     <a href="<?php echo get_field( 'donate_link', 'option' ); ?>" class="btn sidebar__btn btn-secondary">DONATE TODAY</a>
     <p class="sidebar__text"><i>Become an ACCR member today and give your Artist/Venue profile an extended description as well as having your events tagged as featured.</i></p>
-    <a href="#_" class="btn sidebar__btn btn-primary">BECOME A MEMBER</a>
+    <a href="<?php echo get_field( 'donate_link', 'option' ); ?>" class="btn sidebar__btn btn-primary">BECOME A MEMBER</a>
 
     <hr class="hr--light" />
 

@@ -35,7 +35,7 @@
         gtag('config', 'UA-99227980-39');
       </script>
 </head>
-<body>
+<body <?php body_class(); ?>>
     <header <?php if(is_front_page()): echo 'class="header--home"'; endif;?>>
         <nav class="navbar navbar-expand-lg">
             <div class="masthead--sides"></div>

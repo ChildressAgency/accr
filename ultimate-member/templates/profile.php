@@ -624,8 +624,15 @@ print "<div class='um-profile-body $nav $nav-$subnav'>";
       'eventDisplay' => 'list',
       'posts_per_page' => 10,
       'start_date' => date('Y-m-d H:i:s'),
-      'meta_key' => $events_meta_key,
-      'meta_value' => $events_profile_type_id,
+      'meta_query' => array(
+        'relation' => 'AND',
+        array(
+          'key' => $events_meta_key,
+          'value' => $events_profile_type_id,
+          'compare' => '='
+        )),
+      //'meta_key' => $events_meta_key,
+      //'meta_value' => $events_profile_type_id,
       'tribeHideRecurrence' => true
     ));
 
@@ -633,8 +640,15 @@ print "<div class='um-profile-body $nav $nav-$subnav'>";
       'posts_per_page' => 10,
       'start_date' => date('Y-m-d H:i:s'),
       'eventDisplay' => 'list',
-      'meta_key' => $events_meta_key,
-      'meta_value' => $events_profile_type_id,
+      'meta_query' => array(
+        'relation' => 'AND',
+        array(
+          'key' => $events_meta_key,
+          'value' => $events_profile_type_id,
+          'compare' => '='
+        )),
+      //'meta_key' => $events_meta_key,
+      //'meta_value' => $events_profile_type_id,
       'featured' => true
     ));
 

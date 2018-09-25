@@ -1,11 +1,11 @@
 <?php
-
-// add_action('wp_footer', 'show_template');
-// function show_template() {
-// 	global $template;
-// 	print_r($template);
-// }
-
+/*
+ add_action('wp_footer', 'show_template');
+ function show_template() {
+ 	global $template;
+ 	print_r($template);
+ }
+*/
     function jquery_cdn(){
         if(!is_admin()){
             wp_deregister_script('jquery');
@@ -158,7 +158,7 @@
 
     //Add these scripts to only the front page
     function tribehome_enqueue_front_page_scripts() {
-        if( is_front_page() )
+        if( is_front_page() || is_tag())
         {
 
     	    //Add the stylesheet into the header
@@ -167,7 +167,7 @@
     		wp_enqueue_style("tribe.homepage.date",WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css");
 
     		//Add the scripts in the footer
-    		wp_enqueue_script("jquery");
+    		//wp_enqueue_script("jquery");
 
     		wp_enqueue_script(
     		"tribe.homepage.bar", WP_PLUGIN_URL."/the-events-calendar/src/resources/js/tribe-events-bar.min.js",
@@ -185,7 +185,12 @@
     		//"tribe.homepage.footer", WP_PLUGIN_URL."/tribe-homepage-search/js/footer.js",
     		//array("jquery"), "1.3.1",1);
 
-    	}
+      }
+    		wp_enqueue_style("tribe.homepage.date",WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css");
+   		wp_enqueue_script(
+    		"tribe.homepage.datepicker", WP_PLUGIN_URL."/the-events-calendar/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+    		array("jquery"), "1.3.1",1);
+
     }
     add_action( 'wp_enqueue_scripts', 'tribehome_enqueue_front_page_scripts' );
 
@@ -282,6 +287,7 @@
     }
     add_filter( 'tribe-events-bar-filters',  'remove_search_from_bar', 1000, 1 );
 
+
     // load styles
     function accr_styles(){
         wp_register_style('bootstrap-css', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
@@ -360,4 +366,253 @@ function accr_prepare_user_query_args($query_args, $directory_settings){
     );
   }
   return $query_args;
+}
+
+/**
+ * Method of listing upcoming events, complete with functional pagination
+ * if WP-PageNavi is installed.
+ *
+ * Implemented as a shortcode.
+ *
+ * @see https://wordpress.org/plugins/wp-pagenavi/
+ */
+function accr_tag_event_list() {
+  $tag = get_queried_object();
+
+	// Safety first! Bail in the event TEC is inactive/not loaded yet
+	if ( ! class_exists( 'Tribe__Events__Main' ) )
+		return;
+		
+	// Has the user paged forward, ie are they on /page-slug/page/2/?
+	$paged = get_query_var( 'paged' )
+		? get_query_var( 'paged' )
+		: 1; 
+		
+	// Build our query, adopt the default number of events to show per page
+	$upcoming = new WP_Query( array(
+		'post_type' => Tribe__Events__Main::POSTTYPE,
+    'paged'     => $paged,
+    'tag' => $tag->slug
+	) );
+	
+  // If we got some results, let's list 'em
+  ?><div class="tribe-events-loop"><?php
+	while ( $upcoming->have_posts() ) {
+    global $post;
+		$upcoming->the_post();
+		$title = get_the_title();
+		$date  = tribe_get_start_date();
+		
+		// Of course, you could and probably would expand on this
+		// and add more info and better formatting
+    //echo "<p> $title <i>$date</i> </p>";
+    		$venue_details = tribe_get_venue_details();
+
+		// The address string via tribe_get_venue_details will often be populated even when there's
+		// no address, so let's get the address string on its own for a couple of checks below.
+		$venue_address = tribe_get_address();
+
+		// Venue
+		$has_venue_address = ( ! empty( $venue_details['address'] ) ) ? ' location' : '';
+
+		// Organizer
+		$organizer = tribe_get_organizer();
+		$organizer_link = tribe_get_organizer_link();
+		$organizer_name = tribe_get_organizer();
+
+		// event date/time
+		// $event_id = get_the_ID();
+		$start_date = tribe_get_start_date( $post, false, 'M d, Y', null );
+		$end_date = tribe_get_end_date( $post, false, 'M d, Y', null );
+		$start_date_time = tribe_get_start_date( $post, false, 'h:i a', null );
+		$end_date_time = tribe_get_end_date( $post, false, 'h:i a', null );
+		$isAllDay = tribe_event_is_all_day( get_the_ID() );
+
+		// 'ADD IT' button
+		$addit_start_date = tribe_get_start_date( $post, false, 'Ymd', null );
+		$addit_start_date_time = tribe_get_start_date( $post, false, 'His', null );
+		$addit_end_date = tribe_get_end_date( $post, false, 'Ymd', null );
+		$addit_end_date_time = tribe_get_end_date( $post, false, 'His', null );
+
+		$addit_date_start = $addit_start_date . 'T' . $addit_start_date_time . 'Z';
+		$addit_date_end = $addit_end_date . 'T' . $addit_end_date_time . 'Z';
+		?>
+
+		<div class="event">
+			<?php if( $i==0 ): ?>
+			<div class="event__header event__header--featured">
+			    <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
+			    <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+				    <?php if( $start_date ): ?>
+				        <?php echo $start_date; 
+				        if( !$isAllDay ){ 
+				            echo ' ' . $start_date_time; 
+				        } 
+				        if( strcmp( $start_date, $end_date ) ){ 
+				            echo ' - ' . $end_date;
+				            if( !$isAllDay ){ 
+				                echo ' ' . $end_date_time; 
+				            } 
+				        } elseif( !$isAllDay ){
+				            echo ' - ' . $end_date_time;
+				        } ?>
+				    <?php endif; ?>
+                </p>
+			</div>
+			<?php endif; ?>
+
+			<div class="event__info">
+			    <div class="event-thumbnail <?php if( $i==0 ){ echo 'event-thumbnail--featured'; } ?><?php if( $i > 5 ){ echo 'event-thumbnail--small'; } ?>">
+			        <div class="event-thumbnail__event">
+			            <?php if( $i <=5 ): ?>
+			                <div class="event-thumbnail__date"><span class="month month--start"><?php echo strtoupper(tribe_get_start_date( $post, false, 'M', null )); ?></span> <span class="day"><?php echo tribe_get_start_date( $post, false, 'd', null ); ?><?php if(strcmp($start_date, $end_date)): ?>-<?php echo tribe_get_end_date( $post, false, 'd', null ); ?></span> <span class="month month--end"><?php echo strtoupper(tribe_get_end_date( $post, false, 'M', null )); endif;?></span></div>
+			            <?php endif; ?>
+			            <div class="event-thumbnail__image <?php if( in_array( $post, $featuredEvents ) ): echo 'event-thumbnail__image--featured'; endif; ?>">
+			                <img src="<?php echo get_the_post_thumbnail_url( $post ); ?>" alt="">
+			            </div>
+			        </div>
+			    </div>
+			    
+			    <div class="event__desc-wrapper">
+			        <?php if( $i==0 ): ?>
+			            <?php if( $post->post_excerpt ): ?><p><strong><?php echo $post->post_excerpt; ?></strong></p><?php endif; ?>
+			            <?php if( get_field( 'get_tickets_link', $post ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $post ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
+			            <?php 
+			                
+			                ?>
+			            <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $post->post_title; ?>&dates=<?php echo $addit_date_start; ?>/<?php echo $addit_date_end; ?>&details=&location=<?php echo tribe_get_venue( $post ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
+			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
+			            <a href="<?php echo get_permalink( $post ); ?>" class="view-more">View more</a>
+			        <?php elseif( $i<=5 ): ?>
+			            <div class="event__header">
+			                <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
+			                <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+							    <?php if( $start_date ): ?>
+							        <?php echo $start_date; 
+							        if( !$isAllDay ){ 
+							            echo ' ' . $start_date_time; 
+							        } 
+							        if( strcmp( $start_date, $end_date ) ){ 
+							            echo ' - ' . $end_date;
+							            if( !$isAllDay ){ 
+							                echo ' ' . $end_date_time; 
+							            } 
+							        } elseif( !$isAllDay ){
+							            echo ' - ' . $end_date_time;
+							        } ?>
+							    <?php endif; ?>
+			                </p>
+			            </div>
+			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
+			            <?php if( get_field( 'get_tickets_link', $post ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $post ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
+			            <?php 
+			                $addit_start_date = tribe_get_start_date( $post, false, 'Ymd', null );
+			                $addit_start_date_time = tribe_get_start_date( $post, false, 'His', null );
+			                $addit_end_date = tribe_get_end_date( $post, false, 'Ymd', null );
+			                $addit_end_date_time = tribe_get_end_date( $post, false, 'His', null );
+
+			                $addit_date_start = $addit_start_date . 'T' . $addit_start_date_time . 'Z';
+			                $addit_date_end = $addit_end_date . 'T' . $addit_end_date_time . 'Z';
+			                ?>
+			            <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $post->post_title; ?>&dates=<?php echo $addit_date_start; ?>/<?php echo $addit_date_end; ?>&details=&location=<?php echo tribe_get_venue( $post ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
+			        <?php else: ?>
+			            <div class="event__header">
+			                <h3 class="event__title"><a href="<?php echo get_permalink( $post ); ?>"><?php echo $post->post_title; ?></a></h3>
+			                <p class="event__subtitle"><?php if( $organizer_name ): ?>organized by: <?php echo $organizer_link; ?><br/><?php endif; ?>
+							    <?php if( $start_date ): ?>
+							        <?php echo $start_date; 
+							        if( !$isAllDay ){ 
+							            echo ' ' . $start_date_time; 
+							        } 
+							        if( strcmp( $start_date, $end_date ) ){ 
+							            echo ' - ' . $end_date;
+							            if( !$isAllDay ){ 
+							                echo ' ' . $end_date_time; 
+							            } 
+							        } elseif( !$isAllDay ){
+							            echo ' - ' . $end_date_time;
+							        } ?>
+							    <?php endif; ?>
+			                </p>
+			            </div>
+			            <p class="event__desc"><?php echo mb_strimwidth( $post->post_content, 0, 500, '...' ); ?></p>
+			        <?php endif; ?>
+			    </div>
+			    <div class="clearfix"></div>
+
+			    <?php if( $i > 5 ): ?>
+			        <div class="event__small-btns">
+			            <?php if( get_field( 'get_tickets_link', $post ) ): ?><a href="<?php echo get_field( 'get_tickets_link', $post ); ?>" class="btn btn-white">GET TICKETS</a><?php endif; ?>
+			            <?php 
+			                $addit_start_date = tribe_get_start_date( $post, false, 'Ymd', null );
+			                $addit_start_date_time = tribe_get_start_date( $post, false, 'His', null );
+			                $addit_end_date = tribe_get_end_date( $post, false, 'Ymd', null );
+			                $addit_end_date_time = tribe_get_end_date( $post, false, 'His', null );
+
+			                $addit_date_start = $addit_start_date . 'T' . $addit_start_date_time . 'Z';
+			                $addit_date_end = $addit_end_date . 'T' . $addit_end_date_time . 'Z';
+			                ?>
+			            <a class="btn btn-white" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo $post->post_title; ?>&dates=<?php echo $addit_date_start; ?>/<?php echo $addit_date_end; ?>&details=&location=<?php echo tribe_get_venue( $post ); ?>&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">ADD IT</a>
+			        </div>
+			    <?php endif; ?>
+			</div>
+
+			<?php //do_action( 'tribe_events_inside_after_loop' ); ?>
+		</div>
+
+		<hr class="hr--light" />
+<?php
+  }
+  echo '</div>';
+	
+	// Is Pagenavi activated? Let's use it for pagination if so
+	if ( function_exists( 'wp_pagenavi' ) )
+		wp_pagenavi( array( 'query' => $upcoming ) );
+		
+	// Clean up
+	wp_reset_query();
+}
+// Create a new shortcode to list upcoming events, optionally
+// with pagination
+add_shortcode( 'tag-event-list', 'accr_tag_event_list' );
+
+
+//add end date filter
+add_filter('tribe-events-bar-filters', 'accr_end_date_filter', 1, 1);
+function accr_end_date_filter($filters){
+  $filters['tribe-bar-end-date'] = array(
+    'name' => 'tribe-bar-end-date',
+    'caption' => 'End Date',
+    'html' => '<input type="text" name="tribe-bar-end-date" id="tribe-bar-end-date" placeholder="End Date" />'
+  );
+
+  $resort_filters['tribe-bar-date'] = $filters['tribe-bar-date'];
+  $resort_filters['tribe-bar-end-date'] = $filters['tribe-bar-end-date'];
+  $resort_filters['tribe-bar-search'] = $filters['tribe-bar-search'];
+  $resort_filters['tribe-bar-category'] = $filters['tribe-bar-category'];
+
+  //var_dump($resort_filters);
+  return $resort_filters;
+}
+
+add_filter('tribe_events_pre_get_posts', 'accr_setup_end_date_query', 10, 1);
+function accr_setup_end_date_query($query){
+  if(!empty($_REQUEST['tribe-bar-end-date'])){
+    $meta_query = array(
+      'relation' => 'AND',
+      array(
+        'key' => '_EventEndDate',
+        'value' => $_REQUEST['tribe-bar-end-date'],
+        'compare' => 'LIKE',
+        //'type' => 'DATETIME'
+      )
+    );
+    $query->set('meta_query', $meta_query);
+
+    //$query->set('posts_per_page', (int)tribe_get_option('postsPerPage', 10));
+    $query->set('eventDate', $_REQUEST['tribe-bar-end-date']);
+    //var_dump($query);
+  }
+  
+  return $query;
 }

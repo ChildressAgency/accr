@@ -5,7 +5,8 @@
         <?php if( is_page()
                 && !is_page( 'about-us' )
                 && !is_page( 'account' )
-                && !is_page( 'user' )):?>
+                && !is_page( 'user' )
+                && !is_page('members')):?>
             <h1><?php echo the_title(); ?></h1>
         <?php endif; ?>
 
@@ -77,7 +78,9 @@
                         <article>
                             <?php the_content(); ?>
                         </article>
-                    <?php endwhile; endif; ?>
+                    <?php endwhile; else: ?>
+                      <article><p>Sorry, we could not find any events. Please try a different search.</p></article>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
             <?php get_sidebar(); ?>

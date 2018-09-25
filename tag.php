@@ -27,7 +27,8 @@
 
       <div class="row">
           <div class="col-md-9 content-with-sidebar">
-            <?php tribe_get_template_part( 'list' ); ?>
+            <?php //tribe_get_template_part( 'list' ); ?>
+            <?php echo do_shortcode('[tag-event-list]'); ?>
           </div>
           <?php get_sidebar(); ?>
       </div>

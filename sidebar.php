@@ -7,7 +7,7 @@
     $current_url = tribe_events_get_current_filter_url();
     ?>
 
-    <form id="tribe-bar-form" class="" name="tribe-bar-form" method="post" action="<?php echo esc_url( home_url( 'events' ) ); ?>">
+    <form id="tribe-bar-form" class="" name="tribe-bar-form" method="get" action="<?php echo esc_url( home_url( 'events' ) ); ?>">
         <?php if ( ! empty( $filters ) ) { ?>
             <div class="search search--sidebar">
                 <h3 class="sidebar__heading sidebar__heading--find-event">FIND AN EVENT</h3>
@@ -54,10 +54,10 @@
     <h3 class="sidebar__heading">DIRECTORIES</h3>
     <a href="<?php echo esc_url(home_url('get-listed')); ?>" class="btn sidebar__btn btn-primary">GET LISTED</a>
   
-    <a href="<?php echo home_url('members'); ?>" class="btn sidebar__btn btn-primary">ALL PROFILES</a>
-    <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Artist', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
-    <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Venue and Public Art', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
-    <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Arts & Cultural Organization', 'um_search' => '1'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
+    <a href="<?php echo esc_url(add_query_arg(array('member' => 'true'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ALL PROFILES</a>
+    <a href="<?php echo esc_url(add_query_arg(array('profile_type' => 'Artist', 'member'=> 'true'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ARTISTS</a>
+    <a href="<?php echo esc_url(add_query_arg(array('profile_type' => rawurlencode('Venue and Public Art'), 'member' => 'true'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">VENUES</a>
+    <a href="<?php echo esc_url(add_query_arg(array('profile_type' => rawurlencode('Arts & Cultural Organization'), 'member' => 'true'), home_url('members'))); ?>" class="btn sidebar__btn btn-primary">ORGANIZATIONS</a>
 
     <a href="<?php echo esc_url(home_url('opportunities')); ?>" class="btn sidebar__btn btn-primary">OPPORTUNITIES</a>
     <hr class="hr--light" />

@@ -9,7 +9,15 @@
   <div class="event__tabs-wrapper">
     <div class="nav nav-tabs" role="tablist">
       <a href="<?php echo add_query_arg('member', 'true', home_url('members')); ?>" class="events__heading nav-item nav-link active" id="nav-members" role="tab"><h2>MEMBERS</h2></a>
-      <a href="<?php echo home_url('members'); ?>" class="events__heading nav-item nav-link" id="nav-all" role="tab"><h2>ALL</h2></a>
+      <?php 
+        if(isset($_GET['profile_type'])){
+          $profile_type = $_GET['profile_type'];
+          echo '<a href="' . esc_url(add_query_arg(array('profile_type' => rawurlencode($profile_type), 'um_search' => 1), home_url('members'))) . '" class="events__heading nav-item nav-link" id="nav-all" role="tab"><h2>ALL</h2></a>';
+        }
+        else{
+          echo '<a href="' . home_url('members') . '" class="events__heading nav-item nav-link" id="nav-all" role="tab"><h2>ALL</h2></a>';
+        }
+      ?>
     </div>
   </div>
 
@@ -26,8 +34,8 @@
 
         foreach(um_members('users_per_page') as $member):
           $i++; 
-          um_fetch_user($member); ?>
-          
+          um_fetch_user($member); 
+          if(!isset($_GET['profile_type']) || get_field('profile_type', 'user_' . um_user('ID')) == $profile_type): ?>
           <div class="um-member um-role-<?php echo um_user('role'); ?> <?php echo um_user('account_status'); ?>">
 
             <div class="member-block">
@@ -94,7 +102,7 @@
               </div><?php //end accr_member-block-info ?>
             </div><?php //end member block ?>
           </div><?php //end um-member ?>
-
+          <?php endif; ?>
           <?php um_reset_user_clean(); endforeach; // end foreach um_members ?>
           <?php	um_reset_user(); ?>
 
@@ -109,7 +117,15 @@ else{ ?>
   <div class="event__tabs-wrapper">
     <div class="nav nav-tabs" role="tablist">
       <a href="<?php echo add_query_arg('member', 'true', home_url('members')); ?>" class="events__heading nav-item nav-link" id="nav-members" role="tab"><h2>MEMBERS</h2></a>
-      <a href="<?php echo home_url('members'); ?>" class="events__heading nav-item nav-link active" id="nav-all" role="tab"><h2>ALL</h2></a>
+      <?php 
+        if(isset($_GET['profile_type'])){
+          $profile_type = $_GET['profile_type'];
+          echo '<a href="' . esc_url(add_query_arg(array('profile_type' => rawurlencode($profile_type), 'um_search' => 1), home_url('members'))) . '" class="events__heading nav-item nav-link active" id="nav-all" role="tab"><h2>ALL</h2></a>';
+        }
+        else{
+          echo '<a href="' . home_url('members') . '" class="events__heading nav-item nav-link active" id="nav-all" role="tab"><h2>ALL</h2></a>';
+        }
+      ?>
     </div>
   </div>
 

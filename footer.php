@@ -1,4 +1,17 @@
-<footer>
+    <footer>
+        <section class="partners text-center">
+            <div class="container">
+                <p class="partners__heading">We couldn't do this without the support of our great partners</p>
+
+                <div class="row partners__row">
+                    <?php if( have_rows( 'partners', 'options' ) ): while( have_rows( 'partners', 'options' ) ): the_row(); ?>
+                        <?php $num_cols = get_sub_field('layout'); ?>
+                        <div class="<?php echo $num_cols; ?>"><a href="<?php the_sub_field( 'link' ); ?>"><img src="<?php the_sub_field( 'image' ); ?>" alt="" class="img-fluid"></a></div>
+                    <?php endwhile; endif; ?>
+                </div>
+            </div>
+        </section>
+
         <div class="footer__upper">
             <div class="footer__links">
                 <div class="container-fluid">
@@ -77,7 +90,7 @@
                 </div>
                 <hr class="footer__hr" />
             </div>
-            <p class="footer__copyright"><i>COPYRIGHT INFORMATION 2018 &copy;</i></p>
+            <p class="footer__copyright"><i>&copy; <?php echo date("Y"); ?> The Arts & Cultural Council of the Rappahannock<br/>Website designed by <a href="https://childressagency.com/">The Childress Agency</a></i></p>
         </div>
     </footer>
     

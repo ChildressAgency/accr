@@ -8,13 +8,15 @@
 
   <div class="event__tabs-wrapper">
     <div class="nav nav-tabs" role="tablist">
-      <a href="<?php echo add_query_arg('member', 'true', home_url('members')); ?>" class="events__heading nav-item nav-link active" id="nav-members" role="tab"><h2>MEMBERS</h2></a>
+      
       <?php 
         if(isset($_GET['profile_type'])){
           $profile_type = $_GET['profile_type'];
+          echo '<a href="' . esc_url(add_query_arg(array('profile_type' => rawurlencode($profile_type), 'member' => 'true'), home_url('members'))) . '" class="events__heading nav-item nav-link active" id="nav-members" role="tab"><h2>MEMBERS</h2></a>';
           echo '<a href="' . esc_url(add_query_arg(array('profile_type' => rawurlencode($profile_type), 'um_search' => 1), home_url('members'))) . '" class="events__heading nav-item nav-link" id="nav-all" role="tab"><h2>ALL</h2></a>';
         }
         else{
+          echo '<a href="' . add_query_arg('member', 'true', home_url('members')) . '" class="events__heading nav-item nav-link active" id="nav-members" role="tab"><h2>MEMBERS</h2></a>';
           echo '<a href="' . home_url('members') . '" class="events__heading nav-item nav-link" id="nav-all" role="tab"><h2>ALL</h2></a>';
         }
       ?>
@@ -116,13 +118,14 @@
 else{ ?>
   <div class="event__tabs-wrapper">
     <div class="nav nav-tabs" role="tablist">
-      <a href="<?php echo add_query_arg('member', 'true', home_url('members')); ?>" class="events__heading nav-item nav-link" id="nav-members" role="tab"><h2>MEMBERS</h2></a>
       <?php 
         if(isset($_GET['profile_type'])){
           $profile_type = $_GET['profile_type'];
+          echo '<a href="' . esc_url(add_query_arg(array('profile_type' => rawurlencode($profile_type), 'member' => 'true'), home_url('members'))) . '" class="events__heading nav-item nav-link" id="nav-members" role="tab"><h2>MEMBERS</h2></a>';
           echo '<a href="' . esc_url(add_query_arg(array('profile_type' => rawurlencode($profile_type), 'um_search' => 1), home_url('members'))) . '" class="events__heading nav-item nav-link active" id="nav-all" role="tab"><h2>ALL</h2></a>';
         }
         else{
+          echo '<a href="' . add_query_arg('member', 'true', home_url('members')) . '" class="events__heading nav-item nav-link" id="nav-members" role="tab"><h2>MEMBERS</h2></a>';
           echo '<a href="' . home_url('members') . '" class="events__heading nav-item nav-link active" id="nav-all" role="tab"><h2>ALL</h2></a>';
         }
       ?>

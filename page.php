@@ -5,8 +5,12 @@
         <?php if( is_page()
                 && !is_page( 'about-us' )
                 && !is_page( 'account' )
+<<<<<<< HEAD
                 && !is_page( 'user' )
                 && !is_page('members')):?>
+=======
+                && !is_page( 'user' )):?>
+>>>>>>> b318f694e4f224205beb606618f5b5cd6676b2aa
             <h1><?php echo the_title(); ?></h1>
         <?php endif; ?>
 
@@ -14,6 +18,7 @@
             if(is_post_type_archive('tribe_events')){
                 if(is_tax('tribe_events_cat')){
                     $page_object = get_queried_object();
+<<<<<<< HEAD
                     $intro = get_field('event_category_page_intro', $page_object); 
                     $sponsor = get_field( 'event_category_page_sponsor', $page_object ); ?>
                     <div class="container-fluid">
@@ -66,6 +71,22 @@
         <div class="row">
             <div class="col-md-9 content-with-sidebar">
 
+=======
+                    echo get_field('event_category_page_intro', $page_object);
+                }
+                elseif(is_tag()){
+                    $page_object = get_queried_object();
+                    echo get_field('event_tag_page_intro', $page_object);
+                }
+                else{
+                    echo get_field('all_events_page_intro', 'option');
+                }
+            }
+        ?>
+        <div class="row">
+            <div class="col-md-9 content-with-sidebar">
+
+>>>>>>> b318f694e4f224205beb606618f5b5cd6676b2aa
                 <?php 
                 if( is_page( 'opportunities' ) ):
                     get_template_part( 'tp-opportunities' );
@@ -78,9 +99,13 @@
                         <article>
                             <?php the_content(); ?>
                         </article>
+<<<<<<< HEAD
                     <?php endwhile; else: ?>
                       <article><p>Sorry, we could not find any events. Please try a different search.</p></article>
                     <?php endif; ?>
+=======
+                    <?php endwhile; endif; ?>
+>>>>>>> b318f694e4f224205beb606618f5b5cd6676b2aa
                 <?php endif; ?>
             </div>
             <?php get_sidebar(); ?>
